@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook/screens/screens.dart';
 
+/**
+ * app 主入口
+ */
 void main() {
   runApp(MyApp());
 }

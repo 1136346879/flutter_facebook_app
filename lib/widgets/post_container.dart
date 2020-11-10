@@ -154,7 +154,7 @@ class _PostStats extends StatelessWidget {
                 color: Colors.grey[600],
               ),
             ),
-            const SizedBox(width: 8.0),
+            const SizedBox(width: 4.0),
             Text(
               '${post.shares} Shares',
               style: TextStyle(
@@ -220,7 +220,7 @@ class _PostButton extends StatelessWidget {
         child: InkWell(
           onTap: onTap,
           child: Container(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
+            // padding: const EdgeInsets.symmetric(horizontal: 10.0),
             height: 25.0,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
