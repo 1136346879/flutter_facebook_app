@@ -1,11 +1,18 @@
-import 'package:meta/meta.dart';
 
 class User {
-  final String name;
-  final String imageUrl;
+   String name;
+   String imageUrl;
 
-  const User({
-    @required this.name,
-    @required this.imageUrl,
+   User({
+     this.name,
+     this.imageUrl,
   });
+
+  User.fromJson(Map<dynamic, dynamic> json){
+    if (json == null){
+      return;
+    }
+    name = json['name'];
+    imageUrl = json['imageUrl'];
+  }
 }
