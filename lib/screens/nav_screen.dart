@@ -10,6 +10,9 @@ import 'package:xfs_flutter_utils/base/xfs_base_view.dart';
 
 import 'nav_screen_presenter.dart';
 
+/**
+ * 主页面UI框架
+ */
 class NavScreen extends XFSBasePage {
   @override
   _NavScreenState createState() => _NavScreenState();
@@ -22,6 +25,7 @@ class NavScreen extends XFSBasePage {
 
 class _NavScreenState extends XFSBasePageState<NavScreen,
     User, NavScreenPresenter>{
+///五个页面
   final List<Widget> _screens = [
     HomeScreen(),
     Scaffold(),
@@ -30,6 +34,7 @@ class _NavScreenState extends XFSBasePageState<NavScreen,
     Scaffold(),
     Scaffold(),
   ];
+  ///五个图标
   final List<IconData> _icons = const [
     Icons.home,
     Icons.ondemand_video,
@@ -38,10 +43,12 @@ class _NavScreenState extends XFSBasePageState<NavScreen,
     MdiIcons.bellOutline,
     Icons.menu,
   ];
+  ///默认选中第一个
   int _selectedIndex = 0;
 @override
   void initState() {
     super.initState();
+    ///获取当前用户数据
     presenter.getCurrentUserInf();
   }
 

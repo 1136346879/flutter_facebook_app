@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook/config/palette.dart';
 import 'package:flutter_facebook/models/models.dart';
 import 'package:flutter_facebook/widgets/widgets.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class CustomAppBar extends StatelessWidget {
@@ -38,7 +39,7 @@ class CustomAppBar extends StatelessWidget {
         children: [
           Expanded(
             child: Text(
-              'facebook',
+              'facebook ${currentUser.name}',
               style: const TextStyle(
                 color: Palette.facebookBlue,
                 fontSize: 32.0,
@@ -66,12 +67,12 @@ class CustomAppBar extends StatelessWidget {
                 CircleButton(
                   icon: Icons.search,
                   iconSize: 30.0,
-                  onPressed: () => print('Search'),
+                  onPressed: () => Fluttertoast.showToast(msg:'Search'),
                 ),
                 CircleButton(
                   icon: MdiIcons.facebookMessenger,
                   iconSize: 30.0,
-                  onPressed: () => print('Messenger'),
+                  onPressed: () =>Fluttertoast.showToast(msg:'Messenger'),
                 ),
               ],
             ),
