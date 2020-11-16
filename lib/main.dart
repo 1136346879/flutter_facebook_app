@@ -54,7 +54,7 @@ Widget _routerTo() => MaterialApp(
 
   debugShowCheckedModeBanner: false,
   // initialRoute: XFSAppRouteConfigure.rootPage,
-  initialRoute: XFSAppRouteConfigure.xfsNavScreenPage,
+  initialRoute: XFSAppRouteConfigure.xfsNavScreenPage,///首次加载的页面
   theme:ThemeProvider().getTheme(),
   darkTheme: ThemeProvider().getTheme(),
   onGenerateRoute: (settings) => XFSAppRouteConfigure.routeConfigureHandler(settings),

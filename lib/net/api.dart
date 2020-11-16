@@ -1,8 +1,8 @@
 class API {
  // static const BASE_URL = 'https://www.wanandroid.com';
 //  static const BASE_URL = 'http://127.0.0.1:20155/';
-//   static const BASE_URL = 'https://t.fsyuncai.com/api/mobile/';
   static const BASE_URL = 'https://mock.yonyoucloud.com/mock/';
+  static const BASE_URL_xfs = 'https://t.fsyuncai.com/api/mobile/';
 
   static const TREE_URL = 'tree/json';
 

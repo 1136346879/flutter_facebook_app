@@ -18,7 +18,7 @@ class ScreenServer {
       {SuccessBlock<User> successBlock,
       FailureBlock<BaseEntity> failureBlock}) {
 
-    HttpUtils.getDataForCallback(API.CURRENT_USER,
+    HttpUtils.getDataForCallback(API.CURRENT_USER,null,
         httpMethod: HttpMethod.GET, success: (model) {
           User orderPageModel = User.fromJson(model.data);
       successBlock(orderPageModel);

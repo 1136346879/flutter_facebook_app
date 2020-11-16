@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook/address/xfs_address_list_page.dart';
 import 'package:flutter_facebook/config/palette.dart';
 import 'package:flutter_facebook/data/data.dart';
 import 'package:flutter_facebook/models/models.dart';
@@ -77,7 +78,7 @@ class _HomeScreenMobile extends StatelessWidget {
           brightness: Brightness.light,
           backgroundColor: Colors.white,
           title: Text(
-            'facebook-${currentUser.name}',
+            '${currentUser?.name??"facebook"}',
             style: const TextStyle(
               color: Palette.facebookBlue,
               fontSize: 28.0,
@@ -91,7 +92,10 @@ class _HomeScreenMobile extends StatelessWidget {
             CircleButton(
               icon: Icons.search,
               iconSize: 30.0,
-              onPressed: () => Fluttertoast.showToast(msg: 'Search--'),
+              onPressed: () =>{
+              XFSAddressListPage.pushName(context,addressId: "")  ,
+              Fluttertoast.showToast(msg: 'Search--'),
+              }
             ),
             CircleButton(
               icon: MdiIcons.facebookMessenger,

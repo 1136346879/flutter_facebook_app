@@ -29,7 +29,7 @@ class HttpUtils {
     Http().cancelRequests();
   }
 
-  static Future<BaseEntity> getData(String path, {
+  static Future<BaseEntity> getData(String path,String baseUrl, {
     @required HttpMethod httpMethod,
     Map<String, dynamic> params,
     CancelToken cancelToken,
@@ -54,14 +54,14 @@ class HttpUtils {
         case HttpMethod.POST:
 
           responseData = await Http().post(
-            path,
+            path, baseUrl ,
             data: params,
             cancelToken: cancelToken,
           );
           break;
         case HttpMethod.POSTQUERY:
           responseData = await Http().post(
-            path,
+            path, baseUrl ,
             params: params,
             cancelToken: cancelToken,
           );
@@ -138,7 +138,7 @@ class HttpUtils {
   /// [success] 成功回调
   /// [failure] 失败回调
   static getDataForCallback(
-      String path, {
+      String path,String baseUrl, {
         @required HttpMethod httpMethod,
         Map<String, dynamic> params,
         CancelToken cancelToken,
@@ -166,14 +166,14 @@ class HttpUtils {
         case HttpMethod.POST:
 
           responseData = await Http().post(
-            path,
+            path,baseUrl,
             data: params,
             cancelToken: cancelToken,
           );
           break;
         case HttpMethod.POSTQUERY:
           responseData = await Http().post(
-            path,
+            path,baseUrl,
             params: params,
             cancelToken: cancelToken,
           );
