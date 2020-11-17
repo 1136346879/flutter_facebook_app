@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook/address/xfs_address_list_page.dart';
 import 'package:flutter_facebook/models/xfs_user_model.dart';
 import 'package:flutter_facebook/net/xfs_common_channel_utils.dart';
+import 'package:flutter_facebook/order/xfs_order_page.dart';
 import 'package:flutter_facebook/screens/nav_screen.dart';
 import 'package:xfs_flutter_utils/utils/xfs_log_util.dart';
 import 'package:xfs_flutter_utils/xfs_route/xfs_custom_router.dart';
@@ -50,9 +51,9 @@ class XFSAppRouteConfigure {
       widget: XFSRootPage(),
     ),
 
-    // orderPage: (arguments) => XFSRouteResult(
-    //       widget: XFSOrderPage(arguments: arguments,),
-    //     ),
+    orderPage: (arguments) => XFSRouteResult(
+          widget: XFSOrderPage(arguments: arguments,),
+        ),
     // orderSearchPage: (arguments) => XFSRouteResult(
     //       widget: XFSOrderSearchPage(),
     //     ),
