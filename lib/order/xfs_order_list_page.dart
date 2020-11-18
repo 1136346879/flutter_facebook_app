@@ -13,13 +13,15 @@ class XFSOrderListpage extends XFSBaseListPage {
 
   /// 请求参数
   final XFSRequestOrderListModel arguments;
-  XFSOrderListpage({this.arguments});
+
+  final GlobalKey<XFSOrderListpageState> globalKey;
+  XFSOrderListpage({@required this.arguments,this.globalKey}): super(key:globalKey);
   @override
-  XFSBaseListPageState<XFSBaseListPage, XFSOrderListModel, XFSBasePresenter> getState() => _XFSOrderListpageState();
+  XFSBaseListPageState<XFSBaseListPage, XFSOrderListModel, XFSBasePresenter> getState() => XFSOrderListpageState();
 
 }
 
-class _XFSOrderListpageState extends XFSBaseListPageState<XFSOrderListpage, XFSOrderListModel, XFSOrderListPresenter>
+class XFSOrderListpageState extends XFSBaseListPageState<XFSOrderListpage, XFSOrderListModel, XFSOrderListPresenter>
     implements XfsOrderListView,XFSItemClickDelegate{
 
 
@@ -59,8 +61,12 @@ class _XFSOrderListpageState extends XFSBaseListPageState<XFSOrderListpage, XFSO
   @override
   void onLoadMore() {
     super.onLoadMore();
+    presenter.loadmoreData(pageNumber);
   }
-
+  /// 搜索订单
+  void searchOrder(String searchKey){
+    presenter.searchData(searchKey);
+  }
 @override
   emptyViewAction() {
      super.emptyViewAction();
@@ -72,7 +78,9 @@ class _XFSOrderListpageState extends XFSBaseListPageState<XFSOrderListpage, XFSO
 
   @override
   void onRefresh() {
+    super.onRefresh();
 
+    presenter.refreshData();
   }
 
   @override

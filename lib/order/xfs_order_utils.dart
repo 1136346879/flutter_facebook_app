@@ -50,6 +50,12 @@ class XFSOrderUtils {
     }
   }
 
+
+  /// 获取开票类型
+  static List getInvoiceSorce() {
+    return ['全部', '未开票', '已开票', '开票中',];
+  }
+
   /// 根据标题获取code
   static dynamic orderCodeTabWithTitle(String title) {
     if (title.isNullOrEmpty()) {

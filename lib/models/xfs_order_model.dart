@@ -239,6 +239,8 @@ class XFSRequestOrderListModel{
   List unchoice_customer_ids;
 
 
+  /// 开票状态
+  String invoiceSorce;
   XFSRequestOrderListModel({this.tab_order_status, this.page_num=1, this.page_size,
     this.beginTime, this.endTime, this.paid_type, this.search_param});
 

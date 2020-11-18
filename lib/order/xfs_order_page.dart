@@ -51,12 +51,20 @@ class _XFSOrderPageState extends XFSBasePageState<XFSOrderPage, Object, XFSBaseP
   List<Widget> actions() {
 
     return [
+      XFSText('订单导出',
+        padding: EdgeInsets.only(left: 10, right: 10),
+        textColor: Colors.white,
+        onTap: (){
+          Fluttertoast.showToast(msg: "订单导出");
+          // Navigator.pushNamed(context, XFSAppRouteConfigure.orderExportPage);
+        },
+      ),
     XFSText('搜索订单',
       padding: EdgeInsets.only(left: 10, right: 10),
       textColor: Colors.white,
       onTap: (){
       Fluttertoast.showToast(msg: "搜索订单");
-        // Navigator.pushNamed(context, XFSAppRouteConfigure.orderSearchPage);
+        Navigator.pushNamed(context, XFSAppRouteConfigure.orderSearchPage);
       },
     ),
     ];

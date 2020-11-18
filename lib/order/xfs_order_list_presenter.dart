@@ -26,6 +26,24 @@ class XFSOrderListPresenter extends XFSBasePresenter<XfsOrderListView>{
 
   }
 
+  /// 搜索订单
+  /// [搜索关键词]
+  searchData(String searchKey){
+    _requestOrderListModel.search_param = searchKey;
+    mView?.showPageLoading();
+    _getOrderListData(isRefresh: true, page: 1, showProgress: true);
+  }
+
+  /// 刷新数据
+  refreshData(){
+    _getOrderListData(isRefresh: true, page: 1, showProgress: false);
+  }
+
+  /// 加载更多
+  loadmoreData(int page){
+    _getOrderListData(isRefresh: false, page: page, showProgress: false);
+  }
+
   /// 获取订单列表数据
   /// [isRefresh] 是否刷新
   /// [page] 页面
