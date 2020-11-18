@@ -6,8 +6,6 @@ import 'package:flutter_facebook/order/xfs_order_list_presenter.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xfs_flutter_utils/base/xfs_base_list_page.dart';
 import 'package:xfs_flutter_utils/base/xfs_base_presenter.dart';
-import 'package:xfs_flutter_utils/base/xfs_base_view.dart';
-import 'package:xfs_flutter_utils/widgets/xfs_text.dart';
 
 class XFSOrderListpage extends XFSBaseListPage {
 

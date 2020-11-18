@@ -56,6 +56,7 @@ class _XFSOrderPageState extends XFSBasePageState<XFSOrderPage, Object, XFSBaseP
         textColor: Colors.white,
         onTap: (){
           Fluttertoast.showToast(msg: "订单导出");
+          Navigator.pushNamed(context, XFSAppRouteConfigure.consumerProvide);
           // Navigator.pushNamed(context, XFSAppRouteConfigure.orderExportPage);
         },
       ),

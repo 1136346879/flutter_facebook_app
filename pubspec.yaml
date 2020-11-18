@@ -20,6 +20,7 @@ dependencies:
   connectivity: ^0.4.8+6 #状态的网络(WiFi &移动/蜂窝)
   #全局通知
   event_bus: ^1.1.1
+  provider:
   # 加载网络图片
   cached_network_image: ^2.3.1
   xfs_flutter_utils:
