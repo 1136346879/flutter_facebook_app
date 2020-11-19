@@ -6,16 +6,18 @@ import 'package:provider/provider.dart';
 class SelectProvider extends StatelessWidget {
 
   ///初始化CounterProvider
-  CounterProvider _counterProvider = new CounterProvider();
+  // CounterProvider _counterProvider = new CounterProvider();
 
   @override
   Widget build(BuildContext context) {
     print('页面重绘了。。。。。。。。。。。');
+    var _counterProvider =  Provider.of<CounterProvider>(context);
     //整个页面使用ChangeNotifier来包裹
-    return ChangeNotifierProvider.value(
-      // create: (context) => _counterProvider,
-      value:  _counterProvider,
-      child:
+    return
+      // ChangeNotifierProvider.value(
+      // // create: (context) => _counterProvider,
+      // value:  _counterProvider,
+      // child:
       //child里面的内容不会因为数据的改变而重绘
       Scaffold(
         appBar: AppBar(
@@ -68,7 +70,7 @@ class SelectProvider extends StatelessWidget {
                 )
               ],
             )),
-      ),
+      // ),
     );
   }
 }

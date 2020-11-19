@@ -18,7 +18,7 @@ class ConsumerProvide extends XFSBasePage{
 
 class _TestProvideState extends XFSBasePageState<ConsumerProvide, Object, XFSBasePresenter> {
   ///初始化CounterProvider
-  CounterProvider _counterProvider = new CounterProvider();
+  // CounterProvider _counterProvider = new CounterProvider();
 
   @override
   void initState() {
@@ -36,9 +36,10 @@ class _TestProvideState extends XFSBasePageState<ConsumerProvide, Object, XFSBas
   Widget buildWidget(BuildContext context, Object object) {
     print('页面重绘了。。。。。。。。。。。');
     //整个页面使用ChangeNotifier来包裹
-    return ChangeNotifierProvider(
-      create: (context) => _counterProvider,
-      child:
+    return
+      // ChangeNotifierProvider(
+    //   create: (context) => _counterProvider,
+    //   child:
       //child里面的内容不会因为数据的改变而重绘
       Scaffold(
         // appBar: AppBar(
@@ -48,7 +49,6 @@ class _TestProvideState extends XFSBasePageState<ConsumerProvide, Object, XFSBas
           children: [
             Number(),
             ClickBtn(),
-
             //使用Cousumer来获取Provider
             Consumer(builder: (BuildContext context,
                 CounterProvider counterProvider, Widget child) {
@@ -69,9 +69,9 @@ class _TestProvideState extends XFSBasePageState<ConsumerProvide, Object, XFSBas
             child: Icon(Icons.navigation),
             onPressed: () {
               //调用increment方法改变数据
-              _counterProvider.addNum();
+              Provider.of<CounterProvider>(context).addNum();
             }),
-      ),
+      // ),
     );
   }
 }
