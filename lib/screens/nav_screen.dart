@@ -8,6 +8,7 @@ import 'package:xfs_flutter_utils/base/xfs_base_page.dart';
 import 'package:xfs_flutter_utils/base/xfs_base_presenter.dart';
 import 'package:xfs_flutter_utils/base/xfs_base_view.dart';
 
+import 'home_page.dart';
 import 'nav_screen_presenter.dart';
 
 /**
@@ -27,8 +28,8 @@ class _NavScreenState extends XFSBasePageState<NavScreen,
     User, NavScreenPresenter>{
 ///五个页面
   final List<Widget> _screens = [
+    HomePage(),
     HomeScreen(),
-    Scaffold(),
     Scaffold(),
     Scaffold(),
     Scaffold(),

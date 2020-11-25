@@ -1,4 +1,5 @@
 
+import 'package:flutter_facebook/models/category_model.dart';
 import 'package:flutter_facebook/models/models.dart';
 import 'package:flutter_facebook/net/api.dart';
 import 'package:flutter_facebook/net/http_utils.dart';
@@ -25,6 +26,20 @@ class ScreenServer {
     }, failure: (model) {
       failureBlock(model);
     });
+  }
+
+///获取分类数据
+  static getCategory(Map<String, dynamic> map,
+      {SuccessBlock<BaseEntity> successBlock,
+        FailureBlock<BaseEntity> failureBlock}) {
+
+    HttpUtils.getDataForCallback(API.listfirstdisplay,API.BASE_URL_xfs,params: map,
+        httpMethod: HttpMethod.POST, success: (model) {
+          // CategoryModel orderPageModel = CategoryModel.fromJson(model);
+          successBlock(model);
+        }, failure: (model) {
+          failureBlock(model);
+        });
   }
   //
   // /// 获取订单详情

@@ -40,4 +40,6 @@ class API {
 
   ///https://mock.yonyoucloud.com/mock/16021/currentUser
   static const CURRENT_USER = '16021/currentUser';
+
+  static const listfirstdisplay  = "store/category/listFirstDisplay";
 }
