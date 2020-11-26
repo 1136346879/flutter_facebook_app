@@ -41,6 +41,18 @@ class ScreenServer {
           failureBlock(model);
         });
   }
+  ///获取banner数据
+  static getHomeBanner(Map<String, dynamic> map,
+      {SuccessBlock<BaseEntity> successBlock,
+        FailureBlock<BaseEntity> failureBlock}) {
+
+    HttpUtils.getDataForCallback(API.listWheelPictureFront,API.BASE_URL_xfs,params: map,
+        httpMethod: HttpMethod.POST, success: (model) {
+          successBlock(model);
+        }, failure: (model) {
+          failureBlock(model);
+        });
+  }
   //
   // /// 获取订单详情
   // /// [requestModel] 请求参数

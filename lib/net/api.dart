@@ -41,5 +41,6 @@ class API {
   ///https://mock.yonyoucloud.com/mock/16021/currentUser
   static const CURRENT_USER = '16021/currentUser';
 
-  static const listfirstdisplay  = "store/category/listFirstDisplay";
+  static const listfirstdisplay  = "store/category/listFirstDisplay";//首页分类
+  static const listWheelPictureFront  = "store/wheelPicture/listWheelPictureFront";//轮播图
 }
