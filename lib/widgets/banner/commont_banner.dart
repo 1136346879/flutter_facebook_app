@@ -12,15 +12,17 @@ class CommontBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 200,
-      child: Swiper(
+      child: swiperDataList.isEmpty ?
+          Text("加载中。。。")
+          : Swiper(
         itemBuilder: (BuildContext context, int index) {
-          return Image.network("${swiperDataList[index].picUrl}",
+          return Image.network("${swiperDataList[index]?.picUrl}",
               fit: BoxFit.fill);
         },
         onTap: (index) {
-         Fluttertoast.showToast(msg:swiperDataList[index].picTitle);
+         Fluttertoast.showToast(msg:swiperDataList[index]?.picTitle);
         },
-        itemCount: swiperDataList.length,
+        itemCount: swiperDataList?.length ?? 0,
         pagination: new SwiperPagination(),
         autoplay: true,
       ),

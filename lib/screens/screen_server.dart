@@ -53,6 +53,17 @@ class ScreenServer {
           failureBlock(model);
         });
   }
+  static getAllCityList(Map<String, dynamic> map,
+      {SuccessBlock<BaseEntity> successBlock,
+        FailureBlock<BaseEntity> failureBlock}) {
+
+    HttpUtils.getDataForCallback(API.allCity,API.BASE_URL_xfs,params: map,
+        httpMethod: HttpMethod.POST, success: (model) {
+          successBlock(model);
+        }, failure: (model) {
+          failureBlock(model);
+        });
+  }
   //
   // /// 获取订单详情
   // /// [requestModel] 请求参数

@@ -24,7 +24,7 @@ class _HomePageState
 
   @override
   backAction() {
-    presenter.getHomeBanner();
+    presenter.getCityList();
   }
   @override
   List<Widget> actions() {
@@ -111,7 +111,10 @@ class _HomePageState
   }
 
   List<Widget> getWidgetList(List<Data> object) {
-    return object.map((item) => getItemContainer(item)).toList();
+    if(object.isNullOrEmpty()){
+      return [];
+    }
+    return object?.map((item) => getItemContainer(item))?.toList();
   }
 
   Widget getItemContainer(Data item) {
@@ -123,14 +126,14 @@ class _HomePageState
             child: XFSNormalButton(
               textColor: Colors.black,
               textSize: 16,
-              icon: Expanded(child: Image.network(item.pictureUrl)),
-              text: item.displayContent,
+              icon: Expanded(child: Image.network(item?.pictureUrl)),
+              text: item?.displayContent,
               iconTextAlignment:XFSNormalButtonAlignment.iconTopTextBottom,
               onLongPress: (){
-                Fluttertoast.showToast(msg: '${item.displayContent}');
+                Fluttertoast.showToast(msg: '${item?.displayContent}');
               },
               onPressed: (){
-                Fluttertoast.showToast(msg: '${item.frontFirstCategoryId}');
+                Fluttertoast.showToast(msg: '${item?.frontFirstCategoryId}');
               },
             ),
           ),

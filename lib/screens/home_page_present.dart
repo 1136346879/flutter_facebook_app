@@ -38,28 +38,38 @@ class HomePagePresenter extends XFSBasePresenter<HomePageView> {
     );
   }
 
-    getHomeBanner(){
-      Map<String, dynamic> map = Map();
-      map['source'] = 20;
-      map['warehouse'] = 1;
-      map['platform'] = 10;
-      ScreenServer.getHomeBanner(
-        map,
-        successBlock: (val) {
-          print("返回数据-轮播图-----${val.data.toString()}");
-          // Fluttertoast.showToast(msg: "返回数据-------${val.data.toString()}");
-          BannerModel bannerModel = BannerModel.fromJson(val.data);
-          mView.showBannerData(bannerModel);
-        },
-        failureBlock: (val) {},
-      );
+  getHomeBanner() {
+    Map<String, dynamic> map = Map();
+    map['source'] = 20;
+    map['warehouse'] = 1;
+    map['platform'] = 10;
+    ScreenServer.getHomeBanner(
+      map,
+      successBlock: (val) {
+        print("返回数据-轮播图-----${val.data.toString()}");
+        // Fluttertoast.showToast(msg: "返回数据-------${val.data.toString()}");
+        BannerModel bannerModel = BannerModel.fromJson(val.data);
+        mView.showBannerData(bannerModel);
+      },
+      failureBlock: (val) {},
+    );
+  }
+
+  getCityList() {
+    Map<String, dynamic> map = Map();
+
+    ScreenServer.getAllCityList(
+      map,
+      successBlock: (val) {
+        print("返回数据-城市列表-----${val.data.toString()}");
+      },
+      failureBlock: (val) {},
+    );
   }
 
   HomePagePresenter(HomePageView mView) : super(mView);
 }
 
-
-abstract class HomePageView extends XFSBaseView{
-
+abstract class HomePageView extends XFSBaseView {
   void showBannerData(BannerModel bannerModel);
 }
