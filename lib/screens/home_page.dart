@@ -1,11 +1,18 @@
+import 'dart:ffi';
+
+import 'package:barcode_scan/barcode_scan.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/models/banner_model.dart';
 import 'package:flutter_facebook/models/category_model.dart';
 import 'package:flutter_facebook/screens/home_page_present.dart';
+import 'package:flutter_facebook/subject/subject_page.dart';
 import 'package:flutter_facebook/widgets/banner/commont_banner.dart';
 import 'package:flutter_facebook/widgets/banner/home_banner.dart';
 import 'package:flutter_facebook/widgets/banner/pagination.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+
 
 class HomePage extends XFSBasePage {
   @override
@@ -24,7 +31,10 @@ class _HomePageState
 
   @override
   backAction() {
-    presenter.getCityList();
+    // presenter.getCityList();
+    // presenter.getLinkedCategoryData();
+    // presenter.getSearchProData();
+    // presenter.getSubjectListData();
   }
   @override
   List<Widget> actions() {
@@ -50,14 +60,18 @@ class _HomePageState
         margin: EdgeInsets.only(right: 10),
         child: XFSNormalButton(
           icon: Icon(Icons.location_on_outlined),
-          onPressed: (){},
+          onPressed: (){
+            SubectListPage.pushName(context);
+          },
         ),
       ),
       Container(
         margin: EdgeInsets.only(right: 10),
         child: XFSNormalButton(
           icon: Icon(Icons.add_a_photo_outlined),
-          onPressed: (){},
+          onPressed: (){
+            _scanQR();
+          },
         ),
       ),
 
@@ -75,38 +89,53 @@ class _HomePageState
 
   @override
   Widget buildWidget(BuildContext context, List<Data> object) {
-    return XFSContainer(
-      child: Column(
-        children: [
-          CommontBanner(swiperDataList:arr),
-          // Pagination(),
-          Expanded(
-            child: Container(
-              color: Colors.white,
-              margin: EdgeInsets.only(left: 10,right: 10),
-              child: GridView.count(
-                  padding: EdgeInsets.all(10),
-                //水平子Widget之间间距
-                crossAxisSpacing: 10.0,
-                //垂直子Widget之间间距
-                mainAxisSpacing: 10.0,
-                //GridView内边距
-                // padding: EdgeInsets.all(10.0),
-                //一行的Widget数量
-                crossAxisCount: 4,
-                //子Widget宽高比例
-                // childAspectRatio: 2.0,
-                //子Widget列表
-                children: getWidgetList(object),
-              ),
-            ),
-          ),
-
-        ],
-      ),
-      onTap: () {
-        presenter.getListFirstPlay();
+    return RefreshIndicator(
+      onRefresh: (){
+        return  _onRefresh();
       },
+      child: Scrollable(
+
+      physics: BouncingScrollPhysics(),
+
+        controller: ScrollController(),
+          viewportBuilder: (BuildContext context, ViewportOffset offset) {
+
+        return  XFSContainer(
+          child: ListView(
+            children: [
+              CommontBanner(swiperDataList:arr),
+              // Pagination(),
+              Expanded(
+                child: Container(
+                  color: Colors.white,
+                  margin: EdgeInsets.only(left: 10,right: 10),
+                  child: GridView.count(
+                    primary:false,
+                      shrinkWrap:true,
+                    controller: ScrollController(),
+                      padding: EdgeInsets.all(10),
+                    //水平子Widget之间间距
+                    crossAxisSpacing: 10.0,
+                    //垂直子Widget之间间距
+                    mainAxisSpacing: 10.0,
+                    //GridView内边距
+                    // padding: EdgeInsets.all(10.0),
+                    //一行的Widget数量
+                    crossAxisCount: 4,
+                    //子Widget宽高比例
+                    // childAspectRatio: 2.0,
+                    //子Widget列表
+                    children: getWidgetList(object),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          onTap: () {
+            presenter.getListFirstPlay();
+          },
+        );
+       },),
     );
   }
 
@@ -116,6 +145,22 @@ class _HomePageState
     }
     return object?.map((item) => getItemContainer(item))?.toList();
   }
+   static Future _scanQR() async {
+     try {
+       String qrResult = await BarcodeScanner.scan();
+       print(qrResult);
+     } on PlatformException catch(ex) {
+       if (ex.code == BarcodeScanner.CameraAccessDenied) {
+         print(ex.code);
+       } else {
+         print(ex.code);
+       }
+     } on FormatException {
+       print("pressed ths back button before scanning anyting");
+     } catch(ex){
+       print(ex);
+     }
+   }
 
   Widget getItemContainer(Data item) {
     return Container(
@@ -148,5 +193,15 @@ class _HomePageState
 
      arr = bannerModel.data;
      setState(() {});
+  }
+
+   Future<void> _onRefresh() async{
+     await Future.delayed(Duration(seconds: 1), () {
+       presenter.getListFirstPlay();
+       presenter.getHomeBanner();
+     });
+     setState(() {
+
+     });
   }
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook/models/banner_model.dart';
+import 'package:flutter_facebook/subject/subject_page.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -21,6 +22,7 @@ class CommontBanner extends StatelessWidget {
         },
         onTap: (index) {
          Fluttertoast.showToast(msg:swiperDataList[index]?.picTitle);
+         SubectListPage.pushName(context);
         },
         itemCount: swiperDataList?.length ?? 0,
         pagination: new SwiperPagination(),

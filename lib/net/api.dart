@@ -3,6 +3,7 @@ class API {
 //  static const BASE_URL = 'http://127.0.0.1:20155/';
   static const BASE_URL = 'https://mock.yonyoucloud.com/mock/';
   static const BASE_URL_xfs = 'https://t.fsyuncai.com/api/mobile/';
+  static const BASE_URL_xfs_t2 = 'https://t2.fsyuncai.com/api/mobile/';
 
   static const TREE_URL = 'tree/json';
 
@@ -43,4 +44,17 @@ class API {
 
   static const listfirstdisplay  = "store/category/listFirstDisplay";//首页分类
   static const listWheelPictureFront  = "store/wheelPicture/listWheelPictureFront";//轮播图
+  static const allCity  = "baseservice/area/getWarehouseCoverAddressAllCity";//城市列表
+  static const linkedShowCategory  = "store/category/linkedShowCategory";//一级相关--二级分类数据
+  static const searchPro  = "search/searchPro";//商品列表
+  static const subjectList  = "store/subject/searchWheelSubjectMsg";//专题列表
+  // 智能联想
+  static const SEARCH_ASSOCIATION = "search/queryStringAuto";
+
+  //商品详情
+  static const GOODS_DETAIL = "product/product/skuDetailList";
+
+  //规格参数
+  static const PRODUCT_DETAIL = "product/product/skuShopDetailInformation";
+
 }

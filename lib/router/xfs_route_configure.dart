@@ -9,6 +9,7 @@ import 'package:flutter_facebook/order/xfs_order_page.dart';
 import 'package:flutter_facebook/order/xfs_order_search_page.dart';
 import 'package:flutter_facebook/order/xfs_order_search_result_page.dart';
 import 'package:flutter_facebook/screens/nav_screen.dart';
+import 'package:flutter_facebook/subject/subject_page.dart';
 import 'package:flutter_facebook/testpage/SelectProvider.dart';
 import 'package:flutter_facebook/testpage/consumer_provider.dart';
 import 'package:xfs_flutter_utils/utils/xfs_log_util.dart';
@@ -48,6 +49,7 @@ class XFSAppRouteConfigure {
 
   ///地址列表页面
   static String xfsAddressListPage = "XFSAddressListPage";
+  static String subectListPage = "SubectListPage";
   ///自提地址搜索
   static String xfsSelfRaiseSearchAddress = "XFSSelfRaiseSearchAddress";
   static String xfsOrderApprovalProgressListPage = "xfsOrderApprovalProgressListPage";
@@ -71,6 +73,9 @@ class XFSAppRouteConfigure {
     ),
     xfsOrderExportPage: (arguments) => XFSRouteResult(
       widget: XFSOrderExportPage(arguments: arguments,),
+    ),
+    subectListPage: (arguments) => XFSRouteResult(
+      widget: SubectListPage(arguments: arguments,),
     ),
     //
     // orderDetailsPage: (arguments) => XFSRouteResult(

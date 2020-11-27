@@ -1,4 +1,5 @@
 
+import 'package:flutter_facebook/models/SubjectModel.dart';
 import 'package:flutter_facebook/models/category_model.dart';
 import 'package:flutter_facebook/models/models.dart';
 import 'package:flutter_facebook/net/api.dart';
@@ -60,6 +61,40 @@ class ScreenServer {
     HttpUtils.getDataForCallback(API.allCity,API.BASE_URL_xfs,params: map,
         httpMethod: HttpMethod.POST, success: (model) {
           successBlock(model);
+        }, failure: (model) {
+          failureBlock(model);
+        });
+  }
+  static getLinkedShowCategory(Map<String, dynamic> map,
+      {SuccessBlock<BaseEntity> successBlock,
+        FailureBlock<BaseEntity> failureBlock}) {
+
+    HttpUtils.getDataForCallback(API.linkedShowCategory,API.BASE_URL_xfs,params: map,
+        httpMethod: HttpMethod.POST, success: (model) {
+          successBlock(model);
+        }, failure: (model) {
+          failureBlock(model);
+        });
+  }
+  static getSearchPro(Map<String, dynamic> map,
+      {SuccessBlock<BaseEntity> successBlock,
+        FailureBlock<BaseEntity> failureBlock}) {
+
+    HttpUtils.getDataForCallback(API.searchPro,API.BASE_URL_xfs,params: map,
+        httpMethod: HttpMethod.POST, success: (model) {
+          successBlock(model);
+        }, failure: (model) {
+          failureBlock(model);
+        });
+  }
+  static getSubjectList(Map<String, dynamic> map,
+      {SuccessBlock<SubjectModel> successBlock,
+        FailureBlock<BaseEntity> failureBlock}) {
+
+    HttpUtils.getDataForCallback(API.subjectList,API.BASE_URL_xfs_t2,params: map,
+        httpMethod: HttpMethod.POST, success: (model) {
+          SubjectModel subjectModel = SubjectModel.fromJson(model.data);
+          successBlock(subjectModel);
         }, failure: (model) {
           failureBlock(model);
         });
