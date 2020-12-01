@@ -40,7 +40,7 @@ class _SubectListPageState
   Widget buildItem(ModelList modelList, int index) {
     if (modelList.modelType == 1) {
       return XFSContainer(
-          backgroudColor:_color,
+          backgroundColor:_color,
           onTap: () =>
               Fluttertoast.showToast(msg: '模板一${modelList.modelType}！！！'),
           child: Column(
@@ -62,7 +62,7 @@ class _SubectListPageState
     } else if (modelList.modelType == 2) {
       return XFSContainer(
           padding: EdgeInsets.only(left: 10, right: 10),
-          backgroudColor: _color,
+          backgroundColor: _color,
           onTap: () =>
               Fluttertoast.showToast(msg: '模板一${modelList.modelType}！！！'),
           child: Column(
@@ -95,7 +95,7 @@ class _SubectListPageState
     } else if (modelList.modelType == 3) {
       XFSContainer(
           padding: EdgeInsets.only(left: 10, right: 10),
-          backgroudColor: _color,
+          backgroundColor: _color,
           onTap: () =>
               Fluttertoast.showToast(msg: '模板一${modelList.modelType}！！！'),
           child: Column(
@@ -135,7 +135,7 @@ class _SubectListPageState
     } else if (modelList.modelType == 4) {
       return XFSContainer(
           padding: EdgeInsets.only(left: 10, right: 10),
-          backgroudColor: _color,
+          backgroundColor: _color,
           onTap: () =>
               Fluttertoast.showToast(msg: '模板一${modelList.modelType}！！！'),
           child: Column(
@@ -172,7 +172,7 @@ class _SubectListPageState
     } else if (modelList.modelType == 5) {
       return XFSContainer(
         padding: EdgeInsets.only(left: 10, right: 10),
-        backgroudColor: _color,
+        backgroundColor: _color,
         onTap: () =>
             Fluttertoast.showToast(msg: '模板一${modelList.modelType}！！！'),
         child: Column(
@@ -231,7 +231,7 @@ class _SubectListPageState
     } else if (modelList.modelType == 6) {
       return XFSContainer(
         height: 220,
-        backgroudColor: _color,
+        backgroundColor: _color,
         child:
             ListView.builder(
               shrinkWrap: true,
@@ -282,7 +282,7 @@ class _SubectListPageState
       );
     } else if (modelList.modelType == 7) {
       return XFSContainer(
-          backgroudColor: _color,
+          backgroundColor: _color,
           onTap: () =>
               Fluttertoast.showToast(msg: '模板一${modelList.modelType}！！！'),
           child: Column(
@@ -309,7 +309,7 @@ class _SubectListPageState
           ));
     } else if (modelList.modelType == 8) {
       return XFSContainer(
-          backgroudColor: _color,
+          backgroundColor: _color,
           onTap: () =>
               Fluttertoast.showToast(msg: '模板一${modelList.modelType}！！！'),
           child: Column(
@@ -339,7 +339,7 @@ class _SubectListPageState
           ));
     } else if (modelList.modelType == 9) {
       return XFSContainer(
-          backgroudColor: _color,
+          backgroundColor: _color,
           onTap: () =>
               Fluttertoast.showToast(msg: '模板一${modelList.modelType}！！！'),
           child: Column(
@@ -364,7 +364,7 @@ class _SubectListPageState
           ));
     } else if (modelList.modelType == 10) {
       return XFSContainer(
-          backgroudColor: _color,
+          backgroundColor: _color,
           onTap: () =>
               Fluttertoast.showToast(msg: '模板一${modelList.modelType}！！！'),
           child: Column(
@@ -392,7 +392,7 @@ class _SubectListPageState
           ));
     } else {
       return XFSContainer(
-        backgroudColor: _color,
+        backgroundColor: _color,
         onTap: () => Fluttertoast.showToast(msg: '当前版本不支持，点击升级查看！！！'),
         child: XFSText('当前版本不支持，点击升级查看！！！'),
       );

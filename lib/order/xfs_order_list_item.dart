@@ -318,19 +318,17 @@ class XFSOrderListFooter extends StatelessWidget {
   /// 显示更多，只有商品数量多余三个时候显示
   Widget _moreView(){
     if (model.isShowMore){
-      return Container(
+      return XFSTextButton.icon(
+        onPressed: (){
+          clickDelegate.didSelectCell(section: section, clickType: 2, data: model);
+        },
+        gap: 3,
         height: 30,
-        child: XFSNormalButton(
-          onPressed: (){
-            clickDelegate.didSelectCell(section: section, clickType: 2, data: model);
-          },
-          horizontalSpace: 3,
-          iconTextAlignment: XFSNormalButtonAlignment.iconRightTextLeft,
-          icon: Image.asset(model.isExpand ? R.orderArrowUp : R.orderArrowDown, width: 10, height: 10,),
-          text: model.isExpand ? '收起' : '更多',
-          textColor: Config.color333333,
-          textSize: 12,
-        ),
+        direction: XFSTextButtonIconTextDirection.textLIconR,
+        icon: Image.asset(model.isExpand ? R.orderArrowUp : R.orderArrowDown, width: 10, height: 10,),
+        title: model.isExpand ? '收起' : '更多',
+        textColor: Config.color333333,
+        fontSize: 12,
       );
     }
     return SizedBox(height: 0,);

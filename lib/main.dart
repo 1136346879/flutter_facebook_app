@@ -22,7 +22,8 @@ void main() {
   runZoned<Future<void>>(() async{
     WidgetsFlutterBinding.ensureInitialized();
     Http.init(baseUrl: API.BASE_URL);
-    dio.interceptors.add(ErrorInterceptor());
+    Http.addInterceptors(ErrorInterceptor());
+    Http.addLogInterceptors();
     XFSAppNetworkStatusManager.instance.startMonitor();
     XFSNavigatorManage.init('rootPage');
     runApp(

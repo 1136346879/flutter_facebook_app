@@ -9,9 +9,8 @@ import 'package:flutter_facebook/models/category_model.dart';
 import 'package:flutter_facebook/screens/home_page_present.dart';
 import 'package:flutter_facebook/subject/subject_page.dart';
 import 'package:flutter_facebook/widgets/banner/commont_banner.dart';
-import 'package:flutter_facebook/widgets/banner/home_banner.dart';
-import 'package:flutter_facebook/widgets/banner/pagination.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:xfs_flutter_utils/widgets/xfs_button.dart';
 
 
 class HomePage extends XFSBasePage {
@@ -41,7 +40,7 @@ class _HomePageState
     return [
       Container(
         margin: EdgeInsets.only(right: 10),
-        child: XFSNormalButton(
+        child: XFSTextButton.icon(
           icon: Icon(Icons.shopping_cart),
           onPressed: (){
 
@@ -51,14 +50,14 @@ class _HomePageState
 
       Container(
         margin: EdgeInsets.only(right: 10),
-        child: XFSNormalButton(
+        child: XFSTextButton.icon(
           icon: Icon(Icons.search),
           onPressed: (){},
         ),
       ),
       Container(
         margin: EdgeInsets.only(right: 10),
-        child: XFSNormalButton(
+        child: XFSTextButton.icon(
           icon: Icon(Icons.location_on_outlined),
           onPressed: (){
             SubectListPage.pushName(context);
@@ -67,7 +66,7 @@ class _HomePageState
       ),
       Container(
         margin: EdgeInsets.only(right: 10),
-        child: XFSNormalButton(
+        child: XFSTextButton.icon(
           icon: Icon(Icons.add_a_photo_outlined),
           onPressed: (){
             _scanQR();
@@ -168,12 +167,13 @@ class _HomePageState
       child: Column(
         children: [
           Expanded(
-            child: XFSNormalButton(
+            child: XFSTextButton.icon(
               textColor: Colors.black,
-              textSize: 16,
+              fontSize: 14,
               icon: Expanded(child: Image.network(item?.pictureUrl)),
-              text: item?.displayContent,
-              iconTextAlignment:XFSNormalButtonAlignment.iconTopTextBottom,
+              title: item?.displayContent,
+              direction:XFSTextButtonIconTextDirection.textBIconT,
+
               onLongPress: (){
                 Fluttertoast.showToast(msg: '${item?.displayContent}');
               },

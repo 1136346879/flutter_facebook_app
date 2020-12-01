@@ -55,7 +55,7 @@ class _AddressListPageState extends XFSBaseListPageState<XFSAddressListPage,
   Widget buildItem(XFSAddressModel entity, int index) {
     return XFSInkWell(
         child: XFSContainer(
-            backgroudColor: entity.isSelected??false ? Config.colorfdf2e9 : Colors.white,
+            backgroundColor: entity.isSelected??false ? Config.colorfdf2e9 : Colors.white,
           borderRadius: BorderRadius.all(Radius.circular(10)),
           border: Border.all(
               color: entity.isSelected??false ? Config.colorFFA200 : Colors.white, width: 1),

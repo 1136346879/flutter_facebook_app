@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook/address/xfs_address_list_page.dart';
 import 'package:flutter_facebook/data/data.dart';
 import 'package:flutter_facebook/models/user_model.dart';
+import 'package:flutter_facebook/order/xfs_order_page.dart';
 import 'package:flutter_facebook/screens/screens.dart';
 import 'package:flutter_facebook/widgets/widgets.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -28,10 +30,10 @@ class _NavScreenState extends XFSBasePageState<NavScreen,
     User, NavScreenPresenter>{
 ///五个页面
   final List<Widget> _screens = [
-    HomePage(),
     HomeScreen(),
-    Scaffold(),
-    Scaffold(),
+    HomePage(),
+    XFSAddressListPage(),
+    XFSOrderPage(arguments:"" ),
     Scaffold(),
     Scaffold(),
   ];
