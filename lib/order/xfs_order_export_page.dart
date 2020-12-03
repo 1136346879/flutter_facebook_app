@@ -5,6 +5,9 @@ import 'package:flutter_facebook/order/xfs_order_utils.dart';
 import 'package:flutter_facebook/util/xfs_common_utils.dart';
 import 'package:xfs_flutter_utils/widgets/xfs_choose_wrap.dart';
 
+typedef MultipleCallbackTypedf<T> = Function(int tag, dynamic data);
+typedef SingleCallbackTypedef<T> = Function(int tag, dynamic data);
+
 class XFSOrderExportPage extends XFSBasePage {
   String arguments;
 
@@ -14,8 +17,8 @@ class XFSOrderExportPage extends XFSBasePage {
   XFSBasePageState getState() => _XFSOrderExportPageState();
 }
 
-class _XFSOrderExportPageState
-    extends XFSBasePageState<XFSOrderExportPage, Object, XfsOrderExportPresenter> implements XfsOrderExportView{
+class _XFSOrderExportPageState extends XFSBasePageState<XFSOrderExportPage,
+    Object, XfsOrderExportPresenter> implements XfsOrderExportView {
   XFSExportOrderModel _uploadModel = XFSExportOrderModel();
 
   /// 是否显示自定义时间
@@ -40,6 +43,7 @@ class _XFSOrderExportPageState
 
   @override
   bool get isUseSafeArea => true;
+
   @override
   backAction() {
     if (Navigator.canPop(getContext())) {
@@ -49,21 +53,19 @@ class _XFSOrderExportPageState
     }
   }
 
-
-@override
+  @override
   Widget buildBottom(Object object) {
-  return XFSText(
-    '确认导出',
-    height: 44,
-    textColor: Colors.white,
-    backgroudColor: Config.app_main,
-    alignment: Alignment.center,
-    onTap: (){
-      presenter.exprotOrder(_uploadModel);
-    },
-  );
+    return XFSText(
+      '确认导出',
+      height: 44,
+      textColor: Colors.white,
+      backgroudColor: Config.app_main,
+      alignment: Alignment.center,
+      onTap: () {
+        presenter.exprotOrder(_uploadModel);
+      },
+    );
   }
-
 
   @override
   Widget buildWidget(BuildContext context, Object object) {
@@ -78,6 +80,41 @@ class _XFSOrderExportPageState
 
   _buileTimeView() {
     return Column(
+      children: [
+        _buildView(
+            title: "请选择订单时间",
+            list: [
+              '近三月',
+              '近半年',
+              '近一年',
+              '自定义',
+            ],
+            isMultipleChoice: false,
+            singleCallback: (tag, data) {
+              XFSLogUtil.info('----------------------------$data');
+
+              /// 两次选择一样不做操作
+              if (data == _uploadModel.time) {
+                return;
+              }
+              _uploadModel.time = data;
+              if (data == '自定义') {
+                setState(() {
+                  _showCustomTimeView = true;
+                });
+              } else {
+                // _uploadModel.beginDate = null;
+                // _uploadModel.endDate = null;
+                setState(() {
+                  _showCustomTimeView = false;
+                });
+              }
+            }),
+        Visibility(visible: _showCustomTimeView, child: _buildCustomTimeView())
+      ],
+    );
+
+    Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         XFSText(
@@ -138,7 +175,16 @@ class _XFSOrderExportPageState
   }
 
   _buildOrderStatusView() {
-    return Column(
+    return _buildView(
+        title: "请选择订单状态",
+        list: XFSOrderUtils.getTabbarTitles()..remove('全部'),
+        isMultipleChoice: true,
+        multipleCallback: (tag, data) {
+          XFSLogUtil.info('----------------------------${data.toString()}');
+          _uploadModel.orderStatus = data;
+        });
+
+    Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         XFSText(
@@ -174,7 +220,16 @@ class _XFSOrderExportPageState
   }
 
   _buildInvoiceSorceView() {
-    return Column(
+    return _buildView(
+        title: "请选择开票状态",
+        list: XFSOrderUtils.getInvoiceSorce()..remove('全部'),
+        isMultipleChoice: true,
+        multipleCallback: (tag, data) {
+          XFSLogUtil.info('----------------------------${data.toString()}');
+          _uploadModel.invoiceSorce = data;
+        });
+
+    Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         XFSText(
@@ -210,7 +265,16 @@ class _XFSOrderExportPageState
   }
 
   _buildPaymentView() {
-    return Column(
+    return _buildView(
+        title: "请选择支付方式",
+        list: XFSOrderUtils.getPaymentList()..remove('全部'),
+        isMultipleChoice: true,
+        multipleCallback: (tag, data) {
+          XFSLogUtil.info('----------------------------${data.toString()}');
+          _uploadModel.payments = data;
+        });
+
+    Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         XFSText(
@@ -245,6 +309,39 @@ class _XFSOrderExportPageState
     );
   }
 
+  _buildView<T>(
+      {String title,
+      @required List<T> list,
+      bool isMultipleChoice,
+        MultipleCallbackTypedf multipleCallback,
+      SingleCallbackTypedef singleCallback}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        _buildTitle(title),
+        XFSChooseWrap<T>(
+          list: list,
+          padding: EdgeInsets.symmetric(horizontal: 15),
+          theme: XFSChooseWrapTheme.text(
+              activeColor: Colors.white,
+              textColor: Config.color333333,
+              activeTextColor: Colors.white,
+              backgroudColor: Colors.white,
+              selectedBackgroundImage: R.checkSelected,
+              normalBorder: Border.all(color: Config.color333333),
+              selectedBorder: Border.all(color: Config.app_main),
+              radius: BorderRadius.all(Radius.circular(6)),
+              padding: EdgeInsets.symmetric(horizontal: 15, vertical: 5)),
+          isMultipleChoice: isMultipleChoice,
+          multipleCallback: multipleCallback,
+          singleCallback: singleCallback,
+          runSpacing: 20,
+          spacing: 10,
+        ),
+      ],
+    );
+  }
+
   _buildEmailView() {
     return Column(
       children: [
@@ -270,9 +367,12 @@ class _XFSOrderExportPageState
   _buildTitle(
     String title,
   ) {
-    return XFSText(
-      title,
-      margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+    return Visibility(
+      visible: title.isNotNullOrEmpty(),
+      child: XFSText(
+        title,
+        margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
+      ),
     );
   }
 
@@ -286,7 +386,7 @@ class _XFSOrderExportPageState
     XFSCommonUtils.showToast(msg: msg);
   }
 
-  _buildCustomTimeView(){
+  _buildCustomTimeView() {
     return XFSContainer(
       margin: EdgeInsets.only(left: 15, right: 15, top: 20),
       child: Row(
@@ -308,46 +408,47 @@ class _XFSOrderExportPageState
       ),
     );
   }
+
   /// 开始时间,时间间隔不能大于一年，
-  _buildStartDateView(){
-    return _buildDateLabel(XFSDateUtil.getDateStrByDateTime(_uploadModel.beginDate, format: XFSDateFormat.YEAR_MONTH_DAY),
-        hint: '请选择开始日期',
-        onTap: () {
-          XFSDatePickerView.show(
-              context: context,
-              maximumDate: _uploadModel.endDate,
-              minimumDate: _uploadModel.beginMinDate(),
-              initialDateTime: _uploadModel.beginInitDate(),
-              confirmCallback: (date) {
-                _uploadModel.beginDate = date;
-                setState(() {});
-              }
-          );
-        }
-    );
+  _buildStartDateView() {
+    return _buildDateLabel(
+        XFSDateUtil.getDateStrByDateTime(_uploadModel.beginDate,
+            format: XFSDateFormat.YEAR_MONTH_DAY),
+        hint: '请选择开始日期', onTap: () {
+      XFSDatePickerView.show(
+          context: context,
+          maximumDate: _uploadModel.endDate,
+          minimumDate: _uploadModel.beginMinDate(),
+          initialDateTime: _uploadModel.beginInitDate(),
+          confirmCallback: (date) {
+            _uploadModel.beginDate = date;
+            setState(() {});
+          });
+    });
   }
 
   /// 结束时间
-  _buildEndDateView(){
-    return _buildDateLabel(XFSDateUtil.getDateStrByDateTime(_uploadModel.endDate, format: XFSDateFormat.YEAR_MONTH_DAY),
-        hint: '请选择结束日期',
-        onTap: () {
-          XFSDatePickerView.show(
-              context: context,
-              initialDateTime: _uploadModel.endInitDate(),
-              minimumDate: _uploadModel.beginDate,
-              maximumDate: _uploadModel.endMaxDate(),
-              confirmCallback: (date) {
-                _uploadModel.endDate = date;
-                setState(() {});
-              }
-          );
-        }
-    );
+  _buildEndDateView() {
+    return _buildDateLabel(
+        XFSDateUtil.getDateStrByDateTime(_uploadModel.endDate,
+            format: XFSDateFormat.YEAR_MONTH_DAY),
+        hint: '请选择结束日期', onTap: () {
+      XFSDatePickerView.show(
+          context: context,
+          initialDateTime: _uploadModel.endInitDate(),
+          minimumDate: _uploadModel.beginDate,
+          maximumDate: _uploadModel.endMaxDate(),
+          confirmCallback: (date) {
+            _uploadModel.endDate = date;
+            setState(() {});
+          });
+    });
   }
+
   /// 时间显示
-  _buildDateLabel(String title, {String hint,Function onTap}){
-    return XFSText(title??'',
+  _buildDateLabel(String title, {String hint, Function onTap}) {
+    return XFSText(
+      title ?? '',
       height: 25,
       alignment: Alignment.center,
       hint: hint,

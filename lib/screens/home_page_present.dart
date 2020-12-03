@@ -8,6 +8,7 @@ import 'package:xfs_flutter_utils/base/xfs_base_presenter.dart';
 import 'package:xfs_flutter_utils/base/xfs_base_view.dart';
 
 class HomePagePresenter extends XFSBasePresenter<HomePageView> {
+        List<Data> data = new List<Data>();
   getListFirstPlay() {
     ///{
 //     "loginAccount": "luoluo009",
@@ -28,7 +29,6 @@ class HomePagePresenter extends XFSBasePresenter<HomePageView> {
       successBlock: (val) {
         print("返回数据-分类-----${val.data.toString()}");
         // Fluttertoast.showToast(msg: "返回数据-------${val.data.toString()}");
-        List<Data> data = new List<Data>();
         val.data.forEach((v) {
           data.add(new Data.fromJson(v));
         });
@@ -37,7 +37,11 @@ class HomePagePresenter extends XFSBasePresenter<HomePageView> {
       failureBlock: (val) {},
     );
   }
+        void removeElemet(Data item) {
+          data.remove(item);
+          mView.showData(data: data);
 
+        }
   getHomeBanner() {
     Map<String, dynamic> map = Map();
     map['source'] = 20;
@@ -146,8 +150,11 @@ class HomePagePresenter extends XFSBasePresenter<HomePageView> {
       },
       failureBlock: (val) {},
     );
+
   }
   HomePagePresenter(HomePageView mView) : super(mView);
+
+
 }
 
 abstract class HomePageView extends XFSBaseView {

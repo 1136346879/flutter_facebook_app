@@ -24,9 +24,6 @@ class SubjectPresenter extends XFSBasePresenter{
   }
 
 
-
-
-
   SubjectPresenter(XFSBaseView mView) : super(mView);
 
 }

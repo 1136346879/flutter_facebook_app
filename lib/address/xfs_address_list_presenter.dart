@@ -43,4 +43,9 @@ class XFSAddressListPresenter extends XFSBasePresenter<XFSBaseListView> {
     );
   }
 
+  void removeElements(XFSAddressModel entity) {
+    modelList.remove(entity);
+    mView.showData(data: modelList);
+  }
+
 }

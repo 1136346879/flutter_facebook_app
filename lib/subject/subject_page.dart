@@ -237,36 +237,48 @@ class _SubectListPageState
               shrinkWrap: true,
               scrollDirection:Axis.horizontal ,
               itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin: EdgeInsets.only(right: (index==modelList.urlList.length-1)?0:8),
-                  child: Column(
-                      children: [
-                        XFSNetImageLoader.loadNetImage(
-                            url: modelList.urlList[index].modelUrl,
-                            height: 110,
-                            width: 110),
-                        Container(
-                          width: 110,
-                          color: Colors.white,
-                          alignment: Alignment.center,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                               XFSText(
-                                  '${modelList.urlList[index].productTitle}',
-                                  maxLines: 2,
-                                  margin: EdgeInsets.all(10),
-                                ),
-                             XFSText(
-                                '￥${modelList.urlList[index].productPrice}',
-                                textColor: Colors.red,
-                                padding: EdgeInsets.only(left: 10,bottom: 10),
-                              ),
-                  ]
-                          ),
-                        ),
-                      ],
+                return Dismissible(
+                  key: Key(index.toString()),
+                  onDismissed: (direction){
+                    setState(() {
+                         modelList.urlList.removeAt(index);
+                    });
 
+                  },
+                  confirmDismiss: (direction){
+                    return getTrueFalse();
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(right: (index==modelList.urlList.length-1)?0:8),
+                    child: Column(
+                        children: [
+                          XFSNetImageLoader.loadNetImage(
+                              url: modelList.urlList[index].modelUrl,
+                              height: 110,
+                              width: 110),
+                          Container(
+                            width: 110,
+                            color: Colors.white,
+                            alignment: Alignment.center,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                 XFSText(
+                                    '${modelList.urlList[index].productTitle}',
+                                    maxLines: 2,
+                                    margin: EdgeInsets.all(10),
+                                  ),
+                               XFSText(
+                                  '￥${modelList.urlList[index].productPrice}',
+                                  textColor: Colors.red,
+                                  padding: EdgeInsets.only(left: 10,bottom: 10),
+                                ),
+                    ]
+                            ),
+                          ),
+                        ],
+
+                    ),
                   ),
                 );
               },
@@ -400,13 +412,22 @@ class _SubectListPageState
   }
 
   @override
-  void onLoadMore() {}
+  void onLoadMore() {
+    presenter.getSubjectListData();
+  }
 
   @override
-  void onRefresh() {}
+  void onRefresh() {
+    presenter.getSubjectListData();
+
+  }
 
   @override
   SubjectPresenter initPresenter() {
     return SubjectPresenter(this);
   }
+}
+
+ getTrueFalse() {
+  return true;
 }

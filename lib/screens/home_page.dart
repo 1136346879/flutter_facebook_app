@@ -162,29 +162,48 @@ class _HomePageState
    }
 
   Widget getItemContainer(Data item) {
-    return Container(
-      alignment: Alignment.center,
-      child: Column(
-        children: [
-          Expanded(
-            child: XFSTextButton.icon(
-              textColor: Colors.black,
-              fontSize: 14,
-              icon: Expanded(child: Image.network(item?.pictureUrl)),
-              title: item?.displayContent,
-              direction:XFSTextButtonIconTextDirection.textBIconT,
+    return Dismissible(
+      key: Key(UniqueKey().toString()),
 
-              onLongPress: (){
-                Fluttertoast.showToast(msg: '${item?.displayContent}');
-              },
-              onPressed: (){
-                Fluttertoast.showToast(msg: '${item?.frontFirstCategoryId}');
-              },
-            ),
-          ),
-        ],
+      onDismissed: (direction){
+        setState(() {
+          presenter.removeElemet(item);
+        });
+      },
+      background: Container(
+        padding: const EdgeInsets.only(right: 10),
+        alignment: Alignment.centerRight,
+        color: Colors.red,
+        child: Text(
+          '滑动删除',
+          style:
+          TextStyle(fontSize: 12, color: Colors.white),
+        ),
       ),
-      color: Colors.white,
+      child: Container(
+        alignment: Alignment.center,
+        child: Column(
+          children: [
+            Expanded(
+              child: XFSTextButton.icon(
+                textColor: Colors.black,
+                fontSize: 14,
+                icon: Expanded(child: Image.network(item?.pictureUrl)),
+                title: item?.displayContent,
+                direction:XFSTextButtonIconTextDirection.textBIconT,
+
+                onLongPress: (){
+                  Fluttertoast.showToast(msg: '${item?.displayContent}');
+                },
+                onPressed: (){
+                  Fluttertoast.showToast(msg: '${item?.frontFirstCategoryId}');
+                },
+              ),
+            ),
+          ],
+        ),
+        color: Colors.white,
+      ),
     );
   }
 
