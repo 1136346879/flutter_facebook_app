@@ -4,10 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook/address/xfs_address_list_page.dart';
 import 'package:flutter_facebook/models/xfs_user_model.dart';
 import 'package:flutter_facebook/net/xfs_common_channel_utils.dart';
+import 'package:flutter_facebook/order/tab_page.dart';
 import 'package:flutter_facebook/order/xfs_order_export_page.dart';
 import 'package:flutter_facebook/order/xfs_order_page.dart';
 import 'package:flutter_facebook/order/xfs_order_search_page.dart';
 import 'package:flutter_facebook/order/xfs_order_search_result_page.dart';
+import 'package:flutter_facebook/order/xfs_order_tab_page.dart';
 import 'package:flutter_facebook/screens/nav_screen.dart';
 import 'package:flutter_facebook/subject/subject_page.dart';
 import 'package:flutter_facebook/testpage/SelectProvider.dart';
@@ -32,6 +34,8 @@ class XFSAppRouteConfigure {
 
   ///订单列表页面
   static String orderPage = "XFSOrderPage";
+  static String orderTabPage = "XFSOrderTabPage";
+  static String tabPage = "TabPage";
   static String orderSearchPage = "orderSearchPage";
   static String consumerProvide = "ConsumerProvide";
   static String selectProvider = "SelectProvider";
@@ -65,6 +69,11 @@ class XFSAppRouteConfigure {
     orderPage: (arguments) => XFSRouteResult(
           widget: XFSOrderPage(arguments: arguments,),
         ),
+    orderTabPage: (arguments) => XFSRouteResult(
+          widget: XFSOrderTabPage(arguments: arguments,),),
+
+       tabPage: (arguments) => XFSRouteResult(
+          widget: TabPage(arguments: arguments,),),
     orderSearchPage: (arguments) => XFSRouteResult(
           widget: XFSOrderSearchPage(),
         ),

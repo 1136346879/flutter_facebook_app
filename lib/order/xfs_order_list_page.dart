@@ -48,7 +48,7 @@ class XFSOrderListpageState extends XFSBaseListPageState<XFSOrderListpage, XFSOr
 
   @override
   Widget buildCustomList() {//特殊情况
-    return XFSListView(context: context, delegate: XFSOrderListDelegate(clickDelegate: this, list: modelList,));
+    return XFSListView(context: context, delegate: XFSOrderListDelegate(clickDelegate: this, list: data,));
   }
 
   @override

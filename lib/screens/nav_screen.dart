@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook/address/xfs_address_list_page.dart';
 import 'package:flutter_facebook/data/data.dart';
 import 'package:flutter_facebook/models/user_model.dart';
+import 'package:flutter_facebook/order/tab_page.dart';
 import 'package:flutter_facebook/order/xfs_order_page.dart';
+import 'package:flutter_facebook/order/xfs_order_tab_page.dart';
 import 'package:flutter_facebook/screens/screens.dart';
 import 'package:flutter_facebook/widgets/widgets.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
@@ -34,7 +36,9 @@ class _NavScreenState extends XFSBasePageState<NavScreen,
     HomePage(),
     XFSAddressListPage(),
     XFSOrderPage(arguments:"" ),
-    Scaffold(),
+    // XFSOrderTabPage(arguments: "50"),
+    // Scaffold(),
+    TabPage(arguments: "50"),
     Scaffold(),
   ];
   ///五个图标
