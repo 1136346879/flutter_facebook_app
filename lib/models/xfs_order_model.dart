@@ -75,9 +75,9 @@ class XFSOrderListModel{
   /// 是否展开，默认false，用于控制多个商品是否展开，
   bool isExpand = false;
   /// 是否显示更多按钮，如果商品大于三个则表示需要显示展开按钮，
-  bool get isShowMore => listOrderItems?.length > 3 ? true : false;
+  bool get isShowMore => listOrderItems?.length > 2 ? true : false;
   /// 订单下商品数量，如果小于三个直接显示，多余三个默认显示3个，如果是展开显示商品个数，未展开显示3个
-  int get goodsCount => isShowMore ? isExpand ? listOrderItems?.length : 3  : listOrderItems?.length;
+  int get goodsCount => isShowMore ? isExpand ? listOrderItems?.length : 2  : listOrderItems?.length;
   /// 是否子订单，拆分订单的第一个订单用这个参数，用于取消顶部分割线
   bool isChildOrder = false;
   /// 可购买商品数组

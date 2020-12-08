@@ -23,24 +23,26 @@ class NavScreen extends XFSBasePage {
   _NavScreenState createState() => _NavScreenState();
 
   @override
-  XFSBasePageState<XFSBasePage, Object, XFSBasePresenter<XFSBaseView>> getState() {
-   return _NavScreenState();
+  XFSBasePageState<XFSBasePage, Object, XFSBasePresenter<XFSBaseView>>
+      getState() {
+    return _NavScreenState();
   }
 }
 
-class _NavScreenState extends XFSBasePageState<NavScreen,
-    User, NavScreenPresenter>{
-///五个页面
+class _NavScreenState
+    extends XFSBasePageState<NavScreen, User, NavScreenPresenter> {
+  ///五个页面
   final List<Widget> _screens = [
     HomeScreen(),
     HomePage(),
     XFSAddressListPage(),
-    XFSOrderPage(arguments:"" ),
-    // XFSOrderTabPage(arguments: "50"),
-    // Scaffold(),
+    XFSOrderPage(arguments: ""),
+    XFSOrderTabPage(arguments: "50"),
     TabPage(arguments: "50"),
-    Scaffold(),
+    // Scaffold(),
+    // Scaffold(),
   ];
+
   ///五个图标
   final List<IconData> _icons = const [
     Icons.home,
@@ -50,31 +52,34 @@ class _NavScreenState extends XFSBasePageState<NavScreen,
     MdiIcons.bellOutline,
     Icons.menu,
   ];
+
   ///默认选中第一个
   int _selectedIndex = 0;
-@override
+
+  @override
   void initState() {
     super.initState();
+
     ///获取当前用户数据
     presenter.getCurrentUserInf();
   }
 
   @override
-  Widget buildWidget(BuildContext context, User currentUser ) {
+  Widget buildWidget(BuildContext context, User currentUser) {
     final Size screenSize = MediaQuery.of(context).size;
     return DefaultTabController(
       length: _icons.length,
       child: Scaffold(
         appBar: Responsive.isDesktop(context)
             ? PreferredSize(
-          preferredSize: Size(screenSize.width, 100.0),
-          child: CustomAppBar(
-            currentUser: currentUser,
-            icons: _icons,
-            selectedIndex: _selectedIndex,
-            onTap: (index) => setState(() => _selectedIndex = index),
-          ),
-        )
+                preferredSize: Size(screenSize.width, 100.0),
+                child: CustomAppBar(
+                  currentUser: currentUser,
+                  icons: _icons,
+                  selectedIndex: _selectedIndex,
+                  onTap: (index) => setState(() => _selectedIndex = index),
+                ),
+              )
             : null,
         body: IndexedStack(
           index: _selectedIndex,
@@ -82,14 +87,14 @@ class _NavScreenState extends XFSBasePageState<NavScreen,
         ),
         bottomNavigationBar: !Responsive.isDesktop(context)
             ? Container(
-          // padding: const EdgeInsets.only(bottom: 12.0),
-          color: Colors.white,
-          child: CustomTabBar(
-            icons: _icons,
-            selectedIndex: _selectedIndex,
-            onTap: (index) => setState(() => _selectedIndex = index),
-          ),
-        )
+                // padding: const EdgeInsets.only(bottom: 12.0),
+                color: Colors.white,
+                child: CustomTabBar(
+                  icons: _icons,
+                  selectedIndex: _selectedIndex,
+                  onTap: (index) => setState(() => _selectedIndex = index),
+                ),
+              )
             : const SizedBox.shrink(),
       ),
     );

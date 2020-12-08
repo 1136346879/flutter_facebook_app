@@ -5,6 +5,7 @@ import 'package:flutter_facebook/address/xfs_address_list_page.dart';
 import 'package:flutter_facebook/models/xfs_user_model.dart';
 import 'package:flutter_facebook/net/xfs_common_channel_utils.dart';
 import 'package:flutter_facebook/order/tab_page.dart';
+import 'package:flutter_facebook/order/xfs_order_details_page.dart';
 import 'package:flutter_facebook/order/xfs_order_export_page.dart';
 import 'package:flutter_facebook/order/xfs_order_page.dart';
 import 'package:flutter_facebook/order/xfs_order_search_page.dart';
@@ -87,9 +88,9 @@ class XFSAppRouteConfigure {
       widget: SubectListPage(arguments: arguments,),
     ),
     //
-    // orderDetailsPage: (arguments) => XFSRouteResult(
-    //       widget: XFSOrderDetailsPage(arguments: arguments),
-    //     ),
+    orderDetailsPage: (arguments) => XFSRouteResult(
+          widget: XFSOrderDetailsPage(arguments: arguments),
+        ),
     xfsNavScreenPage: (arguments) => XFSRouteResult(
       widget: NavScreen(),
     ),

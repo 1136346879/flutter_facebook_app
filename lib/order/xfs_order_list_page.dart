@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/models/xfs_order_model.dart';
+import 'package:flutter_facebook/order/xfs_order_details_page.dart';
 import 'package:flutter_facebook/order/xfs_order_list_item.dart';
 import 'package:flutter_facebook/order/xfs_order_list_presenter.dart';
+import 'package:flutter_facebook/order/xfs_order_utils.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xfs_flutter_utils/base/xfs_base_list_page.dart';
 import 'package:xfs_flutter_utils/base/xfs_base_presenter.dart';
@@ -88,6 +90,53 @@ class XFSOrderListpageState extends XFSBaseListPageState<XFSOrderListpage, XFSOr
 
   @override
   void didSelectCell({int section, int row, int clickType, data, data1}) {
+    /// clickType 1:查看详情 2: 显示更多商品 ,100 按钮操作，需要根据data1判断
+      XFSOrderListModel model = data;
+        if (clickType == 1){
+          _pushOrderDetailPage(model.order_id);
+        }
+        else if (clickType == 2){
+          presenter.expandGoods(section);
+        } else if (clickType == 100){
+          if (data1 == '取消订单'){
+            //只有已支付，且支付方式不为账期和货到付款的才显示提示
+            var state = false;
+            if (model.order_status >= 20 && (model.paid_type == 1002 || model.paid_type == 1003 || model.paid_type == 1301 || model.paid_type == 1401)) {
+              state = true;
+            };
+            XFSDataPickerView.show(
+                title: "请选择取消订单的理由",
+
+                pickerTheme: XFSDataPickerViewTheme(
+                  customTitleView: state ? XFSText(
+                    '退款时间储蓄卡1-7天、信用卡1-15天，如超期未收到，请联系客服',
+                    fontSize: 12,
+                    margin: EdgeInsets.fromLTRB(10, 20, 10, 10),
+                  ) : SizedBox(height: 0,),
+
+                ),
+                context: context, list: XFSOrderUtils.getOrderCancelReasonList(),
+            cancelCallback: (){
+              Fluttertoast.showToast(msg: "取消");
+            },
+            confirmCallback: (data,index){
+              Fluttertoast.showToast(msg: "确定");
+              // presenter.cacelOrder(id:  model.order_id, order_status: model.order_status, cancelID: ruler.id);
+            }
+
+            );
+
+
+
+
+
+
+
+
+
+
+          }
+        }
     Fluttertoast.showToast(msg: "点击cell--$data1");
   }
 
@@ -103,6 +152,13 @@ class XFSOrderListpageState extends XFSBaseListPageState<XFSOrderListpage, XFSOr
   @override
   void showBuyAgainAletView(XFSOrderListModel model) {
   }
+  /// 跳转订单详情
+  /// [orderId] 订单id
+  void _pushOrderDetailPage(String orderId){
+
+    XFSOrderDetailsPage.push(context, orderId: orderId,);
+  }
+
 
 }
 

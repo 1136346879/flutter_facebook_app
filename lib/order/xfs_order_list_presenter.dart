@@ -120,9 +120,12 @@ class XFSOrderListPresenter extends XFSBasePresenter<XfsOrderListView>{
   }
 
 
-
-
-
+  /// 商品展开与收起
+  expandGoods(int section){
+    XFSOrderListModel model = _orderList[section];
+    _orderList[section].isExpand = !model.isExpand;
+    mView?.showData(data: _orderList);
+  }
 
 
 }
