@@ -50,7 +50,6 @@ class API {
   static const subjectList  = "store/subject/searchWheelSubjectMsg";//专题列表
   // 智能联想
   static const SEARCH_ASSOCIATION = "search/queryStringAuto";
-
   //商品详情
   static const GOODS_DETAIL = "product/product/skuDetailList";
 

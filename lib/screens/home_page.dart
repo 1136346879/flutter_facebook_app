@@ -6,6 +6,8 @@ import 'package:flutter/services.dart';
 import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/models/banner_model.dart';
 import 'package:flutter_facebook/models/category_model.dart';
+import 'package:flutter_facebook/pages/city_list_page.dart';
+import 'package:flutter_facebook/screens/home_category_detail.dart';
 import 'package:flutter_facebook/screens/home_page_present.dart';
 import 'package:flutter_facebook/subject/subject_page.dart';
 import 'package:flutter_facebook/widgets/banner/commont_banner.dart';
@@ -39,9 +41,9 @@ class _HomePageState
   List<Widget> actions() {
     return [
       Container(
-        margin: EdgeInsets.only(right: 10),
         child: XFSTextButton.icon(
-          icon: Icon(Icons.shopping_cart),
+          icon: Icon(Icons.shopping_cart,color: Colors.white,),
+          width: 6,
           onPressed: (){
 
           },
@@ -49,25 +51,25 @@ class _HomePageState
       ),
 
       Container(
-        margin: EdgeInsets.only(right: 10),
         child: XFSTextButton.icon(
-          icon: Icon(Icons.search),
+          width: 6,
+          icon: Icon(Icons.search,color: Colors.white,),
           onPressed: (){},
         ),
       ),
       Container(
-        margin: EdgeInsets.only(right: 10),
         child: XFSTextButton.icon(
-          icon: Icon(Icons.location_on_outlined),
+          width: 6,
+          icon: Icon(Icons.location_on_outlined,color: Colors.white,),
           onPressed: (){
-            SubectListPage.pushName(context);
+            CityLiStPage.pushName(context);
           },
         ),
       ),
       Container(
-        margin: EdgeInsets.only(right: 10),
         child: XFSTextButton.icon(
-          icon: Icon(Icons.add_a_photo_outlined),
+          width: 6,
+          icon: Icon(Icons.add_a_photo_outlined,color: Colors.white,),
           onPressed: (){
             _scanQR();
           },
@@ -147,7 +149,7 @@ class _HomePageState
    static Future _scanQR() async {
      try {
        String qrResult = await BarcodeScanner.scan();
-       print(qrResult);
+       Fluttertoast.showToast(msg:"扫码后返回信息---${qrResult}");
      } on PlatformException catch(ex) {
        if (ex.code == BarcodeScanner.CameraAccessDenied) {
          print(ex.code);
@@ -185,19 +187,23 @@ class _HomePageState
         child: Column(
           children: [
             Expanded(
-              child: XFSTextButton.icon(
-                textColor: Colors.black,
-                fontSize: 14,
-                icon: Expanded(child: Image.network(item?.pictureUrl)),
-                title: item?.displayContent,
-                direction:XFSTextButtonIconTextDirection.textBIconT,
+              child: Hero(
+                tag: item?.pictureUrl,
+                child: XFSTextButton.icon(
+                  textColor: Colors.black,
+                  fontSize: 14,
+                  icon: Expanded(child: Image.network(item?.pictureUrl)),
+                  title: item?.displayContent,
+                  direction:XFSTextButtonIconTextDirection.textBIconT,
 
-                onLongPress: (){
-                  Fluttertoast.showToast(msg: '${item?.displayContent}');
-                },
-                onPressed: (){
-                  Fluttertoast.showToast(msg: '${item?.frontFirstCategoryId}');
-                },
+                  onLongPress: (){
+                    Fluttertoast.showToast(msg: '${item?.displayContent}');
+                  },
+                  onPressed: (){
+                    HOmePageDetail.push(context, item?.pictureUrl);
+                    Fluttertoast.showToast(msg: '${item?.frontFirstCategoryId}');
+                  },
+                ),
               ),
             ),
           ],

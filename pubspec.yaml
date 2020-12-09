@@ -26,6 +26,7 @@ dependencies:
   flutter_swiper : ^1.1.4  #轮播图
   url_launcher: ^4.0.1
   barcode_scan: 1.0.0
+  geolocator: ^5.3.2+2
   xfs_flutter_utils:
     path: ../xfs_flutter_utils
 

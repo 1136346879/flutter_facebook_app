@@ -1,6 +1,6 @@
 
+import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/models/SubjectModel.dart';
-import 'package:flutter_facebook/models/category_model.dart';
 import 'package:flutter_facebook/models/models.dart';
 import 'package:flutter_facebook/net/api.dart';
 import 'package:flutter_facebook/net/http_utils.dart';
@@ -95,6 +95,24 @@ class ScreenServer {
         httpMethod: HttpMethod.POST, success: (model) {
           SubjectModel subjectModel = SubjectModel.fromJson(model.data);
           successBlock(subjectModel);
+        }, failure: (model) {
+          failureBlock(model);
+        });
+  }
+
+  /// 审批流查看
+  /// [orderId] 订单id
+  static orderApprovalProgress(
+      {@required String orderId,
+        SuccessBlock<BaseEntity> successBlock,
+        FailureBlock<BaseEntity> failureBlock}) {
+    HttpUtils.getDataForCallback(API.APPROVAL_FLOW,API.BASE_URL_xfs_t2,
+        httpMethod: HttpMethod.POSTQUERY,
+        params: {
+          'order_id': orderId,
+          'account_type': '10',
+        }, success: (model) {
+          successBlock(model);
         }, failure: (model) {
           failureBlock(model);
         });
