@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/models/banner_model.dart';
 import 'package:flutter_facebook/models/category_model.dart';
+import 'package:flutter_facebook/pages/az_city_list_page.dart';
 import 'package:flutter_facebook/pages/city_list_page.dart';
 import 'package:flutter_facebook/screens/home_category_detail.dart';
 import 'package:flutter_facebook/screens/home_page_present.dart';
@@ -54,7 +55,9 @@ class _HomePageState
         child: XFSTextButton.icon(
           width: 6,
           icon: Icon(Icons.search,color: Colors.white,),
-          onPressed: (){},
+          onPressed: (){
+            AzCityListPage.pushName(context);
+          },
         ),
       ),
       Container(

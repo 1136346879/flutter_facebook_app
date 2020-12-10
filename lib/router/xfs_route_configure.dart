@@ -11,6 +11,7 @@ import 'package:flutter_facebook/order/xfs_order_page.dart';
 import 'package:flutter_facebook/order/xfs_order_search_page.dart';
 import 'package:flutter_facebook/order/xfs_order_search_result_page.dart';
 import 'package:flutter_facebook/order/xfs_order_tab_page.dart';
+import 'package:flutter_facebook/pages/az_city_list_page.dart';
 import 'package:flutter_facebook/pages/city_list_page.dart';
 import 'package:flutter_facebook/screens/home_category_detail.dart';
 import 'package:flutter_facebook/screens/nav_screen.dart';
@@ -44,6 +45,7 @@ class XFSAppRouteConfigure {
   static String selectProvider = "SelectProvider";
   static String orderSearchResultPage = "orderSearchResultPage";
   static String cityLiStPage = "CityLiStPage";
+  static String azCityListPage = "AzCityListPage";
 
   static String xfsOrderExportPage = "xfsOrderExportPage";//订单导出页面
 
@@ -75,6 +77,9 @@ class XFSAppRouteConfigure {
     ),
     cityLiStPage: (arguments) => XFSRouteResult(
       widget: CityLiStPage(),
+    ),
+    azCityListPage: (arguments) => XFSRouteResult(
+      widget: AzCityListPage(),
     ),
 
     orderPage: (arguments) => XFSRouteResult(

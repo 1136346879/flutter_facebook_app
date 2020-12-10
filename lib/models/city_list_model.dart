@@ -1,3 +1,5 @@
+import 'package:xfs_flutter_utils/widgets/xfs_azlist_view.dart';
+
 class CityListModel {
   List<CityCategory> data;
   String errorMessage;
@@ -53,7 +55,7 @@ class CityCategory {
   }
 }
 
-class City {
+class City extends XFSAZModel{
   Null id;
   int addressId;
   Null warehouseId;
@@ -100,4 +102,14 @@ class City {
     data['is_show_child'] = this.isShowChild;
     return data;
   }
+  @override
+  String getSuspensionTag() {
+    return tagIndex;
+  }
+
+  @override
+  String getTitle() {
+    return name;
+  }
 }
+
