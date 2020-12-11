@@ -35,6 +35,7 @@ class Data {
   int source;
   int platform;
   int warehouse;
+  bool selected = false;
   List<RelationFirstLevelObject> relationFirstLevelObject;
   List<Null> linkedObj;
 
@@ -55,6 +56,7 @@ class Data {
     displayContent = json['displayContent'];
     showSequence = json['showSequence'];
     source = json['source'];
+    selected = json['selected'];
     platform = json['platform'];
     warehouse = json['warehouse'];
     if (json['relationFirstLevelObject'] != null) {

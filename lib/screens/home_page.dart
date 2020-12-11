@@ -24,6 +24,7 @@ class HomePage extends XFSBasePage {
 class _HomePageState
     extends XFSBasePageState<HomePage, List<Data>, HomePagePresenter> implements HomePageView{
    List<BannerModelData> arr = [];
+   String cityName='选择';
   @override
   void initState() {
     super.initState();
@@ -33,10 +34,8 @@ class _HomePageState
 
   @override
   backAction() {
-    // presenter.getCityList();
     // presenter.getLinkedCategoryData();
     // presenter.getSearchProData();
-    // presenter.getSubjectListData();
   }
   @override
   List<Widget> actions() {
@@ -53,17 +52,27 @@ class _HomePageState
 
       Container(
         child: XFSTextButton.icon(
+          title: '${cityName}',
+          textColor: Colors.white,
           width: 6,
-          icon: Icon(Icons.search,color: Colors.white,),
+          icon: Icon(Icons.location_on_outlined,color: Colors.white,),
           onPressed: (){
-            AzCityListPage.pushName(context);
+            // AzCityListPage.pushName(context);
+            Navigator.pushNamed(context, XFSAppRouteConfigure.azCityListPage)
+                .then((value) {
+                  if(value == null) return
+              Fluttertoast.showToast(msg: "$value");
+              setState(() {
+                cityName = value??"选择";
+              });
+            });
           },
         ),
       ),
       Container(
         child: XFSTextButton.icon(
           width: 6,
-          icon: Icon(Icons.location_on_outlined,color: Colors.white,),
+          icon: Icon(Icons.search,color: Colors.white,),
           onPressed: (){
             CityLiStPage.pushName(context);
           },
@@ -89,7 +98,7 @@ class _HomePageState
   @override
   bool get isShowBackButton => false;
   @override
-  String get naviTitle => "方盛云采";
+  String get naviTitle => "";
 
   @override
   Widget buildWidget(BuildContext context, List<Data> object) {

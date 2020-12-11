@@ -8,7 +8,8 @@ import 'package:xfs_flutter_utils/base/xfs_base_presenter.dart';
 import 'package:xfs_flutter_utils/base/xfs_base_view.dart';
 
 class HomePagePresenter extends XFSBasePresenter<HomePageView> {
-        List<Data> data = new List<Data>();
+  List<Data> data = new List<Data>();
+
   getListFirstPlay() {
     ///{
 //     "loginAccount": "luoluo009",
@@ -37,11 +38,12 @@ class HomePagePresenter extends XFSBasePresenter<HomePageView> {
       failureBlock: (val) {},
     );
   }
-        void removeElemet(Data item) {
-          data.remove(item);
-          mView.showData(data: data);
 
-        }
+  void removeElemet(Data item) {
+    data.remove(item);
+    mView.showData(data: data);
+  }
+
   getHomeBanner() {
     Map<String, dynamic> map = Map();
     map['source'] = 20;
@@ -70,16 +72,17 @@ class HomePagePresenter extends XFSBasePresenter<HomePageView> {
       failureBlock: (val) {},
     );
   }
+
   getLinkedCategoryData() {
     Map<String, dynamic> map = Map();
-    map["categoryLevel"]= "1";
-    map["source"]= 20;
-    map["platform"]= 10;
-    List<int> list= [];
+    map["categoryLevel"] = "1";
+    map["source"] = 20;
+    map["platform"] = 10;
+    List<int> list = [];
     list.add(15);
-    map["afterCategoryIds"]= list;
-    map["warehouse"]= 1;
-    map["device_platform"]= "android";
+    map["afterCategoryIds"] = list;
+    map["warehouse"] = 1;
+    map["device_platform"] = "android";
     ScreenServer.getLinkedShowCategory(
       map,
       successBlock: (val) {
@@ -113,20 +116,20 @@ class HomePagePresenter extends XFSBasePresenter<HomePageView> {
      *  brandCatLevel       分类级别
      */
     Map<String, dynamic> map = Map();
-    map["stockSort"]= 0;//库存
-    map["brandCatLevel"]= 0;
-    map["platformType"]= 1;
-    map["channel"]= "fsyuncai";
-    map["activityPerson"]= 20;
-    map["cityId"]= 110100;
-    map["wareHouseId"]= 1;
-    map["queryString"]= "";//搜索的字符串
-    map["rows"]= 20;
-    map["curPage"]= 1;//当前页数
-    map["joinActivity"]= 20;
-    map["categoryId"]= 15;
-    map["promotionSort"]= "0";//促销
-    map["device_platform"]= "android";
+    map["stockSort"] = 0; //库存
+    map["brandCatLevel"] = 0;
+    map["platformType"] = 1;
+    map["channel"] = "fsyuncai";
+    map["activityPerson"] = 20;
+    map["cityId"] = 110100;
+    map["wareHouseId"] = 1;
+    map["queryString"] = ""; //搜索的字符串
+    map["rows"] = 20;
+    map["curPage"] = 1; //当前页数
+    map["joinActivity"] = 20;
+    map["categoryId"] = 15;
+    map["promotionSort"] = "0"; //促销
+    map["device_platform"] = "android";
     ScreenServer.getSearchPro(
       map,
       successBlock: (val) {
@@ -138,11 +141,11 @@ class HomePagePresenter extends XFSBasePresenter<HomePageView> {
 
   getSubjectListData() {
     Map<String, dynamic> map = Map();
-    map["subId"]= "Z200506091315";
-    map["cityId"]= 110100;
-    map["warehouse"]= 1;
-    map["platform"]= 10;
-    map["device_platform"]= "android";
+    map["subId"] = "Z200506091315";
+    map["cityId"] = 110100;
+    map["warehouse"] = 1;
+    map["platform"] = 10;
+    map["device_platform"] = "android";
     ScreenServer.getSubjectList(
       map,
       successBlock: (val) {
@@ -150,11 +153,9 @@ class HomePagePresenter extends XFSBasePresenter<HomePageView> {
       },
       failureBlock: (val) {},
     );
-
   }
+
   HomePagePresenter(HomePageView mView) : super(mView);
-
-
 }
 
 abstract class HomePageView extends XFSBaseView {

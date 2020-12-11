@@ -2,11 +2,14 @@ import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/models/city_list_model.dart';
 import 'package:flutter_facebook/pages/az_city_list_presenter.dart';
 import 'package:flutter_facebook/util/common_utils.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 typedef Widget ItemWidgetBuilder(BuildContext context, dynamic model);
 class AzCityListPage extends XFSBasePage{
   static pushName(BuildContext context) {
     Navigator.pushNamed(context, XFSAppRouteConfigure.azCityListPage)
-        .then((value) {});
+      .then((value) {
+      Fluttertoast.showToast(msg: "$value");
+    });
   }
   @override
   XFSBasePageState getState() => _AzCityListPageState();
@@ -64,7 +67,8 @@ class _AzCityListPageState extends XFSBasePageState<AzCityListPage, List<City>, 
               ),
             ).then((value){
               if (value != null){
-                CommonUtils.showToast(msg: value.name);
+                // CommonUtils.showToast(msg: value.name);
+                Navigator.pop(context,value?.name);
               }
             });
           },
@@ -84,7 +88,8 @@ class _AzCityListPageState extends XFSBasePageState<AzCityListPage, List<City>, 
     return InkWell(
       child: _listItem(model),
       onTap: (){
-        CommonUtils.showToast(msg: model?.name);
+        // CommonUtils.showToast(msg: model?.name);
+        Navigator.pop(context,model?.name);
       },
     );
   }
