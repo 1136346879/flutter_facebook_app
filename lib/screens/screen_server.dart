@@ -2,6 +2,7 @@
 import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/models/SubjectModel.dart';
 import 'package:flutter_facebook/models/models.dart';
+import 'package:flutter_facebook/models/search_result_model.dart';
 import 'package:flutter_facebook/net/api.dart';
 import 'package:flutter_facebook/net/http_utils.dart';
 import 'package:xfs_flutter_utils/base/xfs_base_entity.dart';

@@ -31,8 +31,9 @@ class _CategoryPageState
 
   @override
   Widget buildWidget(BuildContext context, List<Data> object) {
-    frontCategoryId = object[0].relationFirstLevelObject[0].frontCategoryId;
-    fristCategoryName = object[0].relationFirstLevelObject[0].fristCategoryName;
+    if(object.isNullOrEmpty()) return XFSText('');
+    frontCategoryId = object[0]?.relationFirstLevelObject[0]?.frontCategoryId;
+    fristCategoryName = object[0]?.relationFirstLevelObject[0]?.fristCategoryName;
     return object.isNotNullOrEmpty()
         ? Container(
             child: Row(
@@ -66,8 +67,8 @@ class _CategoryPageState
         });
         object[index].selected = true;
         selectedIndex =index;
-        frontCategoryId = object[index].relationFirstLevelObject[0].frontCategoryId;
-        fristCategoryName = object[index].relationFirstLevelObject[0].fristCategoryName;
+        frontCategoryId = object[index]?.relationFirstLevelObject[0]?.frontCategoryId;
+        fristCategoryName = object[index]?.relationFirstLevelObject[0]?.fristCategoryName;
         globalKey.currentState.changeCategory(frontCategoryId,fristCategoryName);
         setState(() {});
       },

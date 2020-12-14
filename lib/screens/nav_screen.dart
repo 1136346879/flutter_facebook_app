@@ -3,6 +3,7 @@ import 'package:flutter_facebook/address/xfs_address_list_page.dart';
 import 'package:flutter_facebook/category/category_page.dart';
 import 'package:flutter_facebook/category/right_category_page.dart';
 import 'package:flutter_facebook/data/data.dart';
+import 'package:flutter_facebook/goods/goods_page.dart';
 import 'package:flutter_facebook/models/user_model.dart';
 import 'package:flutter_facebook/order/tab_page.dart';
 import 'package:flutter_facebook/order/xfs_order_page.dart';
@@ -37,12 +38,13 @@ class _NavScreenState
   final List<Widget> _screens = [
     HomeScreen(),
     HomePage(),
-    // XFSOrderPage(arguments: ""),
-    XFSOrderTabPage(arguments: "50"),
-    // TabPage(arguments: "50"),
     CategoryPage(),
+    XFSOrderTabPage(arguments: "50"),
+    // XFSOrderPage(arguments: ""),
+    // TabPage(arguments: "50"),
     XFSAddressListPage(),
     Scaffold(),
+    // GoodsPage(),
     // RightCategoryListPage(categoryId: 15,categoryName:"工具"),
   ];
 

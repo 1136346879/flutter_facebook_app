@@ -1,5 +1,6 @@
 import 'package:flutter_facebook/category/right_category_list_presenter.dart';
 import 'package:flutter_facebook/config/xfs_header.dart';
+import 'package:flutter_facebook/models/category_to_list_model.dart';
 import 'package:flutter_facebook/models/right_category_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
@@ -50,6 +51,10 @@ class RightCategoryListPageState extends XFSBaseListPageState<
                         '${rightCategoryModel?.afterCategoryName ?? ""}',
                         padding: EdgeInsets.all(10),
                         fontWeight: FontWeight.bold,
+                        onTap: (){
+                          Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments:  CategoryToListModel(rightCategoryModel.afterCategoryId, 2));
+
+                        },
                       ),
                     ),
                     Visibility(
@@ -99,7 +104,7 @@ class RightCategoryListPageState extends XFSBaseListPageState<
               backgroudColor: Colors.white,
               alignment: Alignment.center,
               onTap: () {
-                Fluttertoast.showToast(msg: "${item.afterCategoryName}");
+                Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments:  CategoryToListModel(item.frontFirstCategoryId, 3));
               },
             )
 

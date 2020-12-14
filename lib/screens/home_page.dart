@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/models/banner_model.dart';
 import 'package:flutter_facebook/models/category_model.dart';
+import 'package:flutter_facebook/models/category_to_list_model.dart';
 import 'package:flutter_facebook/pages/az_city_list_page.dart';
 import 'package:flutter_facebook/pages/city_list_page.dart';
 import 'package:flutter_facebook/screens/home_category_detail.dart';
@@ -34,7 +35,6 @@ class _HomePageState
 
   @override
   backAction() {
-    // presenter.getLinkedCategoryData();
     // presenter.getSearchProData();
   }
   @override
@@ -209,11 +209,10 @@ class _HomePageState
                   direction:XFSTextButtonIconTextDirection.textBIconT,
 
                   onLongPress: (){
-                    Fluttertoast.showToast(msg: '${item?.displayContent}');
+                    Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments: CategoryToListModel(item.frontFirstCategoryId, 1));
                   },
                   onPressed: (){
                     HOmePageDetail.push(context, item?.pictureUrl);
-                    Fluttertoast.showToast(msg: '${item?.frontFirstCategoryId}');
                   },
                 ),
               ),
