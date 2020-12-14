@@ -155,6 +155,22 @@ class HomePagePresenter extends XFSBasePresenter<HomePageView> {
     );
   }
 
+
+
+  getGoodsDetialData(){
+    Map<String, dynamic> map = Map();
+    map["spuId"] = 2584;
+    map["cityId"] = 110100;
+    map["wareHouseId"] = 1;
+    map["platformType"] = 1;
+    ScreenServer.goodsDetail(map: map,successBlock: (val){
+      print("返回数据-商品详情页数据-----${val.data.toString()}");
+    },
+    failureBlock: (val){
+
+    });
+  }
+
   HomePagePresenter(HomePageView mView) : super(mView);
 }
 

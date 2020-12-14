@@ -1,4 +1,5 @@
 import 'package:flutter_facebook/config/xfs_header.dart';
+import 'package:flutter_facebook/goods/goods_detail_page.dart';
 import 'package:flutter_facebook/interface/xfs_click_delegate.dart';
 import 'package:flutter_facebook/models/search_result_model.dart';
 import 'package:flutter_facebook/util/xfs_img_loader.dart';
@@ -96,7 +97,9 @@ class _GoodsListPageState extends XFSBaseListPageState<GoodsListPage, SpuList,
         ],
       ),
       onTap: () {
-        Fluttertoast.showToast(msg: "${spuEntry?.spu_Name ?? ""}");
+        Fluttertoast.showToast(msg: "${spuEntry?.spu_Name ?? ""}==${ spuEntry.spuId}");
+
+        GoodsDetailPage.push(context,arguments: spuEntry.spuId);
       },
     );
   }

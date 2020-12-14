@@ -118,6 +118,24 @@ class ScreenServer {
           failureBlock(model);
         });
   }
+
+  static goodsDetail(
+      {@required Map<String, dynamic> map,
+        SuccessBlock<BaseEntity> successBlock,
+        FailureBlock<BaseEntity> failureBlock}) {
+    HttpUtils.getDataForCallback(API.GOODS_DETAIL,API.BASE_URL_xfs,
+        httpMethod: HttpMethod.POSTQUERY,
+        params: {
+          'cityId': map['cityId'],
+          'spuId': map['spuId'],
+          'platformType': map['platformType'],
+          'wareHouseId': map['wareHouseId'],
+        }, success: (model) {
+          successBlock(model);
+        }, failure: (model) {
+          failureBlock(model);
+        });
+  }
   //
   // /// 获取订单详情
   // /// [requestModel] 请求参数

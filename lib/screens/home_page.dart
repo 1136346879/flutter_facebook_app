@@ -36,6 +36,7 @@ class _HomePageState
   @override
   backAction() {
     // presenter.getSearchProData();
+    // presenter.getGoodsDetialData();
   }
   @override
   List<Widget> actions() {

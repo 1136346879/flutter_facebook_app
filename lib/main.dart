@@ -24,6 +24,9 @@ void main() {
     Http.init(baseUrl: API.BASE_URL);
     Http.addInterceptors(ErrorInterceptor());
     Http.addLogInterceptors();
+    /// 日志打印，如果release环境需要改为true不在打印，因为系统判断是否release环境出错。现在手动控制
+    /// todo：每次打包注意修改
+    XFSLogUtil.instance(isRelease: false);
     XFSAppNetworkStatusManager.instance.startMonitor();
     XFSNavigatorManage.init('rootPage');
     runApp(
