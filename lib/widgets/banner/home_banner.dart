@@ -78,18 +78,21 @@ class _BannerState extends State<HomeBanner> {
   }
 
   Widget _buildItem(StoryModel story) {
-    return GestureDetector(
-      onTap: () { // 按下
-        if (widget.onTap != null) {
-          widget.onTap(story);
-        }
-      },
-      child: Stack(
-        fit: StackFit.expand,
-        children: <Widget>[
-         Image.network(story.image, fit: BoxFit.cover),
-          _buildItemTitle(story.title), // 内容文字,大意
-        ],),);
+    return Hero(
+      tag:story.image,
+      child: GestureDetector(
+        onTap: () { // 按下
+          if (widget.onTap != null) {
+            widget.onTap(story);
+          }
+        },
+        child: Stack(
+          fit: StackFit.expand,
+          children: <Widget>[
+           Image.network(story.image, fit: BoxFit.cover),
+            _buildItemTitle(story.title), // 内容文字,大意
+          ],),),
+    );
   }
 
   Widget _buildItemTitle(String title) {

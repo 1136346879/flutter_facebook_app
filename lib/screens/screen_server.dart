@@ -35,7 +35,7 @@ class ScreenServer {
       {SuccessBlock<BaseEntity> successBlock,
         FailureBlock<BaseEntity> failureBlock}) {
 
-    HttpUtils.getDataForCallback(API.listfirstdisplay,API.BASE_URL_xfs,params: map,
+    HttpUtils.getDataForCallback(API.listfirstdisplay,API.BASE_URL_xfs_t2,params: map,
         httpMethod: HttpMethod.POST, success: (model) {
           // CategoryModel orderPageModel = CategoryModel.fromJson(model);
           successBlock(model);
@@ -48,7 +48,7 @@ class ScreenServer {
       {SuccessBlock<BaseEntity> successBlock,
         FailureBlock<BaseEntity> failureBlock}) {
 
-    HttpUtils.getDataForCallback(API.listWheelPictureFront,API.BASE_URL_xfs,params: map,
+    HttpUtils.getDataForCallback(API.listWheelPictureFront,API.BASE_URL_xfs_t2,params: map,
         httpMethod: HttpMethod.POST, success: (model) {
           successBlock(model);
         }, failure: (model) {
@@ -59,7 +59,7 @@ class ScreenServer {
       {SuccessBlock<BaseEntity> successBlock,
         FailureBlock<BaseEntity> failureBlock}) {
 
-    HttpUtils.getDataForCallback(API.allCity,API.BASE_URL_xfs,params: map,
+    HttpUtils.getDataForCallback(API.allCity,API.BASE_URL_xfs_t2,params: map,
         httpMethod: HttpMethod.POST, success: (model) {
           successBlock(model);
         }, failure: (model) {
@@ -70,7 +70,7 @@ class ScreenServer {
       {SuccessBlock<BaseEntity> successBlock,
         FailureBlock<BaseEntity> failureBlock}) {
 
-    HttpUtils.getDataForCallback(API.linkedShowCategory,API.BASE_URL_xfs,params: map,
+    HttpUtils.getDataForCallback(API.linkedShowCategory,API.BASE_URL_xfs_t2,params: map,
         httpMethod: HttpMethod.POST, success: (model) {
           successBlock(model);
         }, failure: (model) {
@@ -81,7 +81,7 @@ class ScreenServer {
       {SuccessBlock<BaseEntity> successBlock,
         FailureBlock<BaseEntity> failureBlock}) {
 
-    HttpUtils.getDataForCallback(API.searchPro,API.BASE_URL_xfs,params: map,
+    HttpUtils.getDataForCallback(API.searchPro,API.BASE_URL_xfs_t2,params: map,
         httpMethod: HttpMethod.POST, success: (model) {
           successBlock(model);
         }, failure: (model) {

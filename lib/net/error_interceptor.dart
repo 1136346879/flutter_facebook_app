@@ -12,30 +12,30 @@ import 'http_code.dart';
 class ErrorInterceptor extends Interceptor {
 
 
-  // @override
-  // Future onRequest(RequestOptions options) async{
-  //   /// post方法拼接公参
-  //   if (options.data is Object){
-  //
-  //     if (options.method == 'POST'){
-  //       if ((options.data as Object).isNotNullOrEmpty()){
-  //         var data = await XFSCommonChannelUtils.getPublicParmas(options.data);
-  //         data.forEach((key, value) {
-  //           options.data[key] = value;
-  //         });
-  //       }
-  //       else if ((options.queryParameters as Object).isNotNullOrEmpty()){
-  //         var data = await XFSCommonChannelUtils.getPublicParmas(options.queryParameters);
-  //
-  //         data.forEach((key, value) {
-  //           options.queryParameters[key] = value;
-  //         });
-  //       }
-  //       return options;
-  //     }
-  //   }
-  //   return super.onRequest(options);
-  // }
+  @override
+  Future onRequest(RequestOptions options) async{
+    /// post方法拼接公参
+    if (options.data is Object){
+
+      if (options.method == 'POST'){
+        if ((options.data as Object).isNotNullOrEmpty()){
+          var data = await XFSCommonChannelUtils.getPublicParmas(options.data);
+          data.forEach((key, value) {
+            options.data[key] = value;
+          });
+        }
+        else if ((options.queryParameters as Object).isNotNullOrEmpty()){
+          var data = await XFSCommonChannelUtils.getPublicParmas(options.queryParameters);
+
+          data.forEach((key, value) {
+            options.queryParameters[key] = value;
+          });
+        }
+        return options;
+      }
+    }
+    return super.onRequest(options);
+  }
 
   @override
   Future onResponse(Response response) async{

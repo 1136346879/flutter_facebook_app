@@ -53,7 +53,7 @@ class _HomePageState
 
       Container(
         child: XFSTextButton.icon(
-          title: '${cityName}',
+          title: '$cityName',
           textColor: Colors.white,
           width: 6,
           icon: Icon(Icons.location_on_outlined,color: Colors.white,),
@@ -201,7 +201,7 @@ class _HomePageState
           children: [
             Expanded(
               child: Hero(
-                tag: item?.pictureUrl,
+                tag: item?.pictureUrl??"item?.pictureUrl",
                 child: XFSTextButton.icon(
                   textColor: Colors.black,
                   fontSize: 14,
@@ -210,10 +210,10 @@ class _HomePageState
                   direction:XFSTextButtonIconTextDirection.textBIconT,
 
                   onLongPress: (){
-                    Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments: CategoryToListModel(item.frontFirstCategoryId, 1));
+                    HOmePageDetail.push(context, item?.pictureUrl);
                   },
                   onPressed: (){
-                    HOmePageDetail.push(context, item?.pictureUrl);
+                    Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments: CategoryToListModel(item.frontFirstCategoryId, 1));
                   },
                 ),
               ),

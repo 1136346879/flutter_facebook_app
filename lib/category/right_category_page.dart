@@ -104,7 +104,7 @@ class RightCategoryListPageState extends XFSBaseListPageState<
               backgroudColor: Colors.white,
               alignment: Alignment.center,
               onTap: () {
-                Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments:  CategoryToListModel(item.frontFirstCategoryId, 3));
+                Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments:  CategoryToListModel(item.afterCategoryId, 3));
               },
             )
 

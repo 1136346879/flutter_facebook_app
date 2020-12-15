@@ -1,7 +1,7 @@
 
 
 class GoodsDetailModel {
-  String volumeSmall;
+  num volumeSmall;
   String guaranteePeriod;
   String specifications;
   int isActivityBegin;
@@ -23,7 +23,7 @@ class GoodsDetailModel {
   int isExistSku;
   List<Images> images;
   num virtualStock;
-  String maxLengthSmall;
+  num maxLengthSmall;
   String subLengthLarge;
   String upperStock;
   String specifyPrice;
@@ -41,11 +41,11 @@ class GoodsDetailModel {
   String warehouseName;
   String name;
   String skuCode;
-  String subLengthSmall;
+  num subLengthSmall;
   String numberSmall;
-  String minLengthRedium;
+  num minLengthRedium;
   String color;
-  String minLengthSmall;
+  num minLengthSmall;
   String liabilityPeriod;
   String unitSmall;
   num distributionPrice;
@@ -57,10 +57,10 @@ class GoodsDetailModel {
   num actualStock;
   int orderLimitType;
   int onActivitySku;
-  String maxLengthRedium;
+  num maxLengthRedium;
   String unitRedium;
   int salesStatus;
-  String weightRedium;
+  num weightRedium;
   int categoryId;
   String saleAttriValue;
   int isSignTranPrice;
@@ -74,11 +74,11 @@ class GoodsDetailModel {
   int isShowPrice;
   num minLength;
   String spuCode;
-  String weightSmall;
+  num weightSmall;
   int isSpecifyPrice;
   String volumeLarge;
   String showPrice;
-  String subLengthRedium;
+  num subLengthRedium;
   String salePrice;
   String miniBuyCount;
   List<String> categroyNames;
@@ -86,7 +86,7 @@ class GoodsDetailModel {
   String maxLengthLarge;
   String minLengthLarge;
   String internationalBarcodeEan;
-  String volumeRedium;
+  num volumeRedium;
   int warehouseId;
   String lowerStock;
 

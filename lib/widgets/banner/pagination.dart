@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_facebook/models/GoodsDetailModel.dart';
 import 'package:flutter_facebook/models/models.dart';
 import 'package:flutter_facebook/models/story.dart';
+import 'package:flutter_facebook/screens/home_category_detail.dart';
 import './home_banner.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -79,13 +80,14 @@ class Pagination extends StatelessWidget {
     // });
     images.forEach((element) {
       // StoryModel storyModel =   StoryModel(element.imgId,element.imgName,image:element.imgUrl,url:'https://www.baidu.com/');
-      bannerStories.add(StoryModel(element.imgId, element.imgUrl,
+      bannerStories.add(StoryModel(element.imgId, element.imgName??"",
           image: element.imgUrl, url: 'https://www.baidu.com/'));
     });
     bannerStories.forEach((element) {});
     if (images.length > 0) {
       list.add(HomeBanner(bannerStories, (story) {
-        _launchURL('${story.url}');
+        // _launchURL('${story.url}');
+        HOmePageDetail.push(context, story.image);
       }));
     }
     return list;

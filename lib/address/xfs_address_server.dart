@@ -11,7 +11,7 @@ class XFSAddressServer {
       FailureBlock<BaseEntity> failureBlock}) {
 
 
-    HttpUtils.getDataForCallback(API.ADDRESS_LIST,API.BASE_URL_xfs,
+    HttpUtils.getDataForCallback(API.ADDRESS_LIST,API.BASE_URL_xfs_t2,
         httpMethod: HttpMethod.POSTQUERY, params: params, success: (model) {
       Fluttertoast.showToast(msg: model.errorMessage);
       successBlock(model);
