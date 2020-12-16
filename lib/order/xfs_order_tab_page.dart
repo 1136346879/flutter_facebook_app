@@ -18,7 +18,6 @@ class XFSOrderTabPage extends XFSBaseTabbarPage {
 class _XFSOrderTabPageState
     extends XFSBaseTabbarPageState<XFSOrderTabPage, Object, XFSBasePresenter> {
 
-  @override
   String get naviTitle => "订单列表";
 
   @override
