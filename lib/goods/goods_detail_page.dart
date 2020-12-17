@@ -1,3 +1,4 @@
+import 'package:after_layout/after_layout.dart';
 import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/models/GoodsDetailModel.dart';
 import 'package:flutter_facebook/util/xfs_img_loader.dart';
@@ -8,7 +9,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xfs_flutter_utils/xfs_flutter_utils.dart';
 
 import 'goods_detail_presenter.dart';
-
 class GoodsDetailPage extends XFSBasePage {
   final int arguments;
 
@@ -32,9 +32,8 @@ class _GoodsDetailPageState extends XFSBasePageState<
   void initState() {
     super.initState();
     scrollController.addListener(() {
-      // if (scrollController.offset > XFSScreenUtil.getScreenW(context)/3*2 + 300 - MediaQuery.of(context).padding.top){
       var offset = scrollController.offset;
-      if (offset >= 1000) {
+      if (offset >= expandedHeight) {
         if (tabTopControll.index != 1) {
           tabTopControll.animateTo(1);
         }
@@ -69,37 +68,21 @@ class _GoodsDetailPageState extends XFSBasePageState<
   GoodsDetailPresenter initPresenter() {
     return GoodsDetailPresenter(this);
   }
-
   @override
   bool get isUseSafeArea => true;
-
   @override
   bool get isShowHeader => false;
-
-  @override
-  List<Widget> actions() {
-    return [
-      XFSTextButton.icon(
-        icon: Icon(
-          Icons.share,
-          color: Colors.white,
-        ),
-        width: 6,
-        onPressed: () {
-          Fluttertoast.showToast(msg: '分享');
-        },
-      ),
-    ];
-  }
-
   ScrollController listViewControll = ScrollController();
-  bool expand = false;
-  String cityName = '请选择城市';
   TabController tabControll;
   TabController tabTopControll;
   ScrollController scrollController = ScrollController();
   double navAlpha = 0;
-
+  double expandedHeight= 1000;
+   updateExpandedHeight(height){
+    expandedHeight = height;
+    setState(() {
+    });
+  }
   @override
   Widget buildWidget(
       BuildContext context, List<GoodsDetailModel> listGoodsDetailModel) {
@@ -122,9 +105,9 @@ class _GoodsDetailPageState extends XFSBasePageState<
                       titleSpacing: 0,
                       title: tabbar(),
                       backgroundColor: Colors.transparent,
-                      expandedHeight: 1000,
+                      expandedHeight: expandedHeight,
                       flexibleSpace: new FlexibleSpaceBar(
-                        background: _buildTopWidget(listGoodsDetailModel),
+                        background: SliverAppBarWidgetCallBack(listGoodsDetailModel:listGoodsDetailModel,updateExpandedHeight: updateExpandedHeight,),
                         collapseMode: CollapseMode.pin,
                         stretchModes: const <StretchMode>[
                           StretchMode.fadeTitle
@@ -170,214 +153,6 @@ class _GoodsDetailPageState extends XFSBasePageState<
               Positioned(bottom: 0, child: _bottomWidget(context))
             ]),
           );
-  }
-
-  _buildTopWidget(List<GoodsDetailModel> listGoodsDetailModel) {
-    return Column(
-      children: [
-        Pagination(images: listGoodsDetailModel[0].images),
-        XFSText(
-          '${listGoodsDetailModel[0].skuName} ${listGoodsDetailModel[0].color ?? ""} ${listGoodsDetailModel[0].specifications} ',
-          padding: EdgeInsets.all(10),
-          fontWeight: FontWeight.bold,
-        ),
-        Visibility(
-          visible: listGoodsDetailModel[0].subtitile.isNotEmpty,
-          child: XFSText(
-            '${listGoodsDetailModel[0].subtitile} ',
-            textColor: Config.color666666,
-            fontSize: 12,
-            padding: EdgeInsets.only(bottom: 10, left: 10),
-          ),
-        ),
-        Row(
-          children: [
-            XFSText(
-              '签约价：${listGoodsDetailModel[0].salePrice}/${listGoodsDetailModel[0].unit}',
-              padding: EdgeInsets.only(bottom: 10, left: 10),
-              textColor: Colors.orange,
-            ),
-            XFSText(
-              '售价：￥${listGoodsDetailModel[0].retailPrice}/${listGoodsDetailModel[0].unit}',
-              padding: EdgeInsets.only(bottom: 10, left: 10),
-              decoration: TextDecoration.lineThrough,
-            ),
-          ],
-        ),
-        CommonLineView(
-          height: 20,
-          color: Config.colorF5F5F5,
-        ),
-        XFSContainer(
-            child: Row(
-          children: [
-            Flexible(
-              flex: 1,
-              child: XFSTextButton.icon(
-                icon: Icon(
-                  Icons.wysiwyg,
-                  color: Colors.orange,
-                  size: 50,
-                ),
-                title: '规格',
-                direction: XFSTextButtonIconTextDirection.textBIconT,
-              ),
-            ),
-            CommonLineView(
-              height: 60,
-              color: Config.colorF5F5F5,
-              width: 1,
-            ),
-            XFSText(
-              "请选择规格",
-              padding: EdgeInsets.all(10),
-            ),
-            Icon(
-              Icons.chevron_right,
-              size: 25,
-              color: Config.color999999,
-            ),
-          ],
-        )),
-        CommonLineView(
-          height: 1,
-          color: Config.colorF5F5F5,
-        ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            XFSTextButton.icon(
-              icon: Icon(
-                Icons.location_on,
-                color: Colors.orange,
-              ),
-              title: '配送区域选择：',
-              direction: XFSTextButtonIconTextDirection.textLIconR,
-            ),
-            XFSText(
-              '$cityName',
-              textColor: Colors.orange,
-              onTap: () {
-                Navigator.pushNamed(
-                        context, XFSAppRouteConfigure.azCityListPage)
-                    .then((value) {
-                  if (value == null) return cityName = value ?? "$cityName";
-                  setState(() {});
-                });
-              },
-            ),
-          ],
-        ),
-        CommonLineView(
-          height: 20,
-          color: Config.colorF5F5F5,
-        ),
-        Expanded(
-          child: ListView.builder(
-            itemBuilder: (ctx, index) {
-              return Column(
-                children: [
-                  Visibility(
-                    visible: index == 0,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Flexible(
-                            flex: 3,
-                            child: XFSText(
-                              '规格型号',
-                              padding: EdgeInsets.all(10),
-                              fontSize: 12,
-                            )),
-                        Flexible(
-                            flex: 2,
-                            child: XFSText(
-                              '价格（元）',
-                              padding: EdgeInsets.all(10),
-                              fontSize: 12,
-                            )),
-                        XFSText(
-                          '操作',
-                          padding: EdgeInsets.all(10),
-                          fontSize: 12,
-                        )
-                      ],
-                    ),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                          flex: 3,
-                          child: XFSText(
-                            '${listGoodsDetailModel[index].color}/${listGoodsDetailModel[index].specifications}',
-                            padding: EdgeInsets.all(10),
-                            fontSize: 12,
-                          )),
-                      Flexible(
-                          flex: 2,
-                          child: XFSText(
-                            '${listGoodsDetailModel[index].salePrice}',
-                            padding: EdgeInsets.all(10),
-                            fontSize: 12,
-                          )),
-                      const XFSText(
-                        '查看',
-                        textColor: Colors.orange,
-                        padding: EdgeInsets.all(10),
-                        fontSize: 12,
-                      ),
-                    ],
-                  ),
-                ],
-              );
-            },
-            physics: const NeverScrollableScrollPhysics(),
-            shrinkWrap: true,
-            itemCount: listGoodsDetailModel.length < 6
-                ? listGoodsDetailModel.length
-                : !expand
-                    ? 5
-                    : listGoodsDetailModel.length,
-          ),
-        ),
-        Visibility(
-            visible: listGoodsDetailModel.length > 5,
-            child: XFSTextButton.icon(
-              onPressed: () {
-                expand = !expand;
-                setState(() {});
-              },
-              icon: Icon(
-                expand
-                    ? Icons.keyboard_arrow_up_sharp
-                    : Icons.keyboard_arrow_down,
-                color: Colors.orange,
-              ),
-              title: expand ? '收起全部' : "展开全部",
-              direction: XFSTextButtonIconTextDirection.textBIconT,
-              textColor: Colors.orange,
-            )),
-        CommonLineView(
-          height: 20,
-          color: Config.colorF5F5F5,
-        ),
-        XFSTextButton.icon(
-          icon: Icon(
-            Icons.keyboard_arrow_up_sharp,
-            color: Config.color999999,
-          ),
-          title: '上拉查看图文详情',
-          direction: XFSTextButtonIconTextDirection.textRIconL,
-          textColor: Config.color999999,
-        ),
-        CommonLineView(
-          height: 20,
-          color: Config.colorF5F5F5,
-        ),
-      ],
-    );
   }
 
   Widget tabbar() {
@@ -482,3 +257,314 @@ class _GoodsDetailPageState extends XFSBasePageState<
     );
   }
 }
+class SliverAppBarWidgetCallBack extends StatefulWidget {
+   final List<GoodsDetailModel> listGoodsDetailModel;
+   final Function(double) updateExpandedHeight;
+   SliverAppBarWidgetCallBack({Key key, @required this.listGoodsDetailModel,@required this.updateExpandedHeight}) : super(key: key);
+  @override
+  _SliverAppBarWidgetCallBackState createState() => _SliverAppBarWidgetCallBackState();
+}
+
+class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack> with AfterLayoutMixin{
+   String cityName = '请选择城市';
+   bool expand = false;
+   double listviewHeight=300;
+  @override
+  Widget build(BuildContext context) {
+    var listGoodsDetailModel = widget.listGoodsDetailModel;
+    listviewHeight =double.parse("${(listGoodsDetailModel.length+1)*50}");
+    if(!expand){
+      if(listGoodsDetailModel.length > 5){
+        listviewHeight=300;
+      }
+    }
+    return Column(
+      children: [
+        Pagination(images: listGoodsDetailModel[0].images),
+        XFSText(
+          '${listGoodsDetailModel[0].skuName} ${listGoodsDetailModel[0].color ?? ""} ${listGoodsDetailModel[0].specifications} ',
+          padding: EdgeInsets.all(10),
+          fontWeight: FontWeight.bold,
+        ),
+        Visibility(
+          visible: listGoodsDetailModel[0].subtitile.isNotEmpty,
+          child: XFSText(
+            '${listGoodsDetailModel[0].subtitile} ',
+            textColor: Config.color666666,
+            fontSize: 12,
+            padding: EdgeInsets.only(bottom: 10, left: 10),
+          ),
+        ),
+        Row(
+          children: [
+            XFSText(
+              '签约价：${listGoodsDetailModel[0].salePrice}/${listGoodsDetailModel[0].unit}',
+              padding: EdgeInsets.only(bottom: 10, left: 10),
+              textColor: Colors.orange,
+            ),
+            XFSText(
+              '售价：￥${listGoodsDetailModel[0].retailPrice}/${listGoodsDetailModel[0].unit}',
+              padding: EdgeInsets.only(bottom: 10, left: 10),
+              decoration: TextDecoration.lineThrough,
+            ),
+          ],
+        ),
+        CommonLineView(
+          height: 20,
+          color: Config.colorF5F5F5,
+        ),
+        XFSContainer(
+            child: Row(
+              children: [
+                Flexible(
+                  flex: 1,
+                  child: XFSTextButton.icon(
+                    icon: Icon(
+                      Icons.wysiwyg,
+                      color: Colors.orange,
+                      size: 50,
+                    ),
+                    title: '规格',
+                    direction: XFSTextButtonIconTextDirection.textBIconT,
+                  ),
+                ),
+                CommonLineView(
+                  height: 60,
+                  color: Config.colorF5F5F5,
+                  width: 1,
+                ),
+                XFSText(
+                  "请选择规格",
+                  padding: EdgeInsets.all(10),
+                ),
+                Icon(
+                  Icons.chevron_right,
+                  size: 25,
+                  color: Config.color999999,
+                ),
+              ],
+            )),
+        CommonLineView(
+          height: 1,
+          color: Config.colorF5F5F5,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            XFSTextButton.icon(
+              icon: Icon(
+                Icons.location_on,
+                color: Colors.orange,
+              ),
+              title: '配送区域选择：',
+              direction: XFSTextButtonIconTextDirection.textLIconR,
+            ),
+            XFSText(
+              '$cityName',
+              textColor: Colors.orange,
+              onTap: () {
+                Navigator.pushNamed(
+                    context, XFSAppRouteConfigure.azCityListPage)
+                    .then((value) {
+                  if (value == null) return cityName = value ?? "$cityName";
+                  setState(() {});
+                });
+              },
+            ),
+          ],
+        ),
+        CommonLineView(
+          height: 20,
+          color: Config.colorF5F5F5,
+        ),
+
+        Container(
+            height: listviewHeight,
+            child:  _listViewBuild(listGoodsDetailModel:listGoodsDetailModel,expand:expand,updateListViewHeight:updateListViewHeight)),
+
+        Visibility(
+            visible: listGoodsDetailModel.length > 5,
+            child: XFSTextButton.icon(
+              onPressed: () {
+                expand = !expand;
+                setState(() {
+                  listviewHeight =double.parse("${(listGoodsDetailModel.length+1)*50}");
+                  if(!expand){
+                      listviewHeight=300;
+                  }
+                });
+                afterSecondLayout(context,double.parse("${(listGoodsDetailModel.length+1)*50}")-300,expand);
+              },
+              icon: Icon(
+                expand
+                    ? Icons.keyboard_arrow_up_sharp
+                    : Icons.keyboard_arrow_down,
+                color: Colors.orange,
+              ),
+              title: expand ? '收起全部' : "展开全部",
+              direction: XFSTextButtonIconTextDirection.textBIconT,
+              textColor: Colors.orange,
+            )),
+        CommonLineView(
+          height: 20,
+          color: Config.colorF5F5F5,
+        ),
+        XFSTextButton.icon(
+          icon: Icon(
+            Icons.keyboard_arrow_up_sharp,
+            color: Config.color999999,
+          ),
+          title: '上拉查看图文详情',
+          direction: XFSTextButtonIconTextDirection.textRIconL,
+          textColor: Config.color999999,
+        ),
+        CommonLineView(
+          height: 20,
+          color: Config.colorF5F5F5,
+        ),
+      ],
+    );
+  }
+   updateListViewHeight(height){
+     listviewHeight = height;
+     setState(() {
+     });
+   }
+  @override
+  void afterFirstLayout(BuildContext context) {
+    RenderBox renderBox = context.findRenderObject();
+    double height = renderBox.getMaxIntrinsicHeight(MediaQuery.of(context).size.width);
+    widget.updateExpandedHeight(height);
+  }
+    afterSecondLayout(BuildContext context, double changeHeight,bool expandbool) {
+     RenderBox renderBox = context.findRenderObject();
+     double height = renderBox.getMaxIntrinsicHeight(MediaQuery.of(context).size.width);
+     expandbool ? widget.updateExpandedHeight(height+changeHeight) :widget.updateExpandedHeight(height-changeHeight);
+   }
+}
+
+class _listViewBuild extends StatefulWidget {
+  final List<GoodsDetailModel> listGoodsDetailModel;
+
+  final Function(double) updateListViewHeight;
+   bool expand =false;
+   _listViewBuild({Key key, this.listGoodsDetailModel,this.expand,this.updateListViewHeight}) : super(key: key);
+  @override
+  __listViewBuildState createState() => __listViewBuildState();
+}
+
+class __listViewBuildState extends State<_listViewBuild>
+    // with AfterLayoutMixin
+{
+  @override
+  Widget build(BuildContext context) {
+    var listGoodsDetailModel = widget.listGoodsDetailModel;
+    return
+      Expanded(
+        child: ListView.builder(
+              itemBuilder: (ctx, index) {
+                return Column(
+                  children: [
+                    Visibility(
+                      visible: index == 0,
+                      child: Container(
+                        height: 50,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Flexible(
+                                flex: 3,
+                                child: XFSText(
+                                  '规格型号',
+                                  padding: EdgeInsets.all(10),
+                                  fontSize: 12,
+                                )),
+                            Flexible(
+                                flex: 2,
+                                child: XFSText(
+                                  '价格（元）',
+                                  padding: EdgeInsets.all(10),
+                                  fontSize: 12,
+                                )),
+                            XFSText(
+                              '操作',
+                              padding: EdgeInsets.all(10),
+                              fontSize: 12,
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    _buildItem(listGoodsDetailModel:listGoodsDetailModel,index:index)
+                  ],
+                );
+              },
+              physics: const NeverScrollableScrollPhysics(),
+              itemCount: listGoodsDetailModel.length < 6
+                  ? listGoodsDetailModel.length
+                  : !widget.expand
+                  ? 5
+                  : listGoodsDetailModel.length,
+    ),
+      );
+
+  }
+  // @override
+  // void afterFirstLayout(BuildContext context) {
+  //   var totallength = widget.listGoodsDetailModel.length < 6
+  //       ? widget.listGoodsDetailModel.length
+  //       : !widget.expand
+  //       ? 5
+  //       : widget.listGoodsDetailModel.length;
+  //   double listviewHeight;
+  //   listviewHeight =double.parse("${50*(totallength+1)}");
+  //   print('listviewheight--$listviewHeight---totalLength---$totallength');
+  //  widget.updateListViewHeight(listviewHeight);
+  // }
+}
+class _buildItem extends StatefulWidget {
+  final List<GoodsDetailModel> listGoodsDetailModel;
+  final int index;
+
+  const _buildItem({Key key, this.listGoodsDetailModel, this.index}) : super(key: key);
+  @override
+  __buildItemState createState() => __buildItemState();
+}
+
+class __buildItemState extends State<_buildItem>{
+  @override
+  Widget build(BuildContext context) {
+    var listGoodsDetailModel = widget.listGoodsDetailModel;
+    var index  = widget.index;
+    return Container(
+      height: 50,
+      child:  Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Flexible(
+              flex: 3,
+              child: XFSText(
+                '${listGoodsDetailModel[index].color}/${listGoodsDetailModel[index].specifications}',
+                padding: EdgeInsets.all(10),
+                fontSize: 12,
+              )),
+          Flexible(
+              flex: 2,
+              child: XFSText(
+                '${listGoodsDetailModel[index].salePrice}',
+                padding: EdgeInsets.all(10),
+                fontSize: 12,
+              )),
+          const XFSText(
+            '查看',
+            textColor: Colors.orange,
+            padding: EdgeInsets.all(10),
+            fontSize: 12,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
