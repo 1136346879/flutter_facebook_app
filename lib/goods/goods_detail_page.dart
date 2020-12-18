@@ -104,7 +104,7 @@ class _GoodsDetailPageState extends XFSBasePageState<
                       leading: _buildLeftBack(),
                       titleSpacing: 0,
                       title: tabbar(),
-                      backgroundColor: Colors.transparent,
+                      backgroundColor: Colors.white,
                       expandedHeight: expandedHeight,
                       flexibleSpace: new FlexibleSpaceBar(
                         background: SliverAppBarWidgetCallBack(listGoodsDetailModel:listGoodsDetailModel,updateExpandedHeight: updateExpandedHeight,),
