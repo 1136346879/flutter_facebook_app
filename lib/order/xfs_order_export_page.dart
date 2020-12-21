@@ -46,8 +46,8 @@ class _XFSOrderExportPageState extends XFSBasePageState<XFSOrderExportPage,
 
   @override
   backAction() {
-    if (Navigator.canPop(getContext())) {
-      Navigator.pop(getContext());
+    if (Navigator.canPop(context)){
+      Navigator.pop(context);
     } else {
       XFSCommonUtils.goBackNative();
     }

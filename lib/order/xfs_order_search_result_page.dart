@@ -35,9 +35,8 @@ class _XFSOrderSearchResultPageState extends XFSBasePageState<XFSOrderSearchResu
   }
 
   @override
-  bool resizeToAvoidBottomPadding() {
-    return false;
-  }
+  bool get resizeToAvoidBottomPadding => false;
+
 
   @override
   List<Widget> actions() {

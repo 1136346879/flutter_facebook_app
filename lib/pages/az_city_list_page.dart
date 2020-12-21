@@ -67,7 +67,6 @@ class _AzCityListPageState extends XFSBasePageState<AzCityListPage, List<City>, 
               ),
             ).then((value){
               if (value != null){
-                // CommonUtils.showToast(msg: value.name);
                 Navigator.pop(context,value?.name);
               }
             });
@@ -88,7 +87,6 @@ class _AzCityListPageState extends XFSBasePageState<AzCityListPage, List<City>, 
     return InkWell(
       child: _listItem(model),
       onTap: (){
-        // CommonUtils.showToast(msg: model?.name);
         Navigator.pop(context,model?.name);
       },
     );
@@ -143,9 +141,7 @@ class XFSSearchPageDelegate<T> extends XFSSearchDelegate{
     _searchData();
     return ListView.builder(
       itemBuilder: (context, index) {
-
         return _buildItem(context, _searchResultList[index]);
-
       },
       itemCount: _searchResultList?.length??0,
     );
@@ -157,9 +153,7 @@ class XFSSearchPageDelegate<T> extends XFSSearchDelegate{
     _searchData();
     return ListView.builder(
       itemBuilder: (context, index) {
-
         return _buildItem(context, _searchResultList[index]);
-
       },
       itemCount: _searchResultList?.length??0,
     );

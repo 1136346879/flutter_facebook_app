@@ -82,7 +82,7 @@ class XFSOrderListPresenter extends XFSBasePresenter<XfsOrderListView>{
       if (showProgress){
         mView?.hidePageLoading();
       }
-      mView?.showEmptyView(state: XFSPageState.ERROR, entity: data);
+      mView?.showEmptyView(state: EmptyViewType.ERROR, entity: data);
       _refreshList(isRefresh, _pageModel?.hasNext??true);
 
     });

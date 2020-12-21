@@ -336,6 +336,25 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
                 XFSText(
                   "请选择规格",
                   padding: EdgeInsets.all(10),
+                  onTap: (){
+                    showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        builder: (BuildContext context) {
+                          return Container(
+                            height: MediaQuery.of(context).size.height*2/3,
+                            child: ListView.builder(
+                              itemBuilder: (context, index) {
+                                return ListTile(
+                                  title: Text('老孟$index'),
+                                );
+                              },
+                              itemExtent: 50,
+                              itemCount: 50,
+                            ),
+                          );
+                        });
+                  },
                 ),
                 Icon(
                   Icons.chevron_right,
@@ -366,7 +385,7 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
                 Navigator.pushNamed(
                     context, XFSAppRouteConfigure.azCityListPage)
                     .then((value) {
-                  if (value == null) return cityName = value ?? "$cityName";
+                  if (value != null)  cityName = value ?? "$value";
                   setState(() {});
                 });
               },
@@ -453,9 +472,7 @@ class _listViewBuild extends StatefulWidget {
   __listViewBuildState createState() => __listViewBuildState();
 }
 
-class __listViewBuildState extends State<_listViewBuild>
-    // with AfterLayoutMixin
-{
+class __listViewBuildState extends State<_listViewBuild> {
   @override
   Widget build(BuildContext context) {
     var listGoodsDetailModel = widget.listGoodsDetailModel;
@@ -509,18 +526,6 @@ class __listViewBuildState extends State<_listViewBuild>
       );
 
   }
-  // @override
-  // void afterFirstLayout(BuildContext context) {
-  //   var totallength = widget.listGoodsDetailModel.length < 6
-  //       ? widget.listGoodsDetailModel.length
-  //       : !widget.expand
-  //       ? 5
-  //       : widget.listGoodsDetailModel.length;
-  //   double listviewHeight;
-  //   listviewHeight =double.parse("${50*(totallength+1)}");
-  //   print('listviewheight--$listviewHeight---totalLength---$totallength');
-  //  widget.updateListViewHeight(listviewHeight);
-  // }
 }
 class _buildItem extends StatefulWidget {
   final List<GoodsDetailModel> listGoodsDetailModel;
