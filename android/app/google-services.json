@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "512479261254",
+    "project_id": "facerecognition-e63eb",
+    "storage_bucket": "facerecognition-e63eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:512479261254:android:d2b229029c1530ddbc9047",
+        "android_client_info": {
+          "package_name": "com.example.flutter_facebook"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "512479261254-h6h6gk31ov6u1dshv94p9bgngq1baeb7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBPNy5CwOPf9C8Aoa3Hgi2JUzLDERo6RkU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "512479261254-h6h6gk31ov6u1dshv94p9bgngq1baeb7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

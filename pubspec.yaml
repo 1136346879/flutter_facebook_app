@@ -28,6 +28,8 @@ dependencies:
   barcode_scan: 1.0.0
   geolocator: ^5.3.2+2
   after_layout:
+  camera:
+  firebase_ml_vision:
   xfs_flutter_utils:
     path: ../xfs_flutter_utils
 

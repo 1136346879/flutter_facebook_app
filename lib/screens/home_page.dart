@@ -46,7 +46,7 @@ class _HomePageState
           icon: Icon(Icons.shopping_cart,color: Colors.white,),
           width: 6,
           onPressed: (){
-
+            Navigator.pushNamed(context, XFSAppRouteConfigure.cameraMainPage);
           },
         ),
       ),
