@@ -127,18 +127,32 @@ return[
   bool get isUseSafeArea => true;
   @override
   Widget buildWidget(BuildContext context, Object object) {
+    final deviceRatio = size.width / size.height;
+
+
     if (cameraController.isNullOrEmpty() ||
         !cameraController.value.isInitialized) {
       return Center(
         child: CircularProgressIndicator(),
       );
     }
+
+
     return Stack(
       children: [
-        AspectRatio(
-          aspectRatio: cameraController.value.aspectRatio,
-          child: CameraPreview(cameraController),
+        Transform.scale(
+          scale: cameraController.value.aspectRatio / deviceRatio,
+          child: Center(
+              child: AspectRatio(
+                aspectRatio: cameraController.value.aspectRatio,
+                child: CameraPreview(cameraController),
+              )
+          ),
         ),
+        // AspectRatio(
+        //   aspectRatio: cameraController.value.aspectRatio,
+        //   child: CameraPreview(cameraController),
+        // ),
         FittedBox(
             fit: BoxFit.fitWidth,
             child: SizedBox(

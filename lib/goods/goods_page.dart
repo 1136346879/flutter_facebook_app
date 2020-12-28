@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/goods/goods_list_page.dart';
+import 'package:flutter_facebook/goods/xfs_right_filt_drawer_page.dart';
 import 'package:flutter_facebook/interface/xfs_click_delegate.dart';
+import 'package:flutter_facebook/models/XFSGoodsFiltModel.dart';
 import 'package:flutter_facebook/models/category_to_list_model.dart';
 import 'package:flutter_facebook/models/search_result_model.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -21,6 +23,7 @@ class GoodsPage extends XFSBasePage {
 class _GoodsLisPageState
     extends XFSBasePageState<GoodsPage, SearchResult, GoodsPresenter>
     implements GoodsListView, XFSClickDelegate {
+  XFSGoodsFiltModel _filtrateModel = XFSGoodsFiltModel();
   @override
   void initState() {
     super.initState();
@@ -59,6 +62,17 @@ class _GoodsLisPageState
   }
 
   @override
+  Widget initEndDrawer() {
+    return XFSRightFiltDrawerPage(
+      filtrateModel: _filtrateModel,
+      confirmCallback: (value){
+        Fluttertoast.showToast(msg: '确认');
+      },
+      resetCallback: (value){
+      },
+    );
+  }
+  @override
   Widget buildTopView(SearchResult object) {
     String mCategoryName =
     object.isNullOrEmpty() ? "" : object?.spuList[0].categoryName1;
@@ -70,7 +84,7 @@ class _GoodsLisPageState
           child: Container(
             padding: EdgeInsets.all(10),
             child: XFSText(
-              '${mCategoryName}',
+              '$mCategoryName',
               fontSize: 16,
               fontWeight: FontWeight.bold,
               alignment: Alignment.center,
@@ -153,6 +167,7 @@ class _GoodsLisPageState
                   ),
                   onPressed: () {
                     Fluttertoast.showToast(msg: "筛选");
+                    openEndDrawer();
                   },
                   ),
             ),

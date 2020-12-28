@@ -47,7 +47,7 @@ class XfsOrderExportPresenter extends XFSBasePresenter<XfsOrderExportView>{
       return false;
     }
 
-    if (!model.email.isEmail()){
+    if (!model.email.isOrEmail()){
       mView?.showPageToast(msg: '请填写正确邮箱');
       return false;
     }
