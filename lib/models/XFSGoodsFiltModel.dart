@@ -6,6 +6,9 @@
 
 
 class XFSGoodsFiltModel {
+  String heightPrice;
+  String lowPrice;
+  String storeName;
 
 }
 

@@ -8,6 +8,8 @@ import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import com.flutter.facebookapp.SignUtils
 import io.flutter.plugins.GeneratedPluginRegistrant
+import android.content.Intent
+import android.net.Uri
 
 class MainActivity: FlutterActivity() {
     private val METHOD_CHANNEL = "xfs_fsyc_method_key"
@@ -26,6 +28,12 @@ class MainActivity: FlutterActivity() {
                         getPublicParmas(call.arguments as kotlin.collections.HashMap<String, Any?>)
                     }
                     "goBack" -> finish()
+                    "callPhone" -> {
+                        val intent = Intent(Intent.ACTION_DIAL)
+                        val data = Uri.parse("tel:" + call.arguments)
+                        intent.data = data
+                        startActivity(intent)
+                    }
                     else -> result.notImplemented()
                 }
             } catch (e: IllegalStateException) {

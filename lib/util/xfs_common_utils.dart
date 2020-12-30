@@ -83,6 +83,9 @@ class XFSCommonUtils{
       eventBus.fire(XFSCloseFlutter());
     }
   }
+  static callPhone(String phoneNum){
+    XFSCommonChannelUtils.callPhone(phoneNum);
+  }
 }
 
 class XFSColorUtils{

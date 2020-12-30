@@ -58,4 +58,5 @@ class R {
 
   static final String checkNormal = 'assets/image/check_normal.png';
   static final String checkSelected = 'assets/image/check_selected.png';
+  static final String phoneCall = 'assets/image/phone.png';
 }

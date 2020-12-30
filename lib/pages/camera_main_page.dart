@@ -1,3 +1,6 @@
+import 'dart:math';
+import 'dart:ui';
+
 import 'package:camera/camera.dart';
 import 'package:firebase_ml_vision/firebase_ml_vision.dart';
 import 'package:flutter/foundation.dart';
@@ -10,7 +13,9 @@ import 'package:flutter_facebook/config/xfs_header.dart';
 ///
 class CameraMainPage extends XFSBasePage {
   var arguments;
+
   CameraMainPage({this.arguments});
+
   @override
   XFSBasePageState getState() => _CameraMainPageState();
 }
@@ -25,39 +30,47 @@ class _CameraMainPageState
   List<Rect> rects;
   double widthRate;
   CustomPainter painter;
+
   @override
   void initState() {
     super.initState();
     getCameras();
   }
+
   @override
   List<Widget> actions() {
-return[
-  Container(
-    child: XFSTextButton.icon(
-      width: 6,
-      icon: Icon(Icons.camera_front,color: Colors.white,),
-      onPressed: (){
-        if(cameraState == 0){
-          cameraState =1;//前置摄像头
-        }else{
-          cameraState =0;//后置摄像头
-        }
-        cameraController = CameraController(camera[cameraState], ResolutionPreset.high);
-        cameraController.initialize().then((value){
-          if(!mounted){
-            return;
-          }
-        });
-        setState(() {});
-      },
-    ),
-  ),
-];
+    return [
+      Container(
+        child: XFSTextButton.icon(
+          width: 6,
+          icon: Icon(
+            Icons.camera_front,
+            color: Colors.white,
+          ),
+          onPressed: () {
+            if (cameraState == 0) {
+              cameraState = 1; //前置摄像头
+            } else {
+              cameraState = 0; //后置摄像头
+            }
+            cameraController =
+                CameraController(camera[cameraState], ResolutionPreset.high);
+            cameraController.initialize().then((value) {
+              if (!mounted) {
+                return;
+              }
+            });
+            setState(() {});
+          },
+        ),
+      ),
+    ];
   }
+
   getCameras() async {
     camera = await availableCameras();
-    cameraController = CameraController(camera[cameraState], ResolutionPreset.high);
+    cameraController =
+        CameraController(camera[cameraState], ResolutionPreset.high);
     await cameraController.initialize();
 
     cameraController.startImageStream((CameraImage image) async {
@@ -88,6 +101,7 @@ return[
           rects = rects;
           painter = FacePainter(
               rects: rects,
+              faces: faces,
               imageSize: cameraController.value.previewSize,
               origSize: size);
         });
@@ -115,8 +129,10 @@ return[
 
   @override
   String get naviTitle => '时时相机';
+
   @override
   XFSBasePresenter initPresenter() {}
+
   concatenatePlanes(List<Plane> planes) {
     WriteBuffer writeBuffer = WriteBuffer();
     planes.forEach((plane) => writeBuffer.putUint8List(plane.bytes));
@@ -124,12 +140,11 @@ return[
   }
 
   @override
-  bool get isUseSafeArea => true;
+  bool get isUseSafeArea => true;//安全区域 适配ios新机型
+
   @override
   Widget buildWidget(BuildContext context, Object object) {
     final deviceRatio = size.width / size.height;
-
-
     if (cameraController.isNullOrEmpty() ||
         !cameraController.value.isInitialized) {
       return Center(
@@ -137,22 +152,16 @@ return[
       );
     }
 
-
     return Stack(
       children: [
         Transform.scale(
           scale: cameraController.value.aspectRatio / deviceRatio,
           child: Center(
               child: AspectRatio(
-                aspectRatio: cameraController.value.aspectRatio,
-                child: CameraPreview(cameraController),
-              )
-          ),
+            aspectRatio: cameraController.value.aspectRatio,
+            child: CameraPreview(cameraController),//相机预览
+          )),
         ),
-        // AspectRatio(
-        //   aspectRatio: cameraController.value.aspectRatio,
-        //   child: CameraPreview(cameraController),
-        // ),
         FittedBox(
             fit: BoxFit.fitWidth,
             child: SizedBox(
@@ -165,16 +174,105 @@ return[
 
   @override
   void dispose() {
+    ///资源释放
     cameraController?.dispose();
     super.dispose();
   }
 }
 
+///脸部画笔
 class FacePainter extends CustomPainter {
   final List<Rect> rects;
   final Size imageSize;
-  final Size origSize; //屏幕大小
-  FacePainter({this.imageSize, this.origSize, this.rects});
+  final Size origSize;
+
+  final List<Face> faces; //屏幕大小
+  FacePainter({this.imageSize, this.origSize, this.rects, this.faces});
+
+  @override
+  void paint(Canvas canvas, Size size) {
+    ///渐变色
+    Gradient gradient = LinearGradient(
+      colors: [
+        Colors.red,
+        Colors.green,
+        Colors.yellow,
+        Colors.orange,
+        Colors.blue,
+      ],
+      stops: [0.15, 0.4, 0.6, 0.8, 0.9],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+    );
+    /// 在屏幕上cavans与图片的转换
+    double scale = origSize.width / imageSize.height;
+
+  ///画笔
+    Paint paint = Paint()
+      ..style = PaintingStyle.fill //stroke
+      ..strokeWidth = 3
+      ..color = Colors.red;
+    Path path = Path();///path 路径
+    faces.forEach((face) {
+    //   List<Offset> upperTOP =
+    //       face.getContour(FaceContourType.upperLipTop).positionsList;
+    //   List<Offset> upperBottom =
+    //       face.getContour(FaceContourType.upperLipBottom).positionsList;
+    //   List<Offset> LOWerTop =
+    //       face.getContour(FaceContourType.lowerLipTop).positionsList;
+    //   List<Offset> lowerBottom =
+    //       face.getContour(FaceContourType.lowerLipBottom).positionsList;
+    //   double leftX = upperBottom.first.dx;
+    //   double leftY = upperBottom.first.dy;
+    //   double rightX = upperBottom.last.dx;
+    //   double rightY = upperBottom.last.dx;
+    //   double mouthWidth = rightX - leftX;
+    //
+    //   ///嘴巴的宽度
+    //   double peak = 1 / 4 * mouthWidth;
+    //   int middlePosition = (upperBottom.length / 2).floor();
+    //
+    //   ///中部元素的
+    //   double mouthHeight =
+    //       LOWerTop[middlePosition].dy - upperBottom[middlePosition].dy;
+
+      ///嘴巴的高度
+
+// if(mouthHeight>=mouthWidth/2){//真人
+//       if (mouthHeight >= 0) {
+//         //图片
+//         path = path..moveTo(leftX * scale, leftY * scale); //左嘴角的位置
+//         double waves = 5.0;
+//         double imageHeight = imageSize.width; //
+//         List<double> ys = spiltDouble(leftY, imageHeight, 2000);
+//         List<double> xs = List<double>();
+//         ys.forEach((y) {
+//           double curX = leftX +
+//               peak * sin((y - leftY) * pi / ((imageHeight - leftY) / waves));
+//           xs.add(curX);
+//           path = path..lineTo(curX * scale, y * scale);
+//         });
+//         path = path..lineTo(xs.last * scale, (ys.last + mouthWidth) * scale);
+//         xs = xs.reversed.toList();
+//         for (int i = 0; i < xs.length; i++) {
+//           path = path..lineTo(xs[i] * scale, ys[i] * scale);
+//         }
+//         path.lineTo(leftX * scale, leftY * scale);
+//
+//         Rect rect = Rect.fromLTWH((leftX - peak) * scale, leftY * scale,
+//             (mouthWidth + 2 * peak) * scale, (imageHeight - leftY) * scale);
+//         paint = paint..shader = gradient.createShader(rect);
+//         canvas.drawPath(path, paint);
+//       }
+
+      // ///获取脸上的元素，画出红点
+      canvas.drawPoints(PointMode.points, scalePointPostion(face.getContour(FaceContourType.allPoints)), paint);
+    });
+    // for (Rect rect in rects) {
+    //   //找出脸布位置，然后画红框标出
+    //   canvas.drawRect(scaleRect(size, rect), paint);
+    // }
+  }
 
   Rect scaleRect(Size cavasSize, Rect rect) {
     double scaleX = origSize.width / imageSize.height;
@@ -185,18 +283,6 @@ class FacePainter extends CustomPainter {
   }
 
   @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = 3
-      ..color = Colors.red;
-
-    for (Rect rect in rects) {
-      canvas.drawRect(scaleRect(size, rect), paint);
-    }
-  }
-
-  @override
   bool shouldRepaint(FacePainter oldDelegate) {
     return oldDelegate.rects != rects;
   }
@@ -204,5 +290,25 @@ class FacePainter extends CustomPainter {
   @override
   bool shouldRebuildSemantics(FacePainter oldDelegate) {
     return false;
+  }
+
+  ///获取脸上的元素，画出红点
+  List<Offset> scalePointPostion(FaceContour contour) {
+    double scale = origSize.width / imageSize.height;
+    List<Offset> newContour = List<Offset>();
+    for (int i = 0; i < contour.positionsList.length; i++) {
+      Offset curPoint = contour.positionsList[i];
+      newContour.add(Offset(curPoint.dx * scale, curPoint.dy * scale));
+    }
+    return newContour;
+  }
+
+  List<double> spiltDouble(double begin, double end, int count) {
+    List<double> result = List<double>();
+    double each = (end - begin) / count;
+    for (int i = 0; i < count; i++) {
+      result.add(begin + each * i);
+    }
+    return result;
   }
 }

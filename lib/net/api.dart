@@ -4,6 +4,8 @@ class API {
   static const BASE_URL = 'https://mock.yonyoucloud.com/mock/';
   static const BASE_URL_xfs = 'https://t.fsyuncai.com/api/mobile/';
   static const BASE_URL_xfs_t2 = 'https://t2.fsyuncai.com/api/mobile/';
+  static const BASE_URL_xfs_t3 = 'https://t3.fsyuncai.com/api/mobile/';
+  static const BASE_URL_xfs_t4 = 'https://t4.fsyuncai.com/api/mobile/';
 
   static const TREE_URL = 'tree/json';
 
@@ -55,5 +57,7 @@ class API {
 
   //规格参数
   static const PRODUCT_DETAIL = "product/product/skuShopDetailInformation";
+  ///门店列表
+  static const STORE_LIST = 'baseservice/warehouse/queryStoreList';
 
 }

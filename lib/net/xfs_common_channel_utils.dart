@@ -57,4 +57,11 @@ class XFSCommonChannelUtils {
   static canPushFlutter(bool canPush){
     methodChannle.invokeMethod('canPushFlutter', canPush);
   }
+  /// 拨打电话
+  /// [phone] 电话号码
+  static Future callPhone(String phone){
+    /// 去掉横线和空白
+    phone.replaceAll('-', '')..trim();
+    methodChannle.invokeMethod('callPhone',phone);
+  }
 }

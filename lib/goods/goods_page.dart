@@ -63,6 +63,8 @@ class _GoodsLisPageState
 
   @override
   Widget initEndDrawer() {
+    _filtrateModel.lowPrice='10';
+    _filtrateModel.storeName='不限门店';
     return XFSRightFiltDrawerPage(
       filtrateModel: _filtrateModel,
       confirmCallback: (value){

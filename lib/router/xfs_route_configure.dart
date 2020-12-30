@@ -21,6 +21,8 @@ import 'package:flutter_facebook/screens/nav_screen.dart';
 import 'package:flutter_facebook/subject/subject_page.dart';
 import 'package:flutter_facebook/testpage/SelectProvider.dart';
 import 'package:flutter_facebook/testpage/consumer_provider.dart';
+import 'package:flutter_facebook/xfs_self_raise/xfs_self_raise_search_address_page.dart';
+import 'package:flutter_facebook/xfs_self_raise/xfs_stores_choice_page.dart';
 import 'package:xfs_flutter_utils/utils/xfs_log_util.dart';
 import 'package:xfs_flutter_utils/xfs_route/xfs_custom_router.dart';
 import 'package:xfs_flutter_utils/xfs_route/xfs_navigator_manage.dart';
@@ -66,6 +68,8 @@ class XFSAppRouteConfigure {
   ///自提地址搜索
   static String xfsSelfRaiseSearchAddress = "XFSSelfRaiseSearchAddress";
   static String xfsOrderApprovalProgressListPage = "xfsOrderApprovalProgressListPage";
+  ///门店列表
+  static String xFSStoreChoicePage = "xFSStoreChoicePage";
   ///主页
   static String xfsNavScreenPage = "xfsNavScreenPage";
   static String homePageDetail = "HOmePageDetail";
@@ -83,6 +87,12 @@ class XFSAppRouteConfigure {
     ),
     cityLiStPage: (arguments) => XFSRouteResult(
       widget: CityLiStPage(),
+    ),
+    xfsSelfRaiseSearchAddress: (arguments) => XFSRouteResult(
+      widget: XFSSelfRaiseSearchAddressPage(arguments: arguments),
+    ),
+    xFSStoreChoicePage: (arguments) => XFSRouteResult(
+      widget: XFSStoreChoicePage(arguments: arguments),
     ),
     azCityListPage: (arguments) => XFSRouteResult(
       widget: AzCityListPage(),
