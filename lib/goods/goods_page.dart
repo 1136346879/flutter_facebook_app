@@ -63,12 +63,11 @@ class _GoodsLisPageState
 
   @override
   Widget initEndDrawer() {
-    _filtrateModel.lowPrice='10';
-    _filtrateModel.storeName='不限门店';
     return XFSRightFiltDrawerPage(
       filtrateModel: _filtrateModel,
       confirmCallback: (value){
-        Fluttertoast.showToast(msg: '确认');
+        _filtrateModel=value;
+        Fluttertoast.showToast(msg: '确认--请列表刷新页面');
       },
       resetCallback: (value){
       },
@@ -199,10 +198,24 @@ class _GoodsLisPageState
   @override
   void didSelectCell({int clickType, data, data1}) {
     if (1 == clickType) {
-      Fluttertoast.showToast(msg: '${data}');
+      Fluttertoast.showToast(msg: '$data');
     }
     if (2 == clickType) {
-      Fluttertoast.showToast(msg: '${data}');
+      Fluttertoast.showToast(msg: '$data');
     }
+  }
+
+  @override
+  siftData(List<String> brandListString) {
+      _filtrateModel.brandStringList = brandListString;
+      setState(() {
+      });
+  }
+
+  @override
+  categoryData(List<CatAndNumXList> categoryList) {
+    _filtrateModel.categoryList = categoryList;
+    setState(() {
+    });
   }
 }

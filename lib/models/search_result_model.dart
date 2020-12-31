@@ -232,19 +232,24 @@ class BrandList {
   List<String> b;
   List<String> c;
   List<String> d;
+  List<String> e;
   List<String> f;
   List<String> g;
   List<String> h;
+  List<String> i;
   List<String> j;
   List<String> k;
   List<String> l;
   List<String> m;
   List<String> n;
   List<String> o;
+  List<String> p;
   List<String> q;
   List<String> r;
   List<String> s;
   List<String> t;
+  List<String> u;
+  List<String> v;
   List<String> w;
   List<String> x;
   List<String> y;
@@ -255,46 +260,56 @@ class BrandList {
         this.b,
         this.c,
         this.d,
+        this.e,
         this.f,
         this.g,
         this.h,
+        this.i,
         this.j,
         this.k,
         this.l,
         this.m,
         this.n,
         this.o,
+        this.p,
         this.q,
         this.r,
         this.s,
         this.t,
+        this.u,
+        this.v,
         this.w,
         this.x,
         this.y,
         this.z});
 
   BrandList.fromJson(Map<String, dynamic> json) {
-    a = json['A'].cast<String>();
-    b = json['B'].cast<String>();
-    c = json['C'].cast<String>();
-    d = json['D'].cast<String>();
-    f = json['F'].cast<String>();
-    g = json['G'].cast<String>();
-    h = json['H'].cast<String>();
-    j = json['J'].cast<String>();
-    k = json['K'].cast<String>();
-    l = json['L'].cast<String>();
-    m = json['M'].cast<String>();
-    n = json['N'].cast<String>();
-    o = json['O'].cast<String>();
-    q = json['Q'].cast<String>();
-    r = json['R'].cast<String>();
-    s = json['S'].cast<String>();
-    t = json['T'].cast<String>();
-    w = json['W'].cast<String>();
-    x = json['X'].cast<String>();
-    y = json['Y'].cast<String>();
-    z = json['Z'].cast<String>();
+    a = json['A']?.cast<String>();
+    b = json['B']?.cast<String>();
+    c = json['C']?.cast<String>();
+    d = json['D']?.cast<String>();
+    e = json['E']?.cast<String>();
+    f = json['F']?.cast<String>();
+    g = json['G']?.cast<String>();
+    h = json['H']?.cast<String>();
+    i = json['I']?.cast<String>();
+    j = json['J']?.cast<String>();
+    k = json['K']?.cast<String>();
+    l = json['L']?.cast<String>();
+    m = json['M']?.cast<String>();
+    n = json['N']?.cast<String>();
+    o = json['O']?.cast<String>();
+    p = json['P']?.cast<String>();
+    q = json['Q']?.cast<String>();
+    r = json['R']?.cast<String>();
+    s = json['S']?.cast<String>();
+    t = json['T']?.cast<String>();
+    u = json['U']?.cast<String>();
+    v = json['V']?.cast<String>();
+    w = json['W']?.cast<String>();
+    x = json['X']?.cast<String>();
+    y = json['Y']?.cast<String>();
+    z = json['Z']?.cast<String>();
   }
 
   Map<String, dynamic> toJson() {

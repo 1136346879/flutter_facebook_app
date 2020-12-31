@@ -78,11 +78,13 @@ class ScreenServer {
         });
   }
   static getSearchPro(Map<String, dynamic> map,
-      {SuccessBlock<BaseEntity> successBlock,
-        FailureBlock<BaseEntity> failureBlock}) {
+      {SuccessBlock<dynamic> successBlock,
+        FailureBlock<dynamic> failureBlock}) {
 
-    HttpUtils.getDataForCallback(API.searchPro,API.BASE_URL_xfs_t2,params: map,
-        httpMethod: HttpMethod.POST, success: (model) {
+    HttpUtils.getDataForCallback(API.searchPro,API.BASE_URL_xfs_t2,params: map,isParse: false,
+        httpMethod: HttpMethod.POST, sucessJson:(json){
+          successBlock(json);
+        },success: (model) {
           successBlock(model);
         }, failure: (model) {
           failureBlock(model);

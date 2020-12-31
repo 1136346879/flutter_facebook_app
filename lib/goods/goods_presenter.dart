@@ -44,11 +44,54 @@ class GoodsPresenter extends XFSBasePresenter<GoodsListView> {
     map["categoryId"] = arguments.categoryId ?? 15;
     map["promotionSort"] = "0"; //促销
     map["device_platform"] = "android";
+    List<String> brandListString = [];
+    List<String> abcd = ["a","b",'c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'];
     ScreenServer.getSearchPro(
       map,
       successBlock: (val) {
-        SearchResult searchResult = SearchResult.fromJson(val.searchResult);
-        mView.showData(data: searchResult);
+        SearchResultModel searchResultModel = SearchResultModel.fromJson(val);
+
+        // SearchResult searchResult = SearchResult.fromJson(val.searchResult);
+        mView.showData(data: searchResultModel.searchResult);
+        // BrandList brandList = BrandList.fromJson(val.brandList);
+mView.categoryData(searchResultModel.catAndNumXList);
+
+
+
+
+
+
+
+
+        searchResultModel.brandList.forEach((element) {
+            brandListString.addAll(element.a??[]);
+            brandListString.addAll(element.b??[]);
+            brandListString.addAll(element.c??[]);
+            brandListString.addAll(element.d??[]);
+            brandListString.addAll(element.e??[]);
+            brandListString.addAll(element.f??[]);
+            brandListString.addAll(element.g??[]);
+            brandListString.addAll(element.h??[]);
+            brandListString.addAll(element.i??[]);
+            brandListString.addAll(element.j??[]);
+            brandListString.addAll(element.k??[]);
+            brandListString.addAll(element.l??[]);
+            brandListString.addAll(element.m??[]);
+            brandListString.addAll(element.n??[]);
+            brandListString.addAll(element.o??[]);
+            brandListString.addAll(element.p??[]);
+            brandListString.addAll(element.q??[]);
+            brandListString.addAll(element.r??[]);
+            brandListString.addAll(element.s??[]);
+            brandListString.addAll(element.t??[]);
+            brandListString.addAll(element.u??[]);
+            brandListString.addAll(element.v??[]);
+            brandListString.addAll(element.w??[]);
+            brandListString.addAll(element.x??[]);
+            brandListString.addAll(element.y??[]);
+            brandListString.addAll(element.z??[]);
+        });
+        mView.siftData(brandListString);
       },
       failureBlock: (val) {},
     );
@@ -57,4 +100,6 @@ class GoodsPresenter extends XFSBasePresenter<GoodsListView> {
 
 abstract class GoodsListView extends XFSBaseView {
   priceSort();
+  siftData(List<String> brandListString);
+  categoryData(List<CatAndNumXList> categoryList);
 }

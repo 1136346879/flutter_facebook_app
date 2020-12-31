@@ -33,6 +33,7 @@ class HttpUtils {
     @required HttpMethod httpMethod,
     Map<String, dynamic> params,
     CancelToken cancelToken,
+    bool isParse = true,
   }) async {
 
     /// 判断是否有网络
@@ -104,7 +105,11 @@ class HttpUtils {
       }
 
       if(responseData != null){
-        model = BaseEntity.fromJson(responseData);
+        if (isParse){
+          model = BaseEntity.fromJson(responseData);
+        } else {
+          return Future.value(responseData);
+        }
       }else{
         model = BaseEntity.error();
       }
@@ -135,6 +140,7 @@ class HttpUtils {
   /// [params] 上传参数
   /// [cancelToken] 取消token不传默认为dio统一token
   /// [httpMethod] 请求方法
+  ///  /// [isParse] 是否解析
   /// [success] 成功回调
   /// [failure] 失败回调
   static getDataForCallback(
@@ -142,8 +148,10 @@ class HttpUtils {
         @required HttpMethod httpMethod,
         Map<String, dynamic> params,
         CancelToken cancelToken,
+        bool isParse = true,
         SuccessBlock<BaseEntity> success,
         FailureBlock<BaseEntity> failure,
+        SuccessBlock<dynamic> sucessJson,
       }) async{
 
     /// 判断是否有网络
@@ -216,7 +224,11 @@ class HttpUtils {
       }
 
       if(responseData != null){
-        model = BaseEntity.fromJson(responseData);
+        if (isParse){
+          model = BaseEntity.fromJson(responseData);
+        } else {
+          return sucessJson(responseData);
+        }
       }else{
         model = BaseEntity.error();
       }
@@ -280,4 +292,5 @@ class HttpUtils {
         onReceiveProgress:progressCallback
     );
   }
+
 }
