@@ -25,13 +25,18 @@ class XFSRightFiltDrawerPage extends StatefulWidget {
 
 class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
   XFSGoodsFiltModel _filtrateModel;
-  List<String> _listBrand = ["C罗", "梅西", "内马尔", "萨拉赫"];
+  List<String> _listBrand = [];
+  List<String> _listBrandShow = [];
   List<CatAndNumXList> _listCategory = [];
+  List<CatAndNumXList> _listCategoryShow = [];
+
   // List<CatAndNumXList> _listCategory = [];
   List<String> _select = [];
   String _choice = "";
   var storeName;
   var shipAddId;
+  bool expandBrand = false;
+  bool expandCategory = false;
   TextEditingController _editingLowerPriceController;
   TextEditingController _editinghighterPriceController;
 
@@ -39,18 +44,33 @@ class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
   void initState() {
     super.initState();
     _filtrateModel = widget.filtrateModel;
-    storeName = _filtrateModel.storeName??"不限门店";
-    shipAddId = _filtrateModel.shipAddId??"";
-    _listBrand = _filtrateModel.brandStringList??[];
-    _listCategory = _filtrateModel.categoryList??[];
+    storeName = _filtrateModel.storeName ?? "不限门店";
+    shipAddId = _filtrateModel.shipAddId ?? "";
+    _listBrandShow = _filtrateModel.brandStringList ?? [];
+    _listCategoryShow = _filtrateModel.categoryList ?? [];
+    print('长度分别是：：${_listBrandShow.length}---${_listCategoryShow.length}');
     _editingLowerPriceController =
         TextEditingController(text: _filtrateModel.lowPrice ?? "");
     _editinghighterPriceController =
         TextEditingController(text: _filtrateModel.heightPrice ?? "");
   }
 
+  brandList() {
+    if (expandBrand || _listBrandShow.length <= 6) {
+      _listBrand = _listBrandShow;
+    } else {
+      _listBrand = _listBrandShow.sublist(0, 6);
+    }
+    if (expandCategory || _listCategoryShow.length <= 6) {
+      _listCategory = _listCategoryShow;
+    } else {
+      _listCategory = _listCategoryShow.sublist(0, 6);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    brandList();
     return XFSDrawer(
       width: XFSScreenUtil.getScreenW(context) - 31,
       child: Column(
@@ -58,50 +78,10 @@ class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
           Expanded(
             child: ListView(
               children: <Widget>[
-                _buildFiltChip(),
-                _buildChoiceChip(),
-                XFSText('价格'),
-                XFSContainer(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(children: [
-                    _buildEditTextView('请输入最低价', _editingLowerPriceController),
-                    XFSText(
-                      '-',
-                      margin: EdgeInsets.symmetric(horizontal: 5),
-                    ),
-                    _buildEditTextView(
-                        '请输入最高价', _editinghighterPriceController),
-                  ]),
-                ),
-                XFSText('门店'),
-                XFSContainer(
-                  margin: EdgeInsets.symmetric(horizontal: 10),
-                  child: Row(children: [
-                    Flexible(flex: 1, child: XFSText('$storeName')),
-                    XFSTextButton.icon(
-                      title: '重新选择',
-                      icon: Icon(Icons.chevron_right),
-                      direction: XFSTextButtonIconTextDirection.textLIconR,
-                    ),
-                  ]),
-                  onTap: () {
-                    Navigator.pushNamed(
-                            context, XFSAppRouteConfigure.xFSStoreChoicePage,
-                            arguments: shipAddId)
-                        .then((value) {
-                      if (value != null) {
-                        var xfsRaiseModel = (value as xfsSelfRaiseSearchModel);
-                        _filtrateModel.storeName = xfsRaiseModel.add_alias;
-                        _filtrateModel.shipAddId = xfsRaiseModel.ship_add_id;
-                        storeName = xfsRaiseModel.add_alias;
-                        shipAddId = xfsRaiseModel.ship_add_id;
-                      } else {
-                        _filtrateModel.storeName = "不限门店";
-                      }
-                      setState(() {});
-                    });
-                  },
-                )
+                _buildBrandFiltChip(),
+                _buildCategoryChoiceChip(),
+                _buildPriceLowerHight(),
+                _buildStoreChoice(),
               ],
             ),
           ),
@@ -111,6 +91,7 @@ class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
     );
   }
 
+  ///底部确认和重置
   Widget _bottomView() {
     return Container(
       height: 49,
@@ -155,8 +136,8 @@ class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
     //   widget.resetCallback(_filtrateModel);
     // }
     Fluttertoast.showToast(msg: '重置');
-    _choice="";
-    _select=[];
+    _choice = "";
+    _select = [];
     setState(() {});
   }
 
@@ -181,60 +162,169 @@ class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
                 textAlign: TextAlign.center,
                 keyboardType: TextInputType.number)));
   }
-///单选 分类
-  _buildChoiceChip() {
+
+  ///单选 分类
+  _buildCategoryChoiceChip() {
     return Column(
       children: [
         Container(
           width: double.infinity,
-          child: Text("分类：$_choice"),
-        ),
-        Wrap(
-            spacing: 20,
-            children: _listCategory.map((it) {
-              return ChoiceChip(
-                label: Text(it.categoryName),
-                selectedColor: Colors.pink,
-                selected: _choice == it.categoryName,
-                onSelected: (value) {
-                  setState(() {
-                    if(_choice ==it.categoryName){
-                      _choice='';
-                    }else
-                    _choice = it.categoryName;
-                  });
-                },
-              );
-            }).toList()),
-      ],
-    );
-  }
-///多选 品牌
-  _buildFiltChip() {
-    return Column(
-        children: [
-          Container(
-            width: double.infinity,
-            child:   Text("品牌：$_select"),
+          child: Row(
+            children: [
+              XFSText("分类",padding: EdgeInsets.all(10),),
+              Flexible(
+                flex: 1,
+                child: XFSText(
+                  "$_choice",
+                  padding: EdgeInsets.all(10),
+                  maxLines: 1,
+                  alignment: Alignment.bottomRight,
+                ),
+              ),
+              Visibility(
+                visible: _listCategoryShow.length > 6,
+                child: XFSTextButton.icon(
+                  onPressed: () {
+                    expandCategory = !expandCategory;
+                    setState(() {});
+                  },
+                  icon: Icon(expandCategory
+                      ? Icons.keyboard_arrow_down
+                      : Icons.keyboard_arrow_up),
+                ),
+              ),
+            ],
           ),
-          Wrap(
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left:10,right: 10),
+          child: Wrap(
               spacing: 20,
-              children: _listBrand.map((it) {
+              children: _listCategory.map((it) {
                 return ChoiceChip(
-                  label: Text(it),
+                  label: Text(it.categoryName),
                   selectedColor: Colors.pink,
-                  selected:  _select.contains(it),
+                  selected: _choice == it.categoryName,
                   onSelected: (value) {
                     setState(() {
-                      if (_select.contains(it)) {
-                        _select.remove(it);
-                      } else {
-                        _select.add(it);
-                      }
+                      if (_choice == it.categoryName) {
+                        _choice = '';
+                      } else
+                        _choice = it.categoryName;
                     });
                   },
                 );
               }).toList()),
+        ),
+      ],
+    );
+  }
+
+  ///多选 品牌
+  _buildBrandFiltChip() {
+    return Column(children: [
+      Container(
+        width: double.infinity,
+        child: Row(
+          children: [
+            XFSText(
+              "品牌",
+              margin:EdgeInsets.all(10),
+            ),
+            Flexible(flex:1,child: XFSText("${_select.toString()}",padding:EdgeInsets.all(10),maxLines: 1, alignment: Alignment.bottomRight)),
+            Visibility(
+              visible: _listBrandShow.length > 6,
+              child: XFSTextButton.icon(
+                onPressed: () {
+                  expandBrand = !expandBrand;
+                  setState(() {});
+                },
+                icon: Icon(expandBrand
+                    ? Icons.keyboard_arrow_down
+                    : Icons.keyboard_arrow_up),
+              ),
+            ),
+          ],
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(left:10,right: 10),
+        child: Wrap(
+            spacing: 20,
+            children: _listBrand.map((it) {
+              return ChoiceChip(
+                label: Text(it),
+                selectedColor: Colors.pink,
+                selected: _select.contains(it),
+                onSelected: (value) {
+                  setState(() {
+                    if (_select.contains(it)) {
+                      _select.remove(it);
+                    } else {
+                      _select.add(it);
+                    }
+                  });
+                },
+              );
+            }).toList()),
+      ),
     ]);
+  }
+
+  ///价格输入
+  _buildPriceLowerHight() {
+    return Column(
+      children: [
+        XFSText('价格',padding: EdgeInsets.all(10),),
+        XFSContainer(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          child: Row(children: [
+            _buildEditTextView('请输入最低价', _editingLowerPriceController),
+            XFSText(
+              '-',
+              margin: EdgeInsets.symmetric(horizontal: 5),
+            ),
+            _buildEditTextView('请输入最高价', _editinghighterPriceController),
+          ]),
+        ),
+      ],
+    );
+  }
+
+  ///门店选择
+  _buildStoreChoice() {
+    return Column(
+      children: [
+        XFSText('门店',padding: EdgeInsets.all(10),),
+        XFSContainer(
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          child: Row(children: [
+            Flexible(flex: 1, child: XFSText('$storeName')),
+            XFSTextButton.icon(
+              title: '重新选择',
+              icon: Icon(Icons.chevron_right),
+              direction: XFSTextButtonIconTextDirection.textLIconR,
+            ),
+          ]),
+          onTap: () {
+            Navigator.pushNamed(
+                    context, XFSAppRouteConfigure.xFSStoreChoicePage,
+                    arguments: shipAddId)
+                .then((value) {
+              if (value != null) {
+                var xfsRaiseModel = (value as xfsSelfRaiseSearchModel);
+                _filtrateModel.storeName = xfsRaiseModel.add_alias;
+                _filtrateModel.shipAddId = xfsRaiseModel.ship_add_id;
+                storeName = xfsRaiseModel.add_alias;
+                shipAddId = xfsRaiseModel.ship_add_id;
+              } else {
+                _filtrateModel.storeName = "不限门店";
+              }
+              setState(() {});
+            });
+          },
+        )
+      ],
+    );
   }
 }
