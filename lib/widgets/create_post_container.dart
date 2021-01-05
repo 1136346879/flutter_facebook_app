@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook/goods/get_test_page.dart';
 import 'package:flutter_facebook/models/models.dart';
 import 'package:flutter_facebook/widgets/widgets.dart';
 
@@ -44,7 +45,11 @@ class CreatePostContainer extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FlatButton.icon(
-                    onPressed: () => print('Live'),
+                    onPressed: () {
+                      print('Live')   ;
+                      GetTestPage.push(context);
+
+            },
                     icon: const Icon(
                       Icons.videocam,
                       color: Colors.red,

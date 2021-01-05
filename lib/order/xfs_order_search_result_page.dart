@@ -55,7 +55,7 @@ class _XFSOrderSearchResultPageState extends XFSBasePageState<XFSOrderSearchResu
   Widget buildAppBarTitleView() {
 
     return XFSTextField(
-      backgroudColor: Colors.white,
+      backgroundColor: Colors.white,
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
       hintText: '请输入商品名称/订单号/收货人/收货手机号',
       controller: _editingController,

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook/address/xfs_address_list_page.dart';
+import 'package:flutter_facebook/goods/get_test_page.dart';
 import 'package:flutter_facebook/goods/goods_detail_page.dart';
 import 'package:flutter_facebook/goods/goods_page.dart';
 import 'package:flutter_facebook/models/xfs_user_model.dart';
@@ -76,11 +77,15 @@ class XFSAppRouteConfigure {
   static String goodsPage = "GoodsPage";
   static String goodsDetailPage = "GoodsDetailPage";
   static String cameraMainPage = "CameraMainPage";
+  static String getTestPage = "GetTestPage";
 
   //统一路由配置
   static Map<String, XFSRouteResultBuilder> routeMap = {
     rootPage: (arguments) => XFSRouteResult(
       widget: XFSRootPage(),
+    ),
+    getTestPage: (arguments) => XFSRouteResult(
+      widget: GetTestPage(),
     ),
     homePageDetail: (arguments) => XFSRouteResult(
       widget: HOmePageDetail(arguments:arguments),
