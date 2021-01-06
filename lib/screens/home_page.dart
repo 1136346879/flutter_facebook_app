@@ -213,7 +213,7 @@ class _HomePageState
                     HOmePageDetail.push(context, item?.pictureUrl);
                   },
                   onPressed: (){
-                    Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments: CategoryToListModel(item.frontFirstCategoryId, 1));
+                    Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments: CategoryToListModel(item.relationFirstLevelObject[0].frontCategoryId, 1));
                   },
                 ),
               ),

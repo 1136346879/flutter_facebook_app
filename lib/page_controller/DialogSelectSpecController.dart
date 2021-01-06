@@ -1,14 +1,14 @@
 import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/models/GoodsDetailModel.dart';
 import 'package:flutter_facebook/screens/screen_server.dart';
-abstract class GoodsDetailView extends XFSBaseView{
-  colors(List<String> listColors);
-}
-class GoodsDetailPresenter extends XFSBasePresenter<GoodsDetailView>{
 
-
+///
+///       创建时间：2021/1/4
+///       修改人  ：zhangyan
+///       描述    ：
+/// 
+class DialogSelectSpecController extends XFSBasePageController{
   List<GoodsDetailModel> listGoodsDetailModel = List();
-
   List<String> listColors = List();
   getGoodsDetialData({int spuId}){
     Map<String, dynamic> map = Map();
@@ -22,25 +22,31 @@ class GoodsDetailPresenter extends XFSBasePresenter<GoodsDetailView>{
       String min = rangeData?.minPrice?.isNullOrEmpty() ?"0.00" : rangeData?.minPrice;
       String priceRange = max==min? min: "$min~$max";
 
+      listGoodsDetailModel.clear();
       listColors.clear();
       val.data.forEach((element) {
         listGoodsDetailModel.add(GoodsDetailModel.fromJson(element));
       });
-      XFSUtils.jsonListToModelList(val.color, (colorValue) =>
-          listColors.add(colorValue));
-      mView.showData(data: listGoodsDetailModel);
-      mView.colors(listColors);
+
+        XFSUtils.jsonListToModelList(val.color, (colorValue) =>
+            listColors.add(colorValue));
+      // if(val.color.length<1){
+      //   listColors.add("");
+      // }
+      showData(listGoodsDetailModel);
+      update();
     },
         failureBlock: (val){
 
         });
   }
-
-
-
-
-
-  GoodsDetailPresenter(XFSBaseView mView) : super(mView);
-
 }
 
+
+
+
+
+
+
+
+      

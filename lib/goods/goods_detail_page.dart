@@ -8,6 +8,7 @@ import 'package:flutter_facebook/widgets/sticky_tabbar_delegate.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xfs_flutter_utils/xfs_flutter_utils.dart';
 
+import 'dialog_select_spec_widget_page.dart';
 import 'goods_detail_presenter.dart';
 
 class GoodsDetailPage extends XFSBasePage {
@@ -28,7 +29,7 @@ class GoodsDetailPage extends XFSBasePage {
 class _GoodsDetailPageState extends XFSBasePageState<
     GoodsDetailPage,
     List<GoodsDetailModel>,
-    GoodsDetailPresenter> with TickerProviderStateMixin {
+    GoodsDetailPresenter> with TickerProviderStateMixin implements GoodsDetailView{
   @override
   void initState() {
     super.initState();
@@ -114,6 +115,8 @@ class _GoodsDetailPageState extends XFSBasePageState<
                         background: SliverAppBarWidgetCallBack(
                           listGoodsDetailModel: listGoodsDetailModel,
                           updateExpandedHeight: updateExpandedHeight,
+                          spuId: widget.arguments,
+                            listColors:listColors,
                         ),
                         collapseMode: CollapseMode.pin,
                         stretchModes: const <StretchMode>[
@@ -264,16 +267,23 @@ class _GoodsDetailPageState extends XFSBasePageState<
       ),
     );
   }
+  List<String> listColors = List();
+  @override
+  colors(List<String> listColors) {
+    this.listColors = listColors;
+  }
 }
 
 class SliverAppBarWidgetCallBack extends StatefulWidget {
   final List<GoodsDetailModel> listGoodsDetailModel;
   final Function(double) updateExpandedHeight;
+  final int spuId;
+  final List<String> listColors ;
 
   SliverAppBarWidgetCallBack(
       {Key key,
       @required this.listGoodsDetailModel,
-      @required this.updateExpandedHeight})
+      @required this.updateExpandedHeight, this.spuId, this.listColors})
       : super(key: key);
 
   @override
@@ -369,7 +379,7 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
                 builder: (BuildContext context) {
                   return Container(
                     height: MediaQuery.of(context).size.height * 4 / 5,
-                    child:_buildBottomSheetVIew(),
+                    child:_buildBottomSheetVIew(widget.spuId,widget.listColors),
                   );
                 });
           },
@@ -485,7 +495,7 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
         : widget.updateExpandedHeight(height - changeHeight);
   }
 
-  _buildBottomSheetVIew() {
+  _buildBottomSheetVIew(int spuId, List<String> listColors) {
     return
       Column(
         children: [
@@ -494,19 +504,19 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
             Column(children: [
               XFSText('¥1亿～9块9',textColor: Config.colorFFA200,fontSize: 20,),
               XFSText('必须全部购买',textColor: Config.color999999,),
-            ],)
+            ],),
+            XFSTextButton.icon(icon: Icon(Icons.close),
+              onPressed: (){
+                Navigator.pop(context);
+              },
+            ),
           ],),
           Expanded(
-            child: ListView.builder(
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text('规格--$index'),
-                );
-              },
-              itemExtent: 50,
-              itemCount: 50,
-            ),
+            child: XFSContainer(
+                backgroundColor: Colors.white,
+                child: DialogSelectSpecPage(spuId:spuId,listColors:listColors)),
           ),
+          XFSText('确认',width: double.infinity,fontSize: 16,textColor: Colors.white,backgroudColor: Config.colorFFA200,alignment: Alignment.center,padding: EdgeInsets.symmetric(vertical: 10),)
         ],
       );
   }
