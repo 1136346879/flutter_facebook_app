@@ -84,7 +84,7 @@ class _DialogSelectSpecListPageState extends XFSGetBaseListPageState<
 
   @override
   Widget buildItem(GoodsDetailModel object, int index) {
-    return XFSText('${object.color}--$index');
+    return XFSText.normal('${object.color}--$index');
   }
 
   @override

@@ -158,7 +158,7 @@ class _GoodsDetailPageState extends XFSBasePageState<
                           physics: const NeverScrollableScrollPhysics(),
                         ),
                       ),
-                      Center(child: XFSText('包装清单')),
+                      Center(child: XFSText.normal('包装清单')),
                     ]),
               ),
               Positioned(bottom: 0, child: _bottomWidget(context))
@@ -206,7 +206,7 @@ class _GoodsDetailPageState extends XFSBasePageState<
   Widget _buildLeftBack() {
     return Opacity(
         opacity: navAlpha,
-        child: XFSText(
+        child: XFSText.container(
           'back',
           padding: EdgeInsets.symmetric(horizontal: 10),
           backgroudColor: Colors.black,
@@ -251,13 +251,13 @@ class _GoodsDetailPageState extends XFSBasePageState<
             fontSize: 10,
             direction: XFSTextButtonIconTextDirection.textBIconT,
           ),
-          XFSText(
+          XFSText.container(
             '加入采购单',
             textColor: Colors.white,
             backgroudColor: Config.colorFFA200,
             padding: EdgeInsets.symmetric(vertical: 15, horizontal: 8),
           ),
-          XFSText(
+          XFSText.container(
             '立即购买',
             textColor: Colors.white,
             backgroudColor: Colors.orange,
@@ -309,14 +309,14 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
     return Column(
       children: [
         Pagination(images: listGoodsDetailModel[0].images),
-        XFSText(
+        XFSText.container(
           '${listGoodsDetailModel[0].skuName} ${listGoodsDetailModel[0].color ?? ""} ${listGoodsDetailModel[0].specifications} ',
           padding: EdgeInsets.all(10),
           fontWeight: FontWeight.bold,
         ),
         Visibility(
           visible: listGoodsDetailModel[0].subtitile.isNotEmpty,
-          child: XFSText(
+          child: XFSText.container(
             '${listGoodsDetailModel[0].subtitile} ',
             textColor: Config.color666666,
             fontSize: 12,
@@ -325,12 +325,12 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
         ),
         Row(
           children: [
-            XFSText(
+            XFSText.container(
               '签约价：${listGoodsDetailModel[0].salePrice}/${listGoodsDetailModel[0].unit}',
               padding: EdgeInsets.only(bottom: 10, left: 10),
               textColor: Colors.orange,
             ),
-            XFSText(
+            XFSText.container(
               '售价：￥${listGoodsDetailModel[0].retailPrice}/${listGoodsDetailModel[0].unit}',
               padding: EdgeInsets.only(bottom: 10, left: 10),
               decoration: TextDecoration.lineThrough,
@@ -363,7 +363,7 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
               ),
               Flexible(
                 flex: 3,
-                child: XFSText("请选择规格", padding: EdgeInsets.all(10)),
+                child: XFSText.container("请选择规格", padding: EdgeInsets.all(10)),
               ),
               Icon(
                 Icons.chevron_right,
@@ -399,7 +399,7 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
               title: '配送区域选择：',
               direction: XFSTextButtonIconTextDirection.textLIconR,
             ),
-            XFSText(
+            XFSText.container(
               '$cityName',
               textColor: Colors.orange,
               onTap: () {
@@ -502,8 +502,8 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
           Row(children: [
             Image.network('https://fsyuncai.oss-cn-beijing.aliyuncs.com/product/images/1554278804115007872b.jpg?x-oss-process=style/marking_text',width: 80,height: 80,),
             Column(children: [
-              XFSText('¥1亿～9块9',textColor: Config.colorFFA200,fontSize: 20,),
-              XFSText('必须全部购买',textColor: Config.color999999,),
+              XFSText.normal('¥1亿～9块9',textColor: Config.colorFFA200,fontSize: 20,),
+              XFSText.normal('必须全部购买',textColor: Config.color999999,),
             ],),
             XFSTextButton.icon(icon: Icon(Icons.close),
               onPressed: (){
@@ -516,7 +516,7 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
                 backgroundColor: Colors.white,
                 child: DialogSelectSpecPage(spuId:spuId,listColors:listColors)),
           ),
-          XFSText('确认',width: double.infinity,fontSize: 16,textColor: Colors.white,backgroudColor: Config.colorFFA200,alignment: Alignment.center,padding: EdgeInsets.symmetric(vertical: 10),)
+          XFSText.container('确认',width: double.infinity,fontSize: 16,textColor: Colors.white,backgroudColor: Config.colorFFA200,alignment: Alignment.center,padding: EdgeInsets.symmetric(vertical: 10),)
         ],
       );
   }
@@ -557,19 +557,19 @@ class __listViewBuildState extends State<_listViewBuild> {
                     children: [
                       Flexible(
                           flex: 3,
-                          child: XFSText(
+                          child: XFSText.container(
                             '规格型号',
                             padding: EdgeInsets.all(10),
                             fontSize: 12,
                           )),
                       Flexible(
                           flex: 2,
-                          child: XFSText(
+                          child: XFSText.container(
                             '价格（元）',
                             padding: EdgeInsets.all(10),
                             fontSize: 12,
                           )),
-                      XFSText(
+                      XFSText.container(
                         '操作',
                         padding: EdgeInsets.all(10),
                         fontSize: 12,
@@ -618,19 +618,19 @@ class __buildItemState extends State<_buildItem> {
         children: [
           Flexible(
               flex: 3,
-              child: XFSText(
+              child: XFSText.container(
                 '${listGoodsDetailModel[index].color}/${listGoodsDetailModel[index].specifications}',
                 padding: EdgeInsets.all(10),
                 fontSize: 12,
               )),
           Flexible(
               flex: 2,
-              child: XFSText(
+              child: XFSText.container(
                 '${listGoodsDetailModel[index].salePrice}',
                 padding: EdgeInsets.all(10),
                 fontSize: 12,
               )),
-          const XFSText(
+          const XFSText.container(
             '查看',
             textColor: Colors.orange,
             padding: EdgeInsets.all(10),

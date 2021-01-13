@@ -48,7 +48,6 @@ class CreatePostContainer extends StatelessWidget {
                     onPressed: () {
                       print('Live')   ;
                       GetTestPage.push(context);
-
             },
                     icon: const Icon(
                       Icons.videocam,

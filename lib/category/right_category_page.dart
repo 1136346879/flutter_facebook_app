@@ -32,7 +32,7 @@ class RightCategoryListPageState extends XFSBaseListPageState<
   Widget buildItem(SecondList rightCategoryModel, int index) {
     return index == 0
         ? 
-            XFSText(
+            XFSText.container(
                   "${rightCategoryModel?.afterCategoryName??""}",
                   padding: EdgeInsets.all(10),
                   margin: EdgeInsets.only(left: 10, right: 10),
@@ -47,7 +47,7 @@ class RightCategoryListPageState extends XFSBaseListPageState<
                 Row(
                   children: [
                     Expanded(
-                      child: XFSText(
+                      child: XFSText.container(
                         '${rightCategoryModel?.afterCategoryName ?? ""}',
                         padding: EdgeInsets.all(10),
                         fontWeight: FontWeight.bold,
@@ -98,7 +98,7 @@ class RightCategoryListPageState extends XFSBaseListPageState<
       return [];
     }
     List<SecondListNext> objectList = expand || object.length <= 6 ? object: object.sublist(0,6);
-    return objectList ?.map((item) => XFSText(
+    return objectList ?.map((item) => XFSText.container(
               item?.afterCategoryName ?? "",
               fontSize: 12,
               backgroudColor: Colors.white,

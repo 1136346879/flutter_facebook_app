@@ -37,7 +37,7 @@ class XFSOrderDetailsPage extends XFSBasePage{
    @override
    Widget buildWidget(BuildContext context, Object object) {
     return Container(
-      child: XFSText('订单详情页'),
+      child: XFSText.normal('订单详情页'),
 
     );
    }

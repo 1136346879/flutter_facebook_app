@@ -31,7 +31,7 @@ class _TabPageState extends BaseTabPageState<TabPage, Object, XFSBasePresenter> 
   @override
   List<Widget> actions() {
     return [
-      XFSText(
+      XFSText.container(
         '订单导出',
         padding: EdgeInsets.only(left: 10, right: 10),
         textColor: Colors.white,
@@ -40,7 +40,7 @@ class _TabPageState extends BaseTabPageState<TabPage, Object, XFSBasePresenter> 
           // Navigator.pushNamed(context, XFSAppRouteConfigure.shoppingCartSharePage);
         },
       ),
-      XFSText(
+      XFSText.container(
         '搜索',
         padding: EdgeInsets.only(left: 10, right: 10),
         textColor: Colors.white,

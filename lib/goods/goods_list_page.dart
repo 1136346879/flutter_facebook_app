@@ -52,19 +52,19 @@ class _GoodsListPageState extends XFSBaseListPageState<GoodsListPage, SpuList,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  child: XFSText(
+                  child: XFSText.normal(
                     '${spuEntry?.spu_Name}',
                     maxLines: 2,
                   ),
                 ),
                 Container(
-                  child: XFSText('${spuEntry?.title}',
+                  child: XFSText.normal('${spuEntry?.title}',
                       maxLines: 2,
                       textColor: Config.color999999,
                       fontSize: 10,
                       overflow: TextOverflow.fade),
                 ),
-                XFSText(
+                XFSText.normal(
                   '${spuEntry?.priceRange}',
                   textColor: Colors.orange,
                 ),
@@ -72,13 +72,13 @@ class _GoodsListPageState extends XFSBaseListPageState<GoodsListPage, SpuList,
                   children: [
                     Visibility(
                         visible: spuEntry?.stock != 0,
-                        child: XFSText(
+                        child: XFSText.container(
                           '现货',
                           textColor: Colors.orange,
                           fontSize: 12,
                           margin: EdgeInsets.only(right: 10),
                         )),
-                    XFSText(
+                    XFSText.container(
                       '规格数量： ${spuEntry?.skuNum}个',
                       fontSize: 10,
                     ),

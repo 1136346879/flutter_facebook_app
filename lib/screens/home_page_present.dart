@@ -29,6 +29,7 @@ class HomePagePresenter extends XFSBasePresenter<HomePageView> {
       map,
       successBlock: (val) {
         print("返回数据-分类-----${val.data.toString()}");
+        data.clear();
         // Fluttertoast.showToast(msg: "返回数据-------${val.data.toString()}");
         val.data.forEach((v) {
           data.add(new Data.fromJson(v));

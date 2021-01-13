@@ -188,7 +188,7 @@ class _SubectListPageState
                     child: Column(
                       children: [
                         Container(
-                          child: XFSText(
+                          child: XFSText.container(
                             '${modelList.urlList[0].productTitle}',
                             margin: EdgeInsets.only(bottom: 20, top: 10),
                             padding: EdgeInsets.only(left: 10),
@@ -198,11 +198,11 @@ class _SubectListPageState
                           child: Row(
                             children: [
                               Expanded(
-                                  child: XFSText(
+                                  child: XFSText.container(
                                 '￥${modelList.urlList[0].productPrice}',
                                 padding: EdgeInsets.only(left: 10),
                               )),
-                              XFSText(
+                              XFSText.container(
                                 '立即购买',
                                 padding: EdgeInsets.all(5),
                                 margin: EdgeInsets.only(right: 20),
@@ -263,12 +263,12 @@ class _SubectListPageState
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                 XFSText(
+                                 XFSText.container(
                                     '${modelList.urlList[index].productTitle}',
                                     maxLines: 2,
                                     margin: EdgeInsets.all(10),
                                   ),
-                               XFSText(
+                               XFSText.container(
                                   '￥${modelList.urlList[index].productPrice}',
                                   textColor: Colors.red,
                                   padding: EdgeInsets.only(left: 10,bottom: 10),
@@ -406,7 +406,7 @@ class _SubectListPageState
       return XFSContainer(
         backgroundColor: _color,
         onTap: () => Fluttertoast.showToast(msg: '当前版本不支持，点击升级查看！！！'),
-        child: XFSText('当前版本不支持，点击升级查看！！！'),
+        child: XFSText.normal('当前版本不支持，点击升级查看！！！'),
       );
     }
   }

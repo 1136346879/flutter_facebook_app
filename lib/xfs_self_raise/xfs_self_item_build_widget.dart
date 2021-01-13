@@ -45,7 +45,7 @@ class XFSSelfItemBuildWidget extends StatelessWidget {
               children: [
                 Expanded(
                   flex: 1,
-                  child: XFSText(
+                  child: XFSText.container(
                     model.add_alias,
                     padding: EdgeInsets.all(10),
                     fontSize: 14,
@@ -55,7 +55,7 @@ class XFSSelfItemBuildWidget extends StatelessWidget {
                 ),
                 Visibility(
                   visible: model.distance != null && model.distance != "null" ?? false,
-                  child: XFSText(
+                  child: XFSText.container(
                     getDistance(model.distance),
                     height: 25,
                     border: Border.all(color: Config.colorD3D3D3, width: 1),
@@ -66,7 +66,7 @@ class XFSSelfItemBuildWidget extends StatelessWidget {
                 ),
                 Visibility(
                   visible: model.isLastAddress ?? false,
-                  child: XFSText(
+                  child: XFSText.container(
                     "上次使用",
                     height: 25,
                     border: Border.all(color: Config.colorFFA200, width: 1),
@@ -82,7 +82,7 @@ class XFSSelfItemBuildWidget extends StatelessWidget {
               height: 1,
               color: Config.colorCCCCCC,
             ),
-            XFSText(
+            XFSText.container(
               "地址： ${getContent(model)}",
               padding: EdgeInsets.only(top: 10, left: 10),
               fontSize: 12,
@@ -90,13 +90,13 @@ class XFSSelfItemBuildWidget extends StatelessWidget {
             ),
             Row(
               children: [
-                const XFSText(
+                const XFSText.container(
                   '联系方式: ',
                   padding: EdgeInsets.only(left: 10),
                   fontSize: 12,
                   textColor: Config.color333333,
                 ),
-                XFSText(
+                XFSText.container(
                   "${model.office_phone}",
                   fontSize: 12,
                   textColor: Config.color2391EA,

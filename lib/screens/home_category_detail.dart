@@ -36,21 +36,21 @@ class _HOmePageDetailState
     return Container(
         child: Column(
           children: [
-            Hero(
-              tag: widget.arguments,
-              child:
+            // Hero(
+            //   tag: widget.arguments,
+            //   child:
               Image.network(
                 widget.arguments,
                 height: 300,
                 width: double.infinity,
               ),
-            ),
-            XFSText(
+            // ),
+            XFSText.container(
               "_HOmePageDetailState extends XFSBasePageState<HOmePageDetail, Object, XFSBasePresenter> ",
               padding: EdgeInsets.all(20),
             ),
             Expanded(
-              child: XFSText(
+              child: XFSText.container(
                 """_HOmePageDetailState extends XFSBasePageState<HOmePageDetail,
                  Object, XFSBasePresenter>  
                         final String imageUrl;

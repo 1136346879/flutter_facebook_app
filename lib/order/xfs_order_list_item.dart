@@ -48,14 +48,14 @@ class XFSOrderListHeader extends StatelessWidget {
               height: 40,
               child: Row(
                 children: [
-                  XFSTextView('订单号：${model.order_id}', fontSize: 14,),
+                  XFSText.container('订单号：${model.order_id}', fontSize: 14,),
                   InkWell(
                     highlightColor: Colors.grey,
                     onTap: (){
                       XFSUtils.copyData(model.order_id);
                       XFSCommonUtils.showToast(msg: '已复制到剪切板');
                     },
-                    child: XFSText('复制',
+                    child: XFSText.container('复制',
                       height: 22,
                       fontSize: 12,
                       borderRadius: BorderRadius.all(Radius.circular(4)),
@@ -84,7 +84,7 @@ class XFSOrderListHeader extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            XFSText(
+            XFSText.container(
               '已拆分',
               padding: EdgeInsets.only(right: 10),
               fontSize: 12,
@@ -95,7 +95,7 @@ class XFSOrderListHeader extends StatelessWidget {
               borderRadius: BorderRadius.all(Radius.circular(4)),
               border: Border.all(color: Config.colorFFA200, width: 1),
               padding: EdgeInsets.all(5),
-              child: XFSTextView(
+              child: XFSText.container(
                 '查看详情',
                 textColor: Config.colorFFA200,
                 fontSize: 12,
@@ -111,7 +111,7 @@ class XFSOrderListHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             invoiceImage(),
-            XFSText(
+            XFSText.container(
               model.order_split_status == 10 ? "$orderStatus（拆分中）" : orderStatus,
               fontSize: 12,
               textColor: Config.colorFFA200,
@@ -260,11 +260,11 @@ class XFSOrderListItem extends StatelessWidget {
       children: [
         Expanded(
           child: Container(
-            child: XFSTextView(model.product_name??'', fontSize: 12, fontWeight: showPriceAnCount ? FontWeight.w600 : FontWeight.w400,),
+            child: XFSText.normal(model.product_name??'', fontSize: 12, fontWeight: showPriceAnCount ? FontWeight.w600 : FontWeight.w400,),
             padding: EdgeInsets.only(right: 65),
           ),
         ),
-        showPriceAnCount ? XFSTextView('¥$salePriceString', fontSize: 12, fontWeight: FontWeight.w600,) : SizedBox(width: 0,),
+        showPriceAnCount ? XFSText.normal('¥$salePriceString', fontSize: 12, fontWeight: FontWeight.w600,) : SizedBox(width: 0,),
       ],
     );
   }
@@ -280,9 +280,9 @@ class XFSOrderListItem extends StatelessWidget {
     return Row(
       children: [
         Expanded(
-          child: XFSTextView(model.sku_info??'', fontSize: 10, fontWeight: FontWeight.w400, textColor: showPriceAnCount ? Config.color666666 : Config.color333333),
+          child: XFSText.normal(model.sku_info??'', fontSize: 10, fontWeight: FontWeight.w400, textColor: showPriceAnCount ? Config.color666666 : Config.color333333),
         ),
-        showPriceAnCount ? XFSTextView('x${buyyerCount}${model.unit_name}', fontSize: 10, fontWeight: FontWeight.w400, textColor: Config.color666666,) : SizedBox(width: 0,),
+        showPriceAnCount ? XFSText.normal('x${buyyerCount}${model.unit_name}', fontSize: 10, fontWeight: FontWeight.w400, textColor: Config.color666666,) : SizedBox(width: 0,),
       ],
     );
   }
@@ -442,7 +442,7 @@ class XFSOrderListFooter extends StatelessWidget {
           clickDelegate?.didSelectCell(section: section, clickType: 100, data: model, data1: title);
         }
       },
-      child: XFSTextView(
+      child: XFSText.normal(
         title,
         textColor: textColor,
         fontSize: 12,

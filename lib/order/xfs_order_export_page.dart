@@ -55,7 +55,7 @@ class _XFSOrderExportPageState extends XFSBasePageState<XFSOrderExportPage,
 
   @override
   Widget buildBottom(Object object) {
-    return XFSText(
+    return XFSText.container(
       '确认导出',
       height: 44,
       textColor: Colors.white,
@@ -117,7 +117,7 @@ class _XFSOrderExportPageState extends XFSBasePageState<XFSOrderExportPage,
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        XFSText(
+        XFSText.container(
           "请选择订单时间",
           margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         ),
@@ -187,7 +187,7 @@ class _XFSOrderExportPageState extends XFSBasePageState<XFSOrderExportPage,
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        XFSText(
+        XFSText.container(
           "请选择订单状态",
           margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         ),
@@ -232,7 +232,7 @@ class _XFSOrderExportPageState extends XFSBasePageState<XFSOrderExportPage,
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        XFSText(
+        XFSText.container(
           "请选择开票状态",
           margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         ),
@@ -277,7 +277,7 @@ class _XFSOrderExportPageState extends XFSBasePageState<XFSOrderExportPage,
     Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        XFSText(
+        XFSText.container(
           "请选择支付方式",
           margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
         ),
@@ -369,7 +369,7 @@ class _XFSOrderExportPageState extends XFSBasePageState<XFSOrderExportPage,
   ) {
     return Visibility(
       visible: title.isNotNullOrEmpty(),
-      child: XFSText(
+      child: XFSText.container(
         title,
         margin: EdgeInsets.symmetric(horizontal: 15, vertical: 20),
       ),
@@ -395,7 +395,7 @@ class _XFSOrderExportPageState extends XFSBasePageState<XFSOrderExportPage,
             child: _buildStartDateView(),
             flex: 1,
           ),
-          XFSText(
+          XFSText.container(
             '～',
             textColor: Config.color999999,
             padding: EdgeInsets.only(left: 6, right: 6),
@@ -447,7 +447,7 @@ class _XFSOrderExportPageState extends XFSBasePageState<XFSOrderExportPage,
 
   /// 时间显示
   _buildDateLabel(String title, {String hint, Function onTap}) {
-    return XFSText(
+    return XFSText.container(
       title ?? '',
       height: 25,
       alignment: Alignment.center,

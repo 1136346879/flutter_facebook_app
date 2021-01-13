@@ -118,22 +118,22 @@ class _AddressListPageState extends XFSBaseListPageState<XFSAddressListPage,
             padding: EdgeInsets.all(10.0),
               child: Column(
                 children: [
-                  XFSText(
+                  XFSText.normal(
                     '${entity.addressPersonList != null?entity.addressPersonList[0]?.receiverName:"--"}   ${entity.addressPersonList != null?entity.addressPersonList[0]?.mobile:"--"}',),
                   Row(
                     children: [
                       Visibility(
                           // visible: entity.isDefault ==1,
                           visible: true,
-                          child: const XFSText('默认',margin:EdgeInsets.only(top:10,bottom:10,right: 30),padding:EdgeInsets.only(left: 10,right: 10,top:4,bottom: 4),borderRadius: BorderRadius.all(Radius.circular(4.0)),textColor:Colors.white,backgroudColor: Config.dark_button_disabled,)),
+                          child: const XFSText.container('默认',margin:EdgeInsets.only(top:10,bottom:10,right: 30),padding:EdgeInsets.only(left: 10,right: 10,top:4,bottom: 4),borderRadius: BorderRadius.all(Radius.circular(4.0)),textColor:Colors.white,backgroudColor: Config.dark_button_disabled,)),
                   Visibility(
                       // visible: entity.limitLine == 10,
                       visible: true,
-                      child: XFSText('限行',margin:EdgeInsets.only(top:10,bottom:10,right: 30),padding:EdgeInsets.only(left: 10,right: 10,top:4,bottom: 4),borderRadius: BorderRadius.all(Radius.circular(4.0)),backgroudColor:Config.colorFFA200,textColor:Colors.white )),
+                      child: XFSText.container('限行',margin:EdgeInsets.only(top:10,bottom:10,right: 30),padding:EdgeInsets.only(left: 10,right: 10,top:4,bottom: 4),borderRadius: BorderRadius.all(Radius.circular(4.0)),backgroudColor:Config.colorFFA200,textColor:Colors.white )),
                     ],
                   ),
                   Image.asset(R.addressLine,width: MediaQuery.of(context).size.width,height: 2),
-                  XFSText("${getContent(entity)}",margin: EdgeInsets.only(top: 10),)
+                  XFSText.container("${getContent(entity)}",margin: EdgeInsets.only(top: 10),)
                 ],
               )
           ),

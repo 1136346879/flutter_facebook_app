@@ -31,7 +31,7 @@ class _CategoryPageState
 
   @override
   Widget buildWidget(BuildContext context, List<Data> object) {
-    if(object.isNullOrEmpty()) return XFSText('');
+    if(object.isNullOrEmpty()) return XFSText.normal('');
     frontCategoryId = object[0]?.relationFirstLevelObject[0]?.frontCategoryId;
     fristCategoryName = object[0]?.relationFirstLevelObject[0]?.fristCategoryName;
     return object.isNotNullOrEmpty()
@@ -52,7 +52,7 @@ class _CategoryPageState
               ],
             ),
           )
-        : XFSText('加载中。。。');
+        : XFSText.normal('加载中。。。');
   }
 
   Widget _itemBuildFirstCategory(List<Data> object, int index) {
@@ -75,7 +75,7 @@ class _CategoryPageState
       backgroundColor:
           object[index]?.selected ?? false ? Colors.orange : Colors.white,
       padding: EdgeInsets.all(15),
-      child: XFSText('${object[index]?.displayContent ?? ""}'),
+      child: XFSText.normal('${object[index]?.displayContent ?? ""}'),
     );
   }
 }

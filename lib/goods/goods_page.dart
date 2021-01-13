@@ -84,7 +84,7 @@ class _GoodsLisPageState
               widget.arguments.mCategoryLevel == 1,
           child: Container(
             padding: EdgeInsets.all(10),
-            child: XFSText(
+            child: XFSText.container(
               '$mCategoryName',
               fontSize: 16,
               fontWeight: FontWeight.bold,
@@ -96,7 +96,7 @@ class _GoodsLisPageState
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            XFSText(
+            XFSText.container(
               '综合',
               padding: EdgeInsets.only(left: 20),
               textColor: true ? Colors.orange : Config.color333333,
@@ -133,7 +133,7 @@ class _GoodsLisPageState
                 )),
             Flexible(
                 flex: 1,
-                child: XFSText(
+                child: XFSText.container(
                   '促销',
                   textColor: false ? Colors.orange : Config.color333333,
                   onTap: () {
@@ -143,7 +143,7 @@ class _GoodsLisPageState
                 )),
             Flexible(
                 flex: 1,
-                child: XFSText(
+                child: XFSText.container(
                   '有库存',
                   textColor: false ? Colors.orange : Config.color333333,
                   onTap: () {
@@ -151,7 +151,7 @@ class _GoodsLisPageState
                   },
 
                 )),
-            XFSText(
+            XFSText.normal(
               '|',
               textColor: Colors.grey,
             ),
@@ -182,7 +182,7 @@ class _GoodsLisPageState
   @override
   Widget buildWidget(BuildContext context, SearchResult object) {
     if (object.isNullOrEmpty() || object.spuList.isNullOrEmpty())
-      return XFSText('');
+      return XFSText.normal('');
     return Expanded(
         child: GoodsListPage(
           spuList: object?.spuList,

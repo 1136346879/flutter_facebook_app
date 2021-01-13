@@ -50,7 +50,7 @@ class _AzCityListPageState extends XFSBasePageState<AzCityListPage, List<City>, 
                     padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
                     child: Icon(Icons.search),
                   ),
-                  XFSText('搜索', textColor: Config.color999999,)
+                  XFSText.normal('搜索', textColor: Config.color999999,)
                 ],
               ),
             ),
@@ -187,7 +187,7 @@ class XFSSearchPageDelegate<T> extends XFSSearchDelegate{
   @override
   Widget buildCancelButton(BuildContext context) {
 
-    return XFSText('取消',
+    return XFSText.container('取消',
       textColor: Config.colorFFA200,
       padding: EdgeInsets.symmetric(horizontal: 10),
       onTap: (){

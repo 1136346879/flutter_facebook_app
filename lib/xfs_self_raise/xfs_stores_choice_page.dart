@@ -42,7 +42,7 @@ class _XFSStoreChoicePageState extends XFSBasePageState<XFSStoreChoicePage,
   @override
   List<Widget> actions() {
     return [
-      XFSText('搜索门店',
+      XFSText.container('搜索门店',
           padding: EdgeInsets.only(left: 10, right: 10),
           textColor: Colors.white, onTap: () {
         Navigator.pushNamed(
@@ -240,7 +240,7 @@ class XFSSearchPageDelegate<T> extends XFSSearchDelegate {
 
   @override
   Widget buildCancelButton(BuildContext context) {
-    return XFSText(
+    return XFSText.container(
       '取消',
       textColor: Config.colorFFA200,
       padding: EdgeInsets.symmetric(horizontal: 10),

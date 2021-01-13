@@ -55,7 +55,7 @@ class _CityLiStPageState
                       locationCity();
                     },
                   ),
-                  XFSText(
+                  XFSText.normal(
                     'GPS定位',
                     textColor: Colors.grey,
                     fontSize: 12,

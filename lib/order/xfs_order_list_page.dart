@@ -108,7 +108,7 @@ class XFSOrderListpageState extends XFSBaseListPageState<XFSOrderListpage, XFSOr
                 title: "请选择取消订单的理由",
 
                 pickerTheme: XFSDataPickerViewTheme(
-                  customTitleView: state ? XFSText(
+                  customTitleView: state ? XFSText.container(
                     '退款时间储蓄卡1-7天、信用卡1-15天，如超期未收到，请联系客服',
                     fontSize: 12,
                     margin: EdgeInsets.fromLTRB(10, 20, 10, 10),

@@ -41,7 +41,7 @@ class _XFSOrderSearchResultPageState extends XFSBasePageState<XFSOrderSearchResu
   @override
   List<Widget> actions() {
     return [
-      XFSText('搜索',
+      XFSText.container('搜索',
         padding: EdgeInsets.only(left: 10, right: 10),
         textColor: Colors.white,
         onTap: (){

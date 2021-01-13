@@ -15,6 +15,7 @@ import 'package:xfs_flutter_utils/base/xfs_base_page.dart';
 import 'package:xfs_flutter_utils/base/xfs_base_presenter.dart';
 import 'package:xfs_flutter_utils/base/xfs_base_view.dart';
 
+import 'first_home_page.dart';
 import 'home_page.dart';
 import 'nav_screen_presenter.dart';
 
@@ -37,12 +38,14 @@ class _NavScreenState
   ///五个页面
   final List<Widget> _screens = [
     HomeScreen(),
+    FirstHomePage(),
     HomePage(),
     CategoryPage(),
-    XFSOrderTabPage(arguments: "50"),
+    // XFSOrderTabPage(arguments: "50"),
     // XFSOrderPage(arguments: ""),
     // TabPage(arguments: "50"),
-    XFSAddressListPage(),
+    // XFSAddressListPage(),
+    Scaffold(),
     Scaffold(),
     // GoodsPage(),
     // RightCategoryListPage(categoryId: 15,categoryName:"工具"),

@@ -67,7 +67,7 @@ class _XFSOrderSearchPageState
                         child: _buildStartDateView(),
                         flex: 1,
                       ),
-                      XFSText(
+                      XFSText.container(
                         '～',
                         textColor: Config.color999999,
                         padding: EdgeInsets.only(left: 6, right: 6),
@@ -94,7 +94,7 @@ class _XFSOrderSearchPageState
               _buildItem(
                   title: '订单状态',
                   contentView: Container(
-                    child: XFSTextView(_selectedOrderStatus??'', hint: '全部', textAlign: TextAlign.right, ),
+                    child: XFSText.normal(_selectedOrderStatus??'', hint: '全部', textAlign: TextAlign.right, ),
                   ),
                   showNext: true,
                   onTap: (){
@@ -104,7 +104,7 @@ class _XFSOrderSearchPageState
               _buildItem(
                   title: '支付方式',
                   contentView: Container(
-                    child: XFSTextView(_selectedPayment??'', hint: '全部', textAlign: TextAlign.right,),
+                    child: XFSText.normal(_selectedPayment??'', hint: '全部', textAlign: TextAlign.right,),
                   ),
                   showNext: true,
                   onTap: (){
@@ -114,7 +114,7 @@ class _XFSOrderSearchPageState
               _buildItem(
                   title: '开票状态',
                   contentView: Container(
-                    child: XFSTextView(_selectedInvoiceSorce??'', hint: '全部', textAlign: TextAlign.right,),
+                    child: XFSText.normal(_selectedInvoiceSorce??'', hint: '全部', textAlign: TextAlign.right,),
                   ),
                   showNext: true,
                   onTap: (){
@@ -130,7 +130,7 @@ class _XFSOrderSearchPageState
   }
   /// 时间显示
   _buildDateLabel(String title, {String hint,Function onTap}){
-    return XFSText(title??'',
+    return XFSText.container(title??'',
       height: 25,
       alignment: Alignment.center,
       hint: hint,
@@ -225,7 +225,7 @@ class _XFSOrderSearchPageState
       child: Row(
         children: [
           Expanded(
-            child: XFSText(
+            child: XFSText.container(
               '重置',
               backgroudColor: Colors.white,
               alignment: Alignment.center,
@@ -238,7 +238,7 @@ class _XFSOrderSearchPageState
             ),
           ),
           Expanded(
-            child: XFSText(
+            child: XFSText.container(
               '搜索',
               backgroudColor: Config.colorFFA200,
               textColor: Colors.white,

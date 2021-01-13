@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/rendering.dart';
@@ -7,23 +6,22 @@ import 'package:flutter_facebook/config/xfs_header.dart';
 import 'package:flutter_facebook/models/banner_model.dart';
 import 'package:flutter_facebook/models/category_model.dart';
 import 'package:flutter_facebook/models/category_to_list_model.dart';
-import 'package:flutter_facebook/pages/az_city_list_page.dart';
 import 'package:flutter_facebook/pages/city_list_page.dart';
+import 'package:flutter_facebook/screens/banner.dart';
 import 'package:flutter_facebook/screens/home_category_detail.dart';
 import 'package:flutter_facebook/screens/home_page_present.dart';
-import 'package:flutter_facebook/subject/subject_page.dart';
 import 'package:flutter_facebook/widgets/banner/commont_banner.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xfs_flutter_utils/widgets/xfs_button.dart';
 
 
-class HomePage extends XFSBasePage {
+class FirstHomePage extends XFSBasePage {
   @override
   XFSBasePageState getState() => _HomePageState();
 }
 
 class _HomePageState
-    extends XFSBasePageState<HomePage, List<Data>, HomePagePresenter> implements HomePageView{
+    extends XFSBasePageState<FirstHomePage, List<Data>, HomePagePresenter> implements HomePageView{
    List<BannerModelData> arr = [];
    String cityName='选择';
   @override
@@ -118,6 +116,7 @@ class _HomePageState
           child: ListView(
             children: [
               CommontBanner(swiperDataList:arr),
+              CategoryBanner(swiperDataList:arr),
               // Pagination(),
               Expanded(
                 child: Container(
@@ -200,10 +199,9 @@ class _HomePageState
         child: Column(
           children: [
             Expanded(
-              child:
-              // Hero(
-              //   tag: item?.pictureUrl??"item?.pictureUrl",
-               XFSTextButton.icon(
+              child: Hero(
+                tag: item?.pictureUrl??"item?.pictureUrl",
+                child: XFSTextButton.icon(
                   textColor: Colors.black,
                   fontSize: 14,
                   icon: Expanded(child: Image.network(item?.pictureUrl)),
@@ -217,7 +215,7 @@ class _HomePageState
                     Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments: CategoryToListModel(item.relationFirstLevelObject[0].frontCategoryId, 1));
                   },
                 ),
-              // ),
+              ),
             ),
           ],
         ),

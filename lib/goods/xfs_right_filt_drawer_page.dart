@@ -98,7 +98,7 @@ class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
       child: Row(
         children: <Widget>[
           Expanded(
-            child: XFSText(
+            child: XFSText.container(
               '重置',
               backgroudColor: Config.colorF4F4F4,
               alignment: Alignment.center,
@@ -110,7 +110,7 @@ class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
             ),
           ),
           Expanded(
-            child: XFSText(
+            child: XFSText.container(
               '确认',
               backgroudColor: Config.colorFFA200,
               alignment: Alignment.center,
@@ -171,10 +171,10 @@ class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
           width: double.infinity,
           child: Row(
             children: [
-              XFSText("分类",padding: EdgeInsets.all(10),),
+              XFSText.container("分类",padding: EdgeInsets.all(10),),
               Flexible(
                 flex: 1,
-                child: XFSText(
+                child: XFSText.container(
                   "$_choice",
                   padding: EdgeInsets.all(10),
                   maxLines: 1,
@@ -227,11 +227,11 @@ class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
         width: double.infinity,
         child: Row(
           children: [
-            XFSText(
+            XFSText.container(
               "品牌",
               margin:EdgeInsets.all(10),
             ),
-            Flexible(flex:1,child: XFSText("${_select.toString()}",padding:EdgeInsets.all(10),maxLines: 1, alignment: Alignment.bottomRight)),
+            Flexible(flex:1,child: XFSText.container("${_select.toString()}",padding:EdgeInsets.all(10),maxLines: 1, alignment: Alignment.bottomRight)),
             Visibility(
               visible: _listBrandShow.length > 6,
               child: XFSTextButton.icon(
@@ -275,12 +275,12 @@ class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
   _buildPriceLowerHight() {
     return Column(
       children: [
-        XFSText('价格',padding: EdgeInsets.all(10),),
+        XFSText.container('价格',padding: EdgeInsets.all(10),),
         XFSContainer(
           margin: EdgeInsets.symmetric(horizontal: 10),
           child: Row(children: [
             _buildEditTextView('请输入最低价', _editingLowerPriceController),
-            XFSText(
+            XFSText.container(
               '-',
               margin: EdgeInsets.symmetric(horizontal: 5),
             ),
@@ -295,11 +295,11 @@ class _XFSRightFiltDrawerPageState extends State<XFSRightFiltDrawerPage> {
   _buildStoreChoice() {
     return Column(
       children: [
-        XFSText('门店',padding: EdgeInsets.all(10),),
+        XFSText.container('门店',padding: EdgeInsets.all(10),),
         XFSContainer(
           margin: EdgeInsets.symmetric(horizontal: 10),
           child: Row(children: [
-            Flexible(flex: 1, child: XFSText('$storeName')),
+            Flexible(flex: 1, child: XFSText.container('$storeName')),
             XFSTextButton.icon(
               title: '重新选择',
               icon: Icon(Icons.chevron_right),

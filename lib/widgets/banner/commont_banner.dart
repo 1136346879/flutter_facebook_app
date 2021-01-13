@@ -12,6 +12,7 @@ class CommontBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.all(20),
       height: 200,
       child: swiperDataList.isEmpty ?
           Text("加载中。。。")

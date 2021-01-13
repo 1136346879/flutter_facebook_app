@@ -51,7 +51,7 @@ class _XFSOrderPageState extends XFSBasePageState<XFSOrderPage, Object, XFSBaseP
   List<Widget> actions() {
 
     return [
-      XFSText('订单导出',
+      XFSText.container('订单导出',
         padding: EdgeInsets.only(left: 10, right: 10),
         textColor: Colors.white,
         onTap: (){
@@ -60,7 +60,7 @@ class _XFSOrderPageState extends XFSBasePageState<XFSOrderPage, Object, XFSBaseP
           Navigator.pushNamed(context, XFSAppRouteConfigure.xfsOrderExportPage);
         },
       ),
-    XFSText('搜索订单',
+    XFSText.container('搜索订单',
       padding: EdgeInsets.only(left: 10, right: 10),
       textColor: Colors.white,
       onTap: (){
@@ -87,7 +87,7 @@ class _XFSOrderPageState extends XFSBasePageState<XFSOrderPage, Object, XFSBaseP
      ],
    );
      Container(
-     child: XFSText('${this.runtimeType.toString()}'),
+     child: XFSText.normal('${this.runtimeType.toString()}'),
    );
   }
 

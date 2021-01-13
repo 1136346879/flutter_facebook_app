@@ -66,6 +66,7 @@ class _TestProvideState extends XFSBasePageState<ConsumerProvide, Object, XFSBas
           ],
         ),
         floatingActionButton: FloatingActionButton(
+            heroTag: 'remove',
             child: Icon(Icons.navigation),
             onPressed: () {
               //调用increment方法改变数据
