@@ -379,7 +379,7 @@ class _SliverAppBarWidgetCallBackState extends State<SliverAppBarWidgetCallBack>
                 builder: (BuildContext context) {
                   return Container(
                     height: MediaQuery.of(context).size.height * 4 / 5,
-                    child:_buildBottomSheetVIew(widget.spuId,widget.listColors),
+                    child:_buildBottomSheetVIew(widget.spuId,widget.listColors.length>0?widget.listColors:[""]),
                   );
                 });
           },
