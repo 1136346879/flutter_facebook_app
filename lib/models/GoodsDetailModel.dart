@@ -70,6 +70,8 @@ class GoodsDetailModel {
   String unitId;
   String revenueCode;
   int arrivalCycle;
+  // 本地字段， 用于记录sku选择的数量
+  int selectCount;
   String costPrice;
   int isShowPrice;
   num minLength;
@@ -110,6 +112,7 @@ class GoodsDetailModel {
         this.lastShelfTime,
         this.maxLength,
         this.unitLarge,
+        this.selectCount,
         this.isExistSku,
         this.images,
         this.virtualStock,
@@ -193,6 +196,7 @@ class GoodsDetailModel {
     platformType = json['platform_type'];
     numberDecimal = json['number_decimal'];
     price = json['price'];
+    selectCount = json['selectCount'];
     qrUrl = json['qr_url'];
     skuName = json['sku_name'];
     model = json['model'];
@@ -294,6 +298,7 @@ class GoodsDetailModel {
     data['customerType'] = this.customerType;
     data['platform_type'] = this.platformType;
     data['number_decimal'] = this.numberDecimal;
+    data['selectCount'] = this.selectCount;
     data['price'] = this.price;
     data['qr_url'] = this.qrUrl;
     data['sku_name'] = this.skuName;
