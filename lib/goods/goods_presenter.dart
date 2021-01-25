@@ -6,7 +6,7 @@ import 'package:flutter_facebook/screens/screen_server.dart';
 class GoodsPresenter extends XFSBasePresenter<GoodsListView> {
   GoodsPresenter(GoodsListView mView) : super(mView);
 
-  getSearchProData(CategoryToListModel arguments) {
+  getSearchProData(CategoryToListModel arguments, bool listBool) {
     /**
      * 获取搜索结果 -- 通过分类搜索的
      *
@@ -49,7 +49,11 @@ class GoodsPresenter extends XFSBasePresenter<GoodsListView> {
       map,
       successBlock: (val) {
         SearchResultModel searchResultModel = SearchResultModel.fromJson(val);
-        mView.showData(data: searchResultModel.searchResult);
+        if(listBool){
+          mView.showData(data: searchResultModel.searchResult);
+        }else{
+           mView.showData(data: searchResultModel.searchResult?.spuList,);
+        }
         mView.categoryData(searchResultModel.catAndNumXList);
         BaseEntity baseEntity = BaseEntity.fromJson(val);
         List<dynamic> brandListTest = List();

@@ -6,28 +6,30 @@ import 'package:flutter_facebook/interface/xfs_click_delegate.dart';
 import 'package:flutter_facebook/models/XFSGoodsFiltModel.dart';
 import 'package:flutter_facebook/models/category_to_list_model.dart';
 import 'package:flutter_facebook/models/search_result_model.dart';
+import 'package:flutter_facebook/util/xfs_img_loader.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
+import 'goods_detail_page.dart';
 import 'goods_presenter.dart';
 
 ///商品页面
-class GoodsPage extends XFSBasePage {
+class SearchGoodsListPage extends XFSBaseListPage {
   CategoryToListModel arguments;
 
-  GoodsPage({this.arguments});
+  SearchGoodsListPage({this.arguments});
 
   @override
-  XFSBasePageState getState() => _GoodsLisPageState();
+  XFSBaseListPageState getState() => _GoodsLisPageState();
 }
 
 class _GoodsLisPageState
-    extends XFSBasePageState<GoodsPage, SearchResult, GoodsPresenter>
+    extends XFSBaseListPageState<SearchGoodsListPage, SpuList, GoodsPresenter>
     implements GoodsListView, XFSClickDelegate {
   XFSGoodsFiltModel _filtrateModel = XFSGoodsFiltModel();
   @override
   void initState() {
     super.initState();
-    presenter.getSearchProData(widget.arguments,true);
+    presenter.getSearchProData(widget.arguments,false);
   }
 
   @override
@@ -47,7 +49,7 @@ class _GoodsLisPageState
       clearButtonMode: OverlayVisibilityMode.editing,
       backgroudColor: Colors.white,
       padding: EdgeInsets.symmetric(vertical: 5, horizontal: 8),
-      hintText: " 请输入商品名称，型号或编码",
+      hintText: " lsit请输入商品名称，型号或编码",
       maxLines: 1,
       borderRadius: BorderRadius.all(Radius.circular(20)),
       hintTextFontSize: 16.0,
@@ -74,9 +76,9 @@ class _GoodsLisPageState
     );
   }
   @override
-  Widget buildTopView(SearchResult object) {
+  Widget buildTopView(List<SpuList> object) {
     String mCategoryName =
-    object.isNullOrEmpty() ? "" : object?.spuList[0].categoryName1;
+    object.isNullOrEmpty() ? "" : object[0].categoryName1;
     return Column(
       children: [
         Visibility(
@@ -179,15 +181,16 @@ class _GoodsLisPageState
     );
   }
 
-  @override
-  Widget buildWidget(BuildContext context, SearchResult object) {
-    if (object.isNullOrEmpty() || object.spuList.isNullOrEmpty())
-      return XFSText.normal('');
-    return  GoodsListPage(
-          spuList: object?.spuList,
-          clickDelegate: this,
-        );
-  }
+  // @override
+  // Widget buildWidget(BuildContext context, SearchResult object) {
+  //   if (object.isNullOrEmpty() || object.spuList.isNullOrEmpty())
+  //     return XFSText.normal('');
+  //   return
+  //       GoodsListPage(
+  //         spuList: object?.spuList,
+  //         clickDelegate: this,
+  //   );
+  // }
 
   @override
   priceSort() {
@@ -216,5 +219,79 @@ class _GoodsLisPageState
     _filtrateModel.categoryList = categoryList;
     setState(() {
     });
+  }
+
+  @override
+  Widget buildItem(SpuList spuEntry, int index) {
+    return XFSContainer(
+      // border: Border.all(color: Config.colorE7E7E7, width: 1),
+      padding: EdgeInsets.only(top: 10),
+      child: Row(
+        children: [
+          XFSNetImageLoader.loadNetImage(
+              url: (spuEntry?.spuimages != null &&
+                  spuEntry.spuimages?.length != null &&
+                  spuEntry.spuimages.length > 0
+                  ? spuEntry?.spuimages[0]
+                  : "") ??
+                  "",
+              width: 100,
+              height: 100),
+          Container(
+            width: MediaQuery.of(context).size.width - 140.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Container(
+                  child: XFSText.normal(
+                    '${spuEntry?.spu_Name}',
+                    maxLines: 2,
+                  ),
+                ),
+                Container(
+                  child: XFSText.normal('${spuEntry?.title}',
+                      maxLines: 2,
+                      textColor: Config.color999999,
+                      fontSize: 10,
+                      overflow: TextOverflow.fade),
+                ),
+                XFSText.normal(
+                  '${spuEntry?.priceRange}',
+                  textColor: Colors.orange,
+                ),
+                Row(
+                  children: [
+                    Visibility(
+                        visible: spuEntry?.stock != 0,
+                        child: XFSText.container(
+                          '现货',
+                          textColor: Colors.orange,
+                          fontSize: 12,
+                          margin: EdgeInsets.only(right: 10),
+                        )),
+                    XFSText.container(
+                      '规格数量： ${spuEntry?.skuNum}个',
+                      fontSize: 10,
+                    ),
+                  ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 8.0),
+                  child: Divider(
+                    height: 1,
+                    color: Colors.black12,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      onTap: () {
+        Fluttertoast.showToast(msg: "${spuEntry?.spu_Name ?? ""}==${ spuEntry.spuId}");
+
+        GoodsDetailPage.push(context,arguments: spuEntry.spuId);
+      },
+    );
   }
 }

@@ -140,12 +140,10 @@ class _GoodsDetailPageState extends XFSBasePageState<
                   ];
                 },
                 body: TabBarView(
-
                     controller: tabControll,
                     physics: const NeverScrollableScrollPhysics(),
                     children: <Widget>[
-                      Expanded(
-                        child: ListView.builder(
+                        ListView.builder(
                           itemBuilder: (ctx, index) {
                             return XFSNetImageLoader.loadNetImage(
                                 height: 200,
@@ -157,7 +155,6 @@ class _GoodsDetailPageState extends XFSBasePageState<
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                         ),
-                      ),
                       Center(child: XFSText.normal('包装清单')),
                     ]),
               ),
@@ -543,8 +540,10 @@ class __listViewBuildState extends State<_listViewBuild> {
   @override
   Widget build(BuildContext context) {
     var listGoodsDetailModel = widget.listGoodsDetailModel;
-    return Expanded(
-      child: ListView.builder(
+    return
+      // Expanded(
+      // child:
+      ListView.builder(
         itemBuilder: (ctx, index) {
           return Column(
             children: [
@@ -589,7 +588,7 @@ class __listViewBuildState extends State<_listViewBuild> {
             : !widget.expand
                 ? 5
                 : listGoodsDetailModel.length,
-      ),
+      // ),
     );
   }
 }

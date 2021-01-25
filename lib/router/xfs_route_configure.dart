@@ -5,6 +5,7 @@ import 'package:flutter_facebook/address/xfs_address_list_page.dart';
 import 'package:flutter_facebook/goods/get_test_page.dart';
 import 'package:flutter_facebook/goods/goods_detail_page.dart';
 import 'package:flutter_facebook/goods/goods_page.dart';
+import 'package:flutter_facebook/goods/search_goods_list_page.dart';
 import 'package:flutter_facebook/models/xfs_user_model.dart';
 import 'package:flutter_facebook/net/xfs_common_channel_utils.dart';
 import 'package:flutter_facebook/order/tab_page.dart';
@@ -75,6 +76,7 @@ class XFSAppRouteConfigure {
   static String xfsNavScreenPage = "xfsNavScreenPage";
   static String homePageDetail = "HOmePageDetail";
   static String goodsPage = "GoodsPage";
+  static String searchGoodsListPage = "SearchGoodsListPage";
   static String goodsDetailPage = "GoodsDetailPage";
   static String cameraMainPage = "CameraMainPage";
   static String getTestPage = "GetTestPage";
@@ -104,6 +106,9 @@ class XFSAppRouteConfigure {
     ),
     goodsPage: (arguments) => XFSRouteResult(
       widget: GoodsPage(arguments:arguments),
+    ),
+    searchGoodsListPage: (arguments) => XFSRouteResult(
+      widget: SearchGoodsListPage(arguments:arguments),
     ),
     goodsDetailPage: (arguments) => XFSRouteResult(
       widget: GoodsDetailPage(arguments:arguments),

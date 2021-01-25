@@ -1,5 +1,3 @@
-import 'package:flutter_facebook/config/xfs_header.dart';
-
 class SearchResultModel{
   SearchResult searchResult;
   int curPage;

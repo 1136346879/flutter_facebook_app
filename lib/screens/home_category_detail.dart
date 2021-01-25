@@ -21,7 +21,7 @@ class _HOmePageDetailState
     extends XFSBasePageState<HOmePageDetail, Object, XFSBasePresenter> {
   @override
   void initState() {
-    timeDilation = 2.0; // 1.0 means normal animation speed.
+    timeDilation = 5.0; // 1.0 means normal animation speed.
     super.initState();
   }
 
@@ -36,15 +36,15 @@ class _HOmePageDetailState
     return Container(
         child: Column(
           children: [
-            // Hero(
-            //   tag: widget.arguments,
-            //   child:
+            Hero(
+              tag: widget.arguments,
+              child:
               Image.network(
                 widget.arguments,
                 height: 300,
                 width: double.infinity,
               ),
-            // ),
+            ),
             XFSText.container(
               "_HOmePageDetailState extends XFSBasePageState<HOmePageDetail, Object, XFSBasePresenter> ",
               padding: EdgeInsets.all(20),

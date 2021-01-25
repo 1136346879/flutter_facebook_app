@@ -119,8 +119,7 @@ class _HomePageState
             children: [
               CommontBanner(swiperDataList:arr),
               // Pagination(),
-              Expanded(
-                child: Container(
+             Container(
                   color: Colors.white,
                   margin: EdgeInsets.only(left: 10,right: 10),
                   child: GridView.count(
@@ -142,7 +141,6 @@ class _HomePageState
                     children: getWidgetList(object),
                   ),
                 ),
-              ),
             ],
           ),
           onTap: () {
@@ -214,11 +212,11 @@ class _HomePageState
                     HOmePageDetail.push(context, item?.pictureUrl);
                   },
                   onPressed: (){
-                    Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments: CategoryToListModel(item.relationFirstLevelObject[0].frontCategoryId, 1));
+                    Navigator.pushNamed(context, XFSAppRouteConfigure.searchGoodsListPage,arguments: CategoryToListModel(item.relationFirstLevelObject[0].frontCategoryId, 1));
                   },
                 ),
-              // ),
-            ),
+              ),
+            // ),
           ],
         ),
         color: Colors.white,

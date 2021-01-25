@@ -1,4 +1,3 @@
-
 import 'package:barcode_scan/barcode_scan.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
@@ -14,16 +13,17 @@ import 'package:flutter_facebook/widgets/banner/commont_banner.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:xfs_flutter_utils/widgets/xfs_button.dart';
 
-
 class FirstHomePage extends XFSBasePage {
   @override
   XFSBasePageState getState() => _HomePageState();
 }
 
 class _HomePageState
-    extends XFSBasePageState<FirstHomePage, List<Data>, HomePagePresenter> implements HomePageView{
-   List<BannerModelData> arr = [];
-   String cityName='选择';
+    extends XFSBasePageState<FirstHomePage, List<Data>, HomePagePresenter>
+    implements HomePageView {
+  List<BannerModelData> arr = [];
+  String cityName = '选择';
+
   @override
   void initState() {
     super.initState();
@@ -36,33 +36,38 @@ class _HomePageState
     // presenter.getSearchProData();
     // presenter.getGoodsDetialData();
   }
+
   @override
   List<Widget> actions() {
     return [
       Container(
         child: XFSTextButton.icon(
-          icon: Icon(Icons.shopping_cart,color: Colors.white,),
+          icon: Icon(
+            Icons.shopping_cart,
+            color: Colors.white,
+          ),
           width: 6,
-          onPressed: (){
+          onPressed: () {
             Navigator.pushNamed(context, XFSAppRouteConfigure.cameraMainPage);
           },
         ),
       ),
-
       Container(
         child: XFSTextButton.icon(
           title: '$cityName',
           textColor: Colors.white,
           width: 6,
-          icon: Icon(Icons.location_on_outlined,color: Colors.white,),
-          onPressed: (){
+          icon: Icon(
+            Icons.location_on_outlined,
+            color: Colors.white,
+          ),
+          onPressed: () {
             // AzCityListPage.pushName(context);
             Navigator.pushNamed(context, XFSAppRouteConfigure.azCityListPage)
                 .then((value) {
-                  if(value == null) return
-              Fluttertoast.showToast(msg: "$value");
+              if (value == null) return Fluttertoast.showToast(msg: "$value");
               setState(() {
-                cityName = value??"选择";
+                cityName = value ?? "选择";
               });
             });
           },
@@ -71,8 +76,11 @@ class _HomePageState
       Container(
         child: XFSTextButton.icon(
           width: 6,
-          icon: Icon(Icons.search,color: Colors.white,),
-          onPressed: (){
+          icon: Icon(
+            Icons.search,
+            color: Colors.white,
+          ),
+          onPressed: () {
             CityLiStPage.pushName(context);
           },
         ),
@@ -80,15 +88,18 @@ class _HomePageState
       Container(
         child: XFSTextButton.icon(
           width: 6,
-          icon: Icon(Icons.add_a_photo_outlined,color: Colors.white,),
-          onPressed: (){
+          icon: Icon(
+            Icons.add_a_photo_outlined,
+            color: Colors.white,
+          ),
+          onPressed: () {
             _scanQR();
           },
         ),
       ),
-
     ];
   }
+
   @override
   HomePagePresenter initPresenter() {
     return HomePagePresenter(this);
@@ -96,90 +107,86 @@ class _HomePageState
 
   @override
   bool get isShowBackButton => false;
+
   @override
   String get naviTitle => "";
 
   @override
   Widget buildWidget(BuildContext context, List<Data> object) {
     return RefreshIndicator(
-      onRefresh: (){
-        return  _onRefresh();
+      onRefresh: () {
+        return _onRefresh();
       },
       child: Scrollable(
-
-      physics: BouncingScrollPhysics(),
-
+        physics: BouncingScrollPhysics(),
         controller: ScrollController(),
-          viewportBuilder: (BuildContext context, ViewportOffset offset) {
-
-        return  XFSContainer(
-          child: ListView(
-            children: [
-              CommontBanner(swiperDataList:arr),
-              CategoryBanner(swiperDataList:arr),
-              // Pagination(),
-              Expanded(
-                child: Container(
-                  color: Colors.white,
-                  margin: EdgeInsets.only(left: 10,right: 10),
-                  child: GridView.count(
-                    primary:false,
-                      shrinkWrap:true,
-                    controller: ScrollController(),
+        viewportBuilder: (BuildContext context, ViewportOffset offset) {
+          return
+            ListView(
+              children: [
+                CommontBanner(swiperDataList: arr),
+                CategoryBanner(swiperDataList: arr),
+                // Pagination(),
+                // Expanded(
+                //   child:
+                  Container(
+                    color: Colors.white,
+                    margin: EdgeInsets.only(left: 10, right: 10),
+                    child: GridView.count(
+                      primary: false,
+                      shrinkWrap: true,
+                      controller: ScrollController(),
                       padding: EdgeInsets.all(10),
-                    //水平子Widget之间间距
-                    crossAxisSpacing: 10.0,
-                    //垂直子Widget之间间距
-                    mainAxisSpacing: 10.0,
-                    //GridView内边距
-                    // padding: EdgeInsets.all(10.0),
-                    //一行的Widget数量
-                    crossAxisCount: 4,
-                    //子Widget宽高比例
-                    // childAspectRatio: 2.0,
-                    //子Widget列表
-                    children: getWidgetList(object),
+                      //水平子Widget之间间距
+                      crossAxisSpacing: 10.0,
+                      //垂直子Widget之间间距
+                      mainAxisSpacing: 10.0,
+                      //GridView内边距
+                      // padding: EdgeInsets.all(10.0),
+                      //一行的Widget数量
+                      crossAxisCount: 4,
+                      //子Widget宽高比例
+                      // childAspectRatio: 2.0,
+                      //子Widget列表
+                      children: getWidgetList(object),
+                    ),
                   ),
-                ),
-              ),
-            ],
-          ),
-          onTap: () {
-            presenter.getListFirstPlay();
-          },
-        );
-       },),
+                // ),
+              ],
+          );
+        },
+      ),
     );
   }
 
   List<Widget> getWidgetList(List<Data> object) {
-    if(object.isNullOrEmpty()){
+    if (object.isNullOrEmpty()) {
       return [];
     }
     return object?.map((item) => getItemContainer(item))?.toList();
   }
-   static Future _scanQR() async {
-     try {
-       String qrResult = await BarcodeScanner.scan();
-       Fluttertoast.showToast(msg:"扫码后返回信息---${qrResult}");
-     } on PlatformException catch(ex) {
-       if (ex.code == BarcodeScanner.CameraAccessDenied) {
-         print(ex.code);
-       } else {
-         print(ex.code);
-       }
-     } on FormatException {
-       print("pressed ths back button before scanning anyting");
-     } catch(ex){
-       print(ex);
-     }
-   }
+
+  static Future _scanQR() async {
+    try {
+      String qrResult = await BarcodeScanner.scan();
+      Fluttertoast.showToast(msg: "扫码后返回信息---${qrResult}");
+    } on PlatformException catch (ex) {
+      if (ex.code == BarcodeScanner.CameraAccessDenied) {
+        print(ex.code);
+      } else {
+        print(ex.code);
+      }
+    } on FormatException {
+      print("pressed ths back button before scanning anyting");
+    } catch (ex) {
+      print(ex);
+    }
+  }
 
   Widget getItemContainer(Data item) {
     return Dismissible(
       key: Key(UniqueKey().toString()),
-
-      onDismissed: (direction){
+      onDismissed: (direction) {
         setState(() {
           presenter.removeElemet(item);
         });
@@ -190,8 +197,7 @@ class _HomePageState
         color: Colors.red,
         child: Text(
           '滑动删除',
-          style:
-          TextStyle(fontSize: 12, color: Colors.white),
+          style: TextStyle(fontSize: 12, color: Colors.white),
         ),
       ),
       child: Container(
@@ -200,19 +206,21 @@ class _HomePageState
           children: [
             Expanded(
               child: Hero(
-                tag: item?.pictureUrl??"item?.pictureUrl",
+                tag: item?.pictureUrl ?? "item?.pictureUrl",
                 child: XFSTextButton.icon(
                   textColor: Colors.black,
                   fontSize: 14,
                   icon: Expanded(child: Image.network(item?.pictureUrl)),
                   title: item?.displayContent,
-                  direction:XFSTextButtonIconTextDirection.textBIconT,
-
-                  onLongPress: (){
+                  direction: XFSTextButtonIconTextDirection.textBIconT,
+                  onLongPress: () {
                     HOmePageDetail.push(context, item?.pictureUrl);
                   },
-                  onPressed: (){
-                    Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,arguments: CategoryToListModel(item.relationFirstLevelObject[0].frontCategoryId, 1));
+                  onPressed: () {
+                    Navigator.pushNamed(context, XFSAppRouteConfigure.goodsPage,
+                        arguments: CategoryToListModel(
+                            item.relationFirstLevelObject[0].frontCategoryId,
+                            1));
                   },
                 ),
               ),
@@ -226,18 +234,15 @@ class _HomePageState
 
   @override
   void showBannerData(BannerModel bannerModel) {
-
-     arr = bannerModel.data;
-     setState(() {});
+    arr = bannerModel.data;
+    setState(() {});
   }
 
-   Future<void> _onRefresh() async{
-     await Future.delayed(Duration(seconds: 1), () {
-       presenter.getListFirstPlay();
-       presenter.getHomeBanner();
-     });
-     setState(() {
-
-     });
+  Future<void> _onRefresh() async {
+    await Future.delayed(Duration(seconds: 1), () {
+      presenter.getListFirstPlay();
+      presenter.getHomeBanner();
+    });
+    setState(() {});
   }
 }
