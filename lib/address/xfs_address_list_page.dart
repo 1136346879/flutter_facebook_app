@@ -46,10 +46,10 @@ class _AddressListPageState extends XFSBaseListPageState<XFSAddressListPage,
     map['pageNum'] = 1;
     map['pageSize'] = 10;
     map['type'] = 10;
-    // map['memberId'] = 1047;
-    map['memberId'] = 42;
+    map['memberId'] = 4717;
+    // map['memberId'] = 42;
     // map['memberId'] = 11;
-    map['member_id'] = 42;
+    map['member_id'] = 4717;
     presenter.refreshData(params: map);
     pageNum++;
   }

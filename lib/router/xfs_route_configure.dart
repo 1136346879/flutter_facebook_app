@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook/address/get_address_list_page.dart';
 import 'package:flutter_facebook/address/xfs_address_list_page.dart';
 import 'package:flutter_facebook/goods/get_test_page.dart';
 import 'package:flutter_facebook/goods/goods_detail_page.dart';
@@ -66,6 +67,7 @@ class XFSAppRouteConfigure {
 
   ///地址列表页面
   static String xfsAddressListPage = "XFSAddressListPage";
+  static String getAddressListPage = "getAddressListPage";
   static String subectListPage = "SubectListPage";
   ///自提地址搜索
   static String xfsSelfRaiseSearchAddress = "XFSSelfRaiseSearchAddress";
@@ -153,6 +155,9 @@ class XFSAppRouteConfigure {
     xfsAddressListPage: (arguments) => XFSRouteResult(
           widget: XFSAddressListPage(),
         ),
+    getAddressListPage: (arguments) => XFSRouteResult(
+      widget: GetAddressListPage(),
+    ),
     // xfsOrderApprovalProgressListPage: (arguments) => XFSRouteResult(
     //       widget: XFSOrderApprovalProcessListPage(orderId: arguments),
     //     ),

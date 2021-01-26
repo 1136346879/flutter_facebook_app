@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_facebook/address/get_address_list_page.dart';
 import 'package:flutter_facebook/models/banner_model.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -35,6 +36,7 @@ class CategoryBanner extends StatelessWidget {
                           icon: Icon(Icons.ac_unit),
                           onPressed: () {
                             Fluttertoast.showToast(msg: '点击icon1');
+                            GetAddressListPage.pushName(context);
                           },
                         ),
                         XFSTextButton.icon(
